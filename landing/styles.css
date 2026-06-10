@@ -296,7 +296,7 @@ body {
   transform: translateY(-3px);
 }
 
-/* ENTREVISTA DESPIDO */
+/* ENTREVISTA */
 
 .interview-section {
   display: none;
@@ -344,10 +344,12 @@ body {
   background: #f7faff;
 }
 
+/* DIAGNÓSTICO */
+
 .diagnostic-card {
   display: none;
   margin-top: 30px;
-  padding: 28px;
+  padding: 30px;
   border-radius: 18px;
   background: #071a33;
   color: white;
@@ -356,16 +358,101 @@ body {
 .diagnostic-card h3 {
   margin-bottom: 16px;
   color: #69c3ff;
+  font-size: 26px;
+}
+
+.diagnostic-card h4 {
+  margin-top: 22px;
+  margin-bottom: 10px;
+  color: #69c3ff;
 }
 
 .diagnostic-card p {
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   color: #d8e9ff;
+}
+
+.diagnostic-card ul {
+  margin: 14px 0 18px 22px;
+}
+
+.diagnostic-card li {
+  margin-bottom: 6px;
+  color: #d8e9ff;
+}
+
+.risk-badge {
+  display: inline-block;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-weight: bold;
+  margin: 8px 0 18px;
+}
+
+.risk-low {
+  background: #e7f8ed;
+  color: #0b6b34;
+}
+
+.risk-medium {
+  background: #fff4d6;
+  color: #7a5300;
+}
+
+.risk-high {
+  background: #ffe0e0;
+  color: #991b1b;
+}
+
+.note {
+  margin-top: 18px;
+  font-size: 14px;
+  color: #a9c9e8 !important;
 }
 
 .dark-btn {
   display: inline-block;
   margin-top: 18px;
+}
+
+/* EXPEDIENTE */
+
+.case-file-card {
+  display: none;
+  margin-top: 30px;
+  padding: 30px;
+  border-radius: 18px;
+  background: white;
+  border: 1px solid #d5e0ec;
+  color: #0b1f3a;
+  box-shadow: 0 16px 40px rgba(7, 26, 51, 0.10);
+}
+
+.case-file-card h3 {
+  color: #0b3b66;
+  margin-bottom: 16px;
+  font-size: 26px;
+}
+
+.case-file-card p {
+  margin-bottom: 8px;
+  color: #4a5c70;
+}
+
+.file-status {
+  margin-top: 22px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.file-status span {
+  background: #e7f3ff;
+  color: #0b3b66;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: bold;
 }
 
 /* SECCIONES */

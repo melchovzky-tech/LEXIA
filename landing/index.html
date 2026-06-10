@@ -75,22 +75,22 @@
       </div>
 
       <div class="action-grid">
-        <button onclick="mostrarEntrevistaDespido()">
+        <button onclick="cargarCaso('despido')">
           <span>⚖️</span>
           <strong>Despido injustificado</strong>
         </button>
 
-        <button>
+        <button onclick="cargarCaso('divorcio')">
           <span>👨‍👩‍👧</span>
           <strong>Divorcio</strong>
         </button>
 
-        <button>
+        <button onclick="cargarCaso('pension')">
           <span>🧾</span>
           <strong>Pensión alimenticia</strong>
         </button>
 
-        <button>
+        <button onclick="cargarCaso('sucesion')">
           <span>📂</span>
           <strong>Sucesión</strong>
         </button>
@@ -98,75 +98,21 @@
     </div>
   </section>
 
-  <section id="entrevista-despido" class="interview-section">
+  <section id="entrevista" class="interview-section">
     <div class="interview-card">
       <span class="section-tag">Entrevista jurídica inicial</span>
 
-      <h2>Despido injustificado</h2>
+      <h2 id="titulo-caso">Caso seleccionado</h2>
 
-      <p class="interview-intro">
-        Responde estas preguntas para que LEX-IA pueda generar una orientación preliminar.
+      <p id="descripcion-caso" class="interview-intro">
+        Responde las siguientes preguntas para generar una orientación preliminar.
       </p>
 
-      <form class="interview-form">
-        <label>
-          ¿Cuánto tiempo trabajaste?
-          <input type="text" placeholder="Ejemplo: 2 años y 6 meses" />
-        </label>
+      <form id="formulario-caso" class="interview-form"></form>
 
-        <label>
-          ¿Cuál era tu salario mensual aproximado?
-          <input type="text" placeholder="Ejemplo: $15,000 MXN" />
-        </label>
+      <div id="diagnostico" class="diagnostic-card"></div>
 
-        <label>
-          ¿Te despidieron verbalmente o por escrito?
-          <select>
-            <option>Selecciona una opción</option>
-            <option>Verbalmente</option>
-            <option>Por escrito</option>
-            <option>Me impidieron entrar a trabajar</option>
-            <option>No me dieron explicación</option>
-          </select>
-        </label>
-
-        <label>
-          ¿Te pagaron finiquito o liquidación?
-          <select>
-            <option>Selecciona una opción</option>
-            <option>Sí</option>
-            <option>No</option>
-            <option>Solo una parte</option>
-          </select>
-        </label>
-
-        <label>
-          ¿Tienes pruebas?
-          <select>
-            <option>Selecciona una opción</option>
-            <option>Contrato</option>
-            <option>Recibos de nómina</option>
-            <option>Mensajes o correos</option>
-            <option>Testigos</option>
-            <option>No tengo pruebas</option>
-          </select>
-        </label>
-
-        <button type="button" class="btn primary" onclick="mostrarDiagnostico()">
-          Generar orientación preliminar
-        </button>
-      </form>
-
-      <div id="diagnostico" class="diagnostic-card">
-        <h3>Diagnóstico preliminar LEX-IA</h3>
-
-        <p><strong>Materia:</strong> Derecho laboral.</p>
-        <p><strong>Problema probable:</strong> Despido injustificado.</p>
-        <p><strong>Nivel de atención:</strong> Medio / Alto.</p>
-        <p><strong>Siguiente paso:</strong> Integrar expediente inicial y revisar pruebas disponibles.</p>
-
-        <a href="#contacto" class="btn secondary dark-btn">Solicitar revisión profesional</a>
-      </div>
+      <div id="expediente" class="case-file-card"></div>
     </div>
   </section>
 
@@ -248,19 +194,6 @@
     <p>© 2026 LEX-IA. Asistente Jurídico Inteligente.</p>
   </footer>
 
-  <script>
-    function mostrarEntrevistaDespido() {
-      const entrevista = document.getElementById("entrevista-despido");
-      entrevista.style.display = "block";
-      entrevista.scrollIntoView({ behavior: "smooth" });
-    }
-
-    function mostrarDiagnostico() {
-      const diagnostico = document.getElementById("diagnostico");
-      diagnostico.style.display = "block";
-      diagnostico.scrollIntoView({ behavior: "smooth" });
-    }
-  </script>
-
+  <script src="script.js"></script>
 </body>
 </html>
