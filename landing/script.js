@@ -1,3 +1,45 @@
+const estadosMexico = [
+  "Aguascalientes",
+  "Baja California",
+  "Baja California Sur",
+  "Campeche",
+  "Chiapas",
+  "Chihuahua",
+  "Ciudad de México",
+  "Coahuila",
+  "Colima",
+  "Durango",
+  "Estado de México",
+  "Guanajuato",
+  "Guerrero",
+  "Hidalgo",
+  "Jalisco",
+  "Michoacán",
+  "Morelos",
+  "Nayarit",
+  "Nuevo León",
+  "Oaxaca",
+  "Puebla",
+  "Querétaro",
+  "Quintana Roo",
+  "San Luis Potosí",
+  "Sinaloa",
+  "Sonora",
+  "Tabasco",
+  "Tamaulipas",
+  "Tlaxcala",
+  "Veracruz",
+  "Yucatán",
+  "Zacatecas"
+];
+
+const preguntaEstado = {
+  id: "estado",
+  texto: "¿En qué estado de la República ocurre el asunto?",
+  tipo: "select",
+  opciones: estadosMexico
+};
+
 const casos = {
   despido: {
     titulo: "Despido injustificado",
@@ -5,6 +47,7 @@ const casos = {
       "Responde estas preguntas para que LEX-IA identifique si existe un posible conflicto laboral, terminación voluntaria o falta de pago de prestaciones.",
     materia: "Derecho laboral",
     expediente: "Expediente laboral inicial",
+    normativa: "Ley Federal del Trabajo y criterios laborales aplicables.",
     documentosBase: [
       "Identificación oficial",
       "Contrato de trabajo, si existe",
@@ -14,6 +57,7 @@ const casos = {
       "Datos de testigos"
     ],
     preguntas: [
+      preguntaEstado,
       {
         id: "tiempo",
         texto: "¿Cuánto tiempo trabajaste?",
@@ -74,6 +118,8 @@ const casos = {
       "Responde estas preguntas para identificar si el asunto parece un divorcio voluntario, contencioso o con temas familiares adicionales.",
     materia: "Derecho familiar",
     expediente: "Expediente familiar de divorcio",
+    normativa:
+      "Código Civil, Código Familiar y legislación procesal aplicable según el estado.",
     documentosBase: [
       "Acta de matrimonio",
       "Identificaciones oficiales",
@@ -83,6 +129,7 @@ const casos = {
       "Convenio propuesto, si ambas partes están de acuerdo"
     ],
     preguntas: [
+      preguntaEstado,
       {
         id: "matrimonio",
         texto: "¿Existe matrimonio civil?",
@@ -122,6 +169,8 @@ const casos = {
       "Responde estas preguntas para identificar si se trata de solicitud, modificación o incumplimiento de pensión alimenticia.",
     materia: "Derecho familiar",
     expediente: "Expediente de alimentos",
+    normativa:
+      "Código Civil, Código Familiar y legislación procesal aplicable según el estado.",
     documentosBase: [
       "Actas de nacimiento de los hijos",
       "Identificación oficial",
@@ -131,6 +180,7 @@ const casos = {
       "Sentencia o convenio, si ya existe"
     ],
     preguntas: [
+      preguntaEstado,
       {
         id: "beneficiario",
         texto: "¿La pensión es para hijos menores de edad?",
@@ -170,6 +220,8 @@ const casos = {
       "Responde estas preguntas para identificar si el asunto puede ser una sucesión testamentaria o intestamentaria.",
     materia: "Derecho sucesorio / familiar",
     expediente: "Expediente sucesorio inicial",
+    normativa:
+      "Código Civil, Código Familiar y legislación procesal aplicable según el estado.",
     documentosBase: [
       "Acta de defunción",
       "Testamento, si existe",
@@ -179,6 +231,7 @@ const casos = {
       "Acta de matrimonio, si aplica"
     ],
     preguntas: [
+      preguntaEstado,
       {
         id: "testamento",
         texto: "¿La persona fallecida dejó testamento?",
@@ -346,6 +399,9 @@ function analizarDespido(r) {
   const advertencias = [];
   const documentos = [...casoActual.documentosBase];
 
+  hallazgos.push(`Jurisdicción preliminar indicada por el usuario: ${r.estado}.`);
+  hallazgos.push("La materia laboral se rige principalmente por legislación federal, sin perjuicio de la competencia y autoridades aplicables según la ubicación del asunto.");
+
   if (
     r.formaTerminacion === "Me despidieron verbalmente" ||
     r.formaTerminacion === "Me impidieron entrar a trabajar" ||
@@ -434,7 +490,7 @@ function analizarDespido(r) {
     nivel = "Bajo / Medio";
   }
 
-  return crearAnalisisBase(problema, nivel, recomendacion, hallazgos, advertencias, documentos);
+  return crearAnalisisBase(r.estado, problema, nivel, recomendacion, hallazgos, advertencias, documentos);
 }
 
 function analizarDivorcio(r) {
@@ -443,13 +499,17 @@ function analizarDivorcio(r) {
   const advertencias = [];
   const documentos = [...casoActual.documentosBase];
 
+  hallazgos.push(`Jurisdicción preliminar indicada por el usuario: ${r.estado}.`);
+  advertencias.push("En materia familiar, los requisitos y procedimientos pueden variar según el estado. Debe revisarse legislación civil, familiar y procesal local.");
+
   if (r.matrimonio === "No") {
     return crearAnalisisBase(
+      r.estado,
       "No se advierte inicialmente un divorcio, porque el usuario indica que no existe matrimonio civil.",
       "Bajo",
       "Revisar si el asunto corresponde a separación de hecho, concubinato, custodia, alimentos o liquidación de bienes.",
-      ["Para que exista divorcio debe revisarse primero la existencia de matrimonio civil."],
-      ["Podría tratarse de un asunto familiar distinto al divorcio."],
+      ["Para que exista divorcio debe revisarse primero la existencia de matrimonio civil.", `Jurisdicción preliminar indicada por el usuario: ${r.estado}.`],
+      ["Podría tratarse de un asunto familiar distinto al divorcio.", "Debe revisarse la legislación familiar aplicable en el estado indicado."],
       ["Identificación oficial", "Documentos que acrediten la relación familiar o patrimonial"]
     );
   }
@@ -514,7 +574,7 @@ function analizarDivorcio(r) {
     nivel = "Medio";
   }
 
-  return crearAnalisisBase(problema, nivel, recomendacion, hallazgos, advertencias, documentos);
+  return crearAnalisisBase(r.estado, problema, nivel, recomendacion, hallazgos, advertencias, documentos);
 }
 
 function analizarPension(r) {
@@ -522,6 +582,9 @@ function analizarPension(r) {
   const hallazgos = [];
   const advertencias = [];
   const documentos = [...casoActual.documentosBase];
+
+  hallazgos.push(`Jurisdicción preliminar indicada por el usuario: ${r.estado}.`);
+  advertencias.push("La pensión alimenticia puede variar en trámite, criterios y autoridad competente según el estado.");
 
   if (r.beneficiario === "Sí") {
     puntos += 2;
@@ -597,7 +660,7 @@ function analizarPension(r) {
     nivel = "Medio";
   }
 
-  return crearAnalisisBase(problema, nivel, recomendacion, hallazgos, advertencias, documentos);
+  return crearAnalisisBase(r.estado, problema, nivel, recomendacion, hallazgos, advertencias, documentos);
 }
 
 function analizarSucesion(r) {
@@ -605,6 +668,9 @@ function analizarSucesion(r) {
   const hallazgos = [];
   const advertencias = [];
   const documentos = [...casoActual.documentosBase];
+
+  hallazgos.push(`Jurisdicción preliminar indicada por el usuario: ${r.estado}.`);
+  advertencias.push("La sucesión debe revisarse conforme a la legislación civil, familiar y procesal aplicable en el estado indicado.");
 
   if (r.testamento === "Sí") {
     hallazgos.push("La existencia de testamento puede orientar el asunto hacia una sucesión testamentaria.");
@@ -676,12 +742,14 @@ function analizarSucesion(r) {
     nivel = "Medio";
   }
 
-  return crearAnalisisBase(problema, nivel, recomendacion, hallazgos, advertencias, documentos);
+  return crearAnalisisBase(r.estado, problema, nivel, recomendacion, hallazgos, advertencias, documentos);
 }
 
-function crearAnalisisBase(problema, nivel, recomendacion, hallazgos, advertencias, documentos) {
+function crearAnalisisBase(estado, problema, nivel, recomendacion, hallazgos, advertencias, documentos) {
   return {
+    estado,
     materia: casoActual.materia,
+    normativa: casoActual.normativa,
     problema,
     nivel,
     recomendacion,
@@ -720,7 +788,9 @@ function mostrarDiagnostico(analisis) {
   diagnostico.innerHTML = `
     <h3>Diagnóstico preliminar LEX-IA</h3>
 
+    <p><strong>Jurisdicción preliminar:</strong> ${analisis.estado}.</p>
     <p><strong>Materia:</strong> ${analisis.materia}.</p>
+    <p><strong>Normativa a revisar:</strong> ${analisis.normativa}</p>
     <p><strong>Problema identificado:</strong> ${analisis.problema}</p>
 
     <span class="${claseRiesgo(analisis.nivel)}">
@@ -774,7 +844,9 @@ function crearExpediente() {
     <h3>Expediente inicial LEX-IA</h3>
 
     <p><strong>Tipo de expediente:</strong> ${ultimoAnalisis.expediente}.</p>
+    <p><strong>Jurisdicción preliminar:</strong> ${ultimoAnalisis.estado}.</p>
     <p><strong>Materia:</strong> ${ultimoAnalisis.materia}.</p>
+    <p><strong>Normativa a revisar:</strong> ${ultimoAnalisis.normativa}</p>
     <p><strong>Problema identificado:</strong> ${ultimoAnalisis.problema}</p>
     <p><strong>Nivel de atención:</strong> ${ultimoAnalisis.nivel}.</p>
     <p><strong>Estado:</strong> Diagnóstico preliminar generado.</p>
@@ -782,6 +854,7 @@ function crearExpediente() {
 
     <div class="file-status">
       <span>Diagnóstico generado</span>
+      <span>Jurisdicción registrada</span>
       <span>Documentos pendientes</span>
       <span>Revisión profesional pendiente</span>
       <span>Expediente inicial creado</span>
