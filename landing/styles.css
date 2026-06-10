@@ -1,33 +1,179 @@
-.brand-card {
-  background: linear-gradient(145deg, #0b1f3a, #123d68);
-  border: 1px solid rgba(143, 208, 255, 0.35);
-  border-radius: 24px;
-  padding: 42px 34px;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
-  text-align: center;
-}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LEX-IA | Asistente Jurídico Inteligente</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
 
-.brand-symbol {
-  font-size: 76px;
-  margin-bottom: 18px;
-}
+  <header class="header">
+    <div class="logo">
+      LEX-IA
+    </div>
 
-.brand-card h2 {
-  font-size: 54px;
-  letter-spacing: 4px;
-  margin-bottom: 6px;
-}
+    <nav class="nav">
+      <a href="#inicio">Inicio</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#funciona">Cómo funciona</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </header>
 
-.brand-subtitle {
-  font-size: 22px;
-  color: #8fd0ff !important;
-  font-weight: bold;
-  margin-bottom: 16px;
-}
+  <main id="inicio" class="hero">
+    <section class="hero-content">
+      <span class="tagline">Asistente Jurídico Inteligente</span>
 
-.brand-description {
-  font-size: 17px;
-  color: #d8e9ff !important;
-  max-width: 460px;
-  margin: 0 auto;
-}
+      <h1>
+        Orientación, representación y seguimiento jurídico en un solo lugar.
+      </h1>
+
+      <p>
+        LEX-IA es una plataforma jurídica mexicana diseñada para brindar orientación legal inicial,
+        generación documental, conexión con abogados y seguimiento transparente de casos.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#consulta" class="btn primary">Iniciar consulta</a>
+        <a href="#funciona" class="btn secondary">Conocer más</a>
+      </div>
+
+      <div class="trust-line">
+        <span>Confianza</span>
+        <span>Imparcialidad</span>
+        <span>Seguridad</span>
+        <span>Cercanía</span>
+      </div>
+    </section>
+
+    <section class="hero-visual">
+      <div class="image-glow"></div>
+
+      <img
+        src="../assets/branding/justicia_robotica_lexia.png"
+        alt="Justicia Robótica LEX-IA"
+        class="justice-image"
+      />
+
+      <div class="brand-floating-card">
+        <h2>LEX-IA</h2>
+        <p>Asistente Jurídico Inteligente</p>
+      </div>
+    </section>
+  </main>
+
+  <section id="consulta" class="consult-section">
+    <div class="consult-card">
+      <div>
+        <span class="section-tag">Consulta inicial</span>
+        <h2>¿Qué problema tienes?</h2>
+        <p>
+          Selecciona una opción para iniciar una orientación preliminar con LEX-IA.
+        </p>
+      </div>
+
+      <div class="action-grid">
+        <button>
+          <span>⚖️</span>
+          <strong>Despido injustificado</strong>
+        </button>
+
+        <button>
+          <span>👨‍👩‍👧</span>
+          <strong>Divorcio</strong>
+        </button>
+
+        <button>
+          <span>🧾</span>
+          <strong>Pensión alimenticia</strong>
+        </button>
+
+        <button>
+          <span>📂</span>
+          <strong>Sucesión</strong>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section id="servicios" class="section">
+    <span class="section-tag center">Servicios iniciales</span>
+    <h2>Una plataforma jurídica completa</h2>
+
+    <div class="cards">
+      <article class="card">
+        <div class="card-icon">💬</div>
+        <h3>Orientación jurídica</h3>
+        <p>
+          LEX-IA identifica el tipo de problema y guía al usuario mediante preguntas claras.
+        </p>
+      </article>
+
+      <article class="card">
+        <div class="card-icon">📄</div>
+        <h3>Generación documental</h3>
+        <p>
+          Ayuda a preparar escritos, solicitudes, contratos y documentos jurídicos básicos.
+        </p>
+      </article>
+
+      <article class="card">
+        <div class="card-icon">📁</div>
+        <h3>Expediente digital</h3>
+        <p>
+          Organiza documentos, evidencias, avances y seguimiento del caso en un solo lugar.
+        </p>
+      </article>
+
+      <article class="card">
+        <div class="card-icon">👔</div>
+        <h3>Abogados verificados</h3>
+        <p>
+          Cuando el asunto requiere representación, se canaliza con abogados reales.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <section id="funciona" class="section dark">
+    <span class="section-tag center">Proceso</span>
+    <h2>Cómo funciona LEX-IA</h2>
+
+    <div class="steps">
+      <div class="step">
+        <span>1</span>
+        <p>El usuario describe su problema jurídico.</p>
+      </div>
+
+      <div class="step">
+        <span>2</span>
+        <p>LEX-IA clasifica el asunto y realiza preguntas guiadas.</p>
+      </div>
+
+      <div class="step">
+        <span>3</span>
+        <p>Se genera un diagnóstico preliminar y recomendaciones.</p>
+      </div>
+
+      <div class="step">
+        <span>4</span>
+        <p>Si es necesario, se conecta con abogado y se abre expediente digital.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto" class="section contact">
+    <span class="section-tag center">Proyecto en desarrollo</span>
+    <h2>LEX-IA v0.1</h2>
+    <p>
+      LEX-IA se encuentra en etapa inicial de diseño, validación y construcción de su primera versión funcional.
+    </p>
+  </section>
+
+  <footer class="footer">
+    <p>© 2026 LEX-IA. Asistente Jurídico Inteligente.</p>
+  </footer>
+
+</body>
+</html>
