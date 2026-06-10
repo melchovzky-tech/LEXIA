@@ -481,3 +481,107 @@ Mientras la Fase 1 orienta y clasifica el problema, la Fase 2 permitirá dar seg
 Este módulo será fundamental para resolver uno de los principales problemas detectados en el mercado jurídico: la falta de transparencia y continuidad entre cliente y abogado.
 
 LEX-IA CASE no solo organizará expedientes, sino que permitirá construir una relación más confiable, ordenada y verificable entre la persona usuaria, el abogado y la plataforma.
+
+
+## Modelo de doble interfaz: cliente y abogado
+
+LEX-IA CASE deberá contemplar un modelo de doble interfaz, similar al funcionamiento de plataformas digitales como servicios de transporte, hospedaje o marketplaces profesionales.
+
+La finalidad de este modelo es separar claramente la experiencia del cliente y la experiencia del abogado, permitiendo que cada usuario tenga herramientas específicas según su rol dentro de la plataforma.
+
+### Interfaz del cliente
+
+La interfaz del cliente estará diseñada para que la persona usuaria pueda consultar y dar seguimiento a su asunto jurídico de forma sencilla.
+
+Desde esta interfaz, el cliente podrá:
+
+* Consultar su expediente mediante folio.
+* Ver el estado actual del caso.
+* Subir documentos.
+* Descargar documentos autorizados.
+* Revisar mensajes o notificaciones.
+* Consultar avances registrados por el abogado.
+* Ver documentos pendientes.
+* Conocer próximas acciones.
+* Solicitar revisión profesional.
+* Revisar pagos o etapas contratadas.
+* Pedir cambio de abogado, si procede conforme a las reglas de la plataforma.
+
+Esta interfaz deberá ser clara, sencilla y orientada a personas que no necesariamente tienen conocimientos jurídicos.
+
+### Interfaz del abogado
+
+La interfaz del abogado estará diseñada para que el profesionista pueda administrar los asuntos que le sean asignados o aceptados dentro de LEX-IA.
+
+Desde esta interfaz, el abogado podrá:
+
+* Consultar expedientes asignados.
+* Revisar diagnóstico preliminar generado por LEX-IA.
+* Revisar documentos cargados por el cliente.
+* Solicitar documentos faltantes.
+* Registrar avances.
+* Subir escritos, promociones, convenios o documentos.
+* Actualizar el estado del caso.
+* Enviar observaciones al cliente.
+* Registrar fechas importantes.
+* Marcar etapas cumplidas.
+* Solicitar revisión de pago por avance, si aplica.
+* Cerrar, pausar o transferir un caso conforme a las políticas de la plataforma.
+
+Esta interfaz deberá estar orientada a la eficiencia profesional, control documental y trazabilidad del trabajo jurídico.
+
+### Panel administrativo de LEX-IA
+
+Además de la interfaz del cliente y del abogado, LEX-IA deberá contar con un panel administrativo interno.
+
+Este panel permitirá a la plataforma supervisar el funcionamiento general del sistema.
+
+Desde este panel se podrá:
+
+* Supervisar expedientes activos.
+* Revisar tiempos de respuesta.
+* Validar abogados registrados.
+* Atender reportes de clientes.
+* Revisar cumplimiento de etapas.
+* Controlar cambios de abogado.
+* Supervisar pagos, comisiones o hitos.
+* Auditar actividad dentro del expediente.
+* Detectar abandono del caso.
+* Aplicar reglas internas de calidad.
+
+El panel administrativo no deberá sustituir el criterio profesional del abogado, pero sí permitirá supervisar el servicio, proteger al cliente y mantener orden dentro de la plataforma.
+
+### Valor estratégico del modelo de doble interfaz
+
+El modelo de doble interfaz permitirá que LEX-IA funcione como una plataforma jurídica organizada y no solo como un asistente de preguntas y respuestas.
+
+Este modelo ofrece ventajas importantes:
+
+* El cliente tiene control y visibilidad de su expediente.
+* El abogado tiene un espacio profesional para administrar sus casos.
+* La plataforma puede supervisar calidad, avances y cumplimiento.
+* Se reduce la pérdida de información.
+* Se facilita el cambio de abogado cuando sea necesario.
+* Se fortalece la confianza entre cliente, abogado y plataforma.
+* Se crea una base para integrar pagos, reputación y seguimiento por etapas.
+
+### Implementación gradual
+
+Aunque el modelo de doble interfaz es estratégico, no debe desarrollarse de forma inmediata en la primera versión pública.
+
+Primero debe consolidarse la Fase 1, orientada a diagnóstico preliminar, clasificación del asunto y recepción inicial de documentos.
+
+Posteriormente, en Fase 2, deberá desarrollarse la interfaz privada del cliente y, después, la interfaz del abogado.
+
+El orden recomendado es:
+
+1. Interfaz pública de orientación inicial.
+2. Registro del cliente.
+3. Folio único de expediente.
+4. Panel privado del cliente.
+5. Carga segura de documentos.
+6. Panel privado del abogado.
+7. Panel administrativo de LEX-IA.
+8. Integración de pagos, reputación y seguimiento avanzado.
+
+Este modelo permitirá que LEX-IA evolucione de manera ordenada, evitando construir demasiadas funciones al mismo tiempo y reduciendo riesgos técnicos, jurídicos y operativos.
