@@ -39,13 +39,13 @@ LEX-IA no se limita a ser un chatbot jurídico. El proyecto se estructura como u
 * **LEX-IA CASE:** expediente digital, folios, seguimiento, bitácora, documentos y continuidad del caso.
 * **LEX-IA PAY:** pagos por etapas, control de hitos, comisiones y transparencia económica.
 * **Red de abogados:** profesionistas validados para revisión, asesoría y representación.
-* **Panel administrativo:** supervisión de calidad, cumplimiento, expedientes y usuarios.
+* **Panel administrativo:** supervisión de calidad, cumplimiento, expedientes, usuarios y seguridad.
 
 ---
 
 ## Estado actual del proyecto
 
-Actualmente el proyecto se encuentra en etapa de prototipo inicial y documentación estratégica.
+Actualmente el proyecto se encuentra en etapa de prototipo inicial, documentación estratégica, diseño funcional, estructura legal-operativa y planeación técnica.
 
 La primera versión funcional se encuentra en:
 
@@ -102,9 +102,9 @@ mvp/fase_1_interfaz_publica.md
 
 ## Fase 2: LEX-IA CASE
 
-La **Fase 2** corresponde al interior de la aplicación.
+La **Fase 2** corresponde al interior privado de la aplicación.
 
-Esta fase iniciará cuando el usuario decida continuar con revisión profesional o representación legal.
+Esta fase iniciará cuando el usuario decida continuar con revisión profesional, asesoría formal o representación legal.
 
 LEX-IA CASE incluirá:
 
@@ -113,6 +113,7 @@ LEX-IA CASE incluirá:
 * Acceso seguro.
 * Panel privado del cliente.
 * Panel privado del abogado.
+* Panel administrador.
 * Carga segura de documentos.
 * Bitácora de actuaciones.
 * Historial del caso.
@@ -122,7 +123,7 @@ LEX-IA CASE incluirá:
 * Seguimiento por etapas.
 * Revisión profesional.
 * Control documental.
-* Posible integración con pagos por avance.
+* Integración futura con pagos por avance.
 
 Documento relacionado:
 
@@ -162,9 +163,96 @@ business/modelo_plataforma_doble_interfaz.md
 
 ---
 
-## Folio único de expediente
+## Arquitectura técnica de Fase 2
 
-En una fase posterior, cada expediente contará con un folio único.
+La arquitectura técnica de LEX-IA CASE define cómo deberá organizarse el sistema privado de expedientes.
+
+Elementos principales:
+
+* Frontend.
+* Backend.
+* Base de datos.
+* Autenticación.
+* Usuarios.
+* Roles.
+* Permisos.
+* Expedientes.
+* Folios.
+* Documentos.
+* Bitácoras.
+* Panel cliente.
+* Panel abogado.
+* Panel administrador.
+* IA documental.
+* Seguridad.
+* Notificaciones.
+* Pagos en fase posterior.
+
+Documento relacionado:
+
+```text
+mvp/arquitectura_fase_2.md
+```
+
+---
+
+## Roles y permisos
+
+LEX-IA deberá operar con control de acceso por rol.
+
+Roles principales:
+
+* Cliente.
+* Abogado.
+* Administrador.
+* Revisor jurídico interno.
+* Soporte técnico.
+* IA de apoyo.
+
+Cada rol tendrá permisos específicos para ver, cargar, modificar, descargar o consultar información dentro de la plataforma.
+
+Documento relacionado:
+
+```text
+mvp/roles_y_permisos.md
+```
+
+---
+
+## Modelo de datos
+
+La Fase 2 requiere una base de datos organizada para administrar usuarios, expedientes, documentos, abogados, bitácoras y pagos.
+
+Entidades principales:
+
+* users
+* clients
+* lawyers
+* admins
+* cases
+* matter_types
+* jurisdictions
+* documents
+* document_analysis
+* case_logs
+* messages
+* notifications
+* lawyer_assignments
+* payments
+* case_tasks
+* lawyer_reviews
+
+Documento relacionado:
+
+```text
+database/modelo_datos_lexia_case.md
+```
+
+---
+
+## Generador de folios
+
+Cada expediente formal de LEX-IA CASE deberá tener un folio único.
 
 Ejemplo:
 
@@ -180,7 +268,234 @@ Donde:
 * **2026** identifica el año.
 * **000014** identifica el número consecutivo del expediente.
 
-El folio permitirá consultar, retomar y dar seguimiento al expediente dentro del sistema.
+El folio permitirá consultar, retomar y dar seguimiento al expediente dentro del sistema, pero no permitirá acceso público por sí mismo.
+
+Documento relacionado:
+
+```text
+database/generador_folios_lexia.md
+```
+
+---
+
+## Seguridad y protección de datos personales
+
+LEX-IA manejará datos personales, documentos jurídicos, datos familiares, laborales, patrimoniales y posiblemente datos sensibles.
+
+Por ello, la plataforma deberá diseñarse bajo principios de:
+
+* Confidencialidad.
+* Consentimiento informado.
+* Acceso limitado.
+* Roles y permisos.
+* Protección documental.
+* Bitácora.
+* Folios protegidos.
+* Seguridad desde el diseño.
+* Control de IA documental.
+* Derechos ARCO.
+* Conservación y eliminación responsable.
+
+Documento relacionado:
+
+```text
+legal/seguridad_datos_personales.md
+```
+
+---
+
+## Aviso de privacidad integral
+
+LEX-IA contará con un aviso de privacidad integral para informar al usuario:
+
+* Quién es el responsable del tratamiento.
+* Qué datos se recaban.
+* Para qué se utilizan.
+* Qué datos sensibles pueden tratarse.
+* Qué documentos pueden recibirse.
+* Cómo se protege la información.
+* Con quién puede compartirse.
+* Cómo ejercer derechos ARCO.
+* Cómo revocar consentimiento.
+* Cómo se utilizará la IA documental.
+* Cómo se comunicarán cambios al aviso.
+
+Documento relacionado:
+
+```text
+legal/aviso_privacidad_integral.md
+```
+
+---
+
+## Términos y condiciones de uso
+
+Los términos y condiciones regulan el uso de la plataforma.
+
+Incluyen:
+
+* Naturaleza del servicio.
+* Alcance de la orientación jurídica.
+* Límites de la IA.
+* No sustitución del abogado.
+* Registro de usuarios.
+* Expediente digital.
+* Folios.
+* Carga documental.
+* Relación con abogados.
+* Pagos futuros.
+* Prohibiciones.
+* Suspensión de cuentas.
+* Propiedad intelectual.
+* Confidencialidad.
+* Limitación de responsabilidad.
+* Jurisdicción aplicable.
+
+Documento relacionado:
+
+```text
+legal/terminos_condiciones.md
+```
+
+---
+
+## Política de uso de inteligencia artificial
+
+LEX-IA utilizará inteligencia artificial como herramienta de apoyo jurídico, organizacional y documental.
+
+La IA podrá apoyar en:
+
+* Clasificación del asunto.
+* Preguntas guiadas.
+* Diagnóstico preliminar.
+* Sugerencia de documentos.
+* Análisis preliminar documental.
+* Resúmenes.
+* Extracción de información.
+* Borradores.
+* Organización del expediente.
+
+La IA no sustituye al abogado, no representa al usuario y no debe emitir decisiones jurídicas definitivas sin revisión profesional.
+
+Documento relacionado:
+
+```text
+legal/politica_uso_ia.md
+```
+
+---
+
+## Política de carga documental
+
+LEX-IA permitirá la carga de documentos relacionados con expedientes jurídicos.
+
+Esta política define:
+
+* Qué documentos pueden cargarse.
+* Qué documentos no deben cargarse.
+* Responsabilidad del usuario.
+* Formatos permitidos.
+* Validación técnica.
+* Documentos falsos o alterados.
+* Documentos de terceros.
+* Documentos con datos sensibles.
+* Clasificación documental.
+* Análisis por IA.
+* Eliminación o bloqueo de documentos.
+* Relación con expediente y folio.
+
+Documento relacionado:
+
+```text
+legal/politica_carga_documental.md
+```
+
+---
+
+## Política de conservación y eliminación de datos
+
+LEX-IA deberá definir cuánto tiempo conserva datos, documentos, expedientes, mensajes, pagos y bitácoras.
+
+Esta política contempla:
+
+* Expedientes activos.
+* Expedientes cerrados.
+* Expedientes cancelados.
+* Conservación de folios.
+* Conservación de documentos.
+* Bloqueo de datos.
+* Eliminación de datos.
+* Anonimización.
+* Solicitudes del usuario.
+* Bitácoras.
+* Pagos.
+* Datos sensibles.
+* Datos de menores.
+* Eliminación segura.
+* Respaldos.
+
+Documento relacionado:
+
+```text
+legal/politica_conservacion_eliminacion_datos.md
+```
+
+---
+
+## Protocolo de incidentes de seguridad
+
+LEX-IA deberá contar con un protocolo para atender incidentes como:
+
+* Acceso no autorizado.
+* Filtración de documentos.
+* Robo de cuenta.
+* Descarga indebida.
+* Error de permisos.
+* Pérdida de información.
+* Carga de archivos maliciosos.
+* Uso indebido de datos personales.
+* Incidentes con IA.
+* Incidentes con abogados.
+* Incidentes administrativos.
+
+El protocolo define detección, registro, contención, investigación, corrección, notificación y cierre del incidente.
+
+Documento relacionado:
+
+```text
+legal/protocolo_incidentes_seguridad.md
+```
+
+---
+
+## Política de validación de abogados
+
+LEX-IA no deberá permitir que cualquier persona actúe como abogado dentro de la plataforma sin validación previa.
+
+Esta política define:
+
+* Requisitos de registro.
+* Verificación de identidad.
+* Verificación de cédula profesional.
+* Especialidades.
+* Jurisdicciones donde puede atender.
+* Niveles de validación.
+* Obligaciones del abogado.
+* Confidencialidad.
+* Asignación de casos.
+* Conflicto de interés.
+* Tiempos de respuesta.
+* Evaluación de desempeño.
+* Quejas.
+* Suspensión.
+* Baja definitiva.
+* Cambio de abogado.
+
+Documento relacionado:
+
+```text
+legal/politica_validacion_abogados.md
+```
 
 ---
 
@@ -209,6 +524,7 @@ LEXIA/
 ├── assets/
 │   └── branding/
 ├── business/
+├── database/
 ├── design/
 ├── docs/
 ├── landing/
@@ -238,6 +554,17 @@ business/plan_negocio.md
 business/lexia_case.md
 business/lexia_pay.md
 business/modelo_plataforma_doble_interfaz.md
+```
+
+### database/
+
+Contiene documentos relacionados con el modelo de datos, estructura futura de base de datos, folios, relaciones entre entidades y lógica preliminar de almacenamiento.
+
+Documentos destacados:
+
+```text
+database/modelo_datos_lexia_case.md
+database/generador_folios_lexia.md
 ```
 
 ### design/
@@ -276,13 +603,21 @@ landing/script.js
 
 ### legal/
 
-Contiene documentos relacionados con marco jurídico, privacidad, marca, dominio, cumplimiento y soporte legal del proyecto.
+Contiene documentos relacionados con marco jurídico, privacidad, seguridad, términos de uso, políticas operativas, protección de datos, IA, carga documental e integración de abogados.
 
 Documentos destacados:
 
 ```text
 legal/marco_juridico.md
 legal/registro_marca_dominio.md
+legal/seguridad_datos_personales.md
+legal/aviso_privacidad_integral.md
+legal/terminos_condiciones.md
+legal/politica_uso_ia.md
+legal/politica_carga_documental.md
+legal/politica_conservacion_eliminacion_datos.md
+legal/protocolo_incidentes_seguridad.md
+legal/politica_validacion_abogados.md
 ```
 
 ### mvp/
@@ -294,6 +629,8 @@ Documentos destacados:
 ```text
 mvp/fase_1_interfaz_publica.md
 mvp/fase_2_lexia_case.md
+mvp/arquitectura_fase_2.md
+mvp/roles_y_permisos.md
 mvp/casos_uso.md
 mvp/flujo_usuario.md
 mvp/requisitos_funcionales.md
@@ -338,19 +675,22 @@ La versión actual es un prototipo local.
 Todavía no incluye:
 
 * Backend.
-* Base de datos.
+* Base de datos funcional.
 * Login.
-* Registro de usuarios.
+* Registro real de usuarios.
 * Folio real.
 * Almacenamiento seguro de documentos.
 * Lectura real de PDFs o imágenes.
-* OCR.
+* OCR real.
 * IA documental real.
 * Panel privado del cliente.
 * Panel privado del abogado.
 * Panel administrador.
 * Pagos.
 * Asignación real de abogados.
+* Validación automatizada de cédulas.
+* Bitácora persistente.
+* Seguridad productiva.
 
 ---
 
@@ -376,9 +716,12 @@ LEX-IA busca diferenciarse por:
 * Control documental.
 * Seguimiento por etapas.
 * Transparencia entre cliente y abogado.
-* Red de profesionistas.
+* Red de profesionistas validados.
 * Apoyo de inteligencia artificial.
-* Posible modelo de pagos por avance.
+* Seguridad documental.
+* Protección de datos personales.
+* Políticas legales claras.
+* Modelo de pagos por avance en fase posterior.
 
 ---
 
@@ -398,6 +741,9 @@ Los siguientes pasos recomendados son:
 10. Integrar IA documental real.
 11. Crear panel administrador.
 12. Diseñar LEX-IA PAY.
+13. Diseñar validación real de abogados.
+14. Crear flujo de incidentes de seguridad.
+15. Crear integración futura con pagos y notificaciones.
 
 ---
 
@@ -406,14 +752,84 @@ Los siguientes pasos recomendados son:
 ```text
 Fase 1: Prototipo funcional local
 Fase 2: Documentación funcional iniciada
+Modelo de doble interfaz: Documentado
+Arquitectura técnica: Documentada
+Roles y permisos: Documentado
+Modelo de datos: Documentado
+Generador de folios: Documentado
+Base legal-operativa: Documentada
 Backend: Pendiente
-Base de datos: Pendiente
+Base de datos funcional: Pendiente
 Usuarios: Pendiente
 IA documental real: Pendiente
 Panel abogado: Pendiente
 Panel cliente: Pendiente
 Panel administrador: Pendiente
 Pagos: Pendiente
+```
+
+---
+
+## Documentos principales del proyecto
+
+### MVP
+
+```text
+mvp/fase_1_interfaz_publica.md
+mvp/fase_2_lexia_case.md
+mvp/arquitectura_fase_2.md
+mvp/roles_y_permisos.md
+mvp/casos_uso.md
+mvp/flujo_usuario.md
+mvp/requisitos_funcionales.md
+mvp/pantallas_app.md
+```
+
+### Database
+
+```text
+database/modelo_datos_lexia_case.md
+database/generador_folios_lexia.md
+```
+
+### Legal
+
+```text
+legal/seguridad_datos_personales.md
+legal/aviso_privacidad_integral.md
+legal/terminos_condiciones.md
+legal/politica_uso_ia.md
+legal/politica_carga_documental.md
+legal/politica_conservacion_eliminacion_datos.md
+legal/protocolo_incidentes_seguridad.md
+legal/politica_validacion_abogados.md
+```
+
+### Business
+
+```text
+business/modelo_negocio.md
+business/plan_negocio.md
+business/lexia_case.md
+business/lexia_pay.md
+business/modelo_plataforma_doble_interfaz.md
+```
+
+### Research
+
+```text
+research/arboles_decision.md
+research/motor_decisiones.md
+research/base_conocimiento_lexia.md
+research/base_datos_lexia.md
+research/calculadora_indemnizacion.md
+```
+
+### Design
+
+```text
+design/identidad_visual.md
+design/concepto_logo_final.md
 ```
 
 ---
@@ -426,6 +842,8 @@ La visión del proyecto es resolver la falta de claridad, confianza y continuida
 
 La Fase 1 permite recibir y clasificar el problema.
 
-La Fase 2 permitirá dar seguimiento formal mediante folios, usuarios, documentos, abogados y control de etapas.
+La Fase 2 permitirá dar seguimiento formal mediante folios, usuarios, documentos, abogados, bitácoras y control de etapas.
 
-El objetivo final es que LEX-IA funcione como una plataforma confiable, ordenada y transparente para acceder a servicios jurídicos en México.
+La base legal-operativa busca proteger la plataforma, al usuario, los documentos, la información personal y la responsabilidad profesional.
+
+El objetivo final es que LEX-IA funcione como una plataforma confiable, ordenada, segura y transparente para acceder a servicios jurídicos en México.
