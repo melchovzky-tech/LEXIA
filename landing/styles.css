@@ -441,6 +441,7 @@ body {
 
 .file-status {
   margin-top: 22px;
+  margin-bottom: 22px;
   display: flex;
   gap: 10px;
   flex-wrap: wrap;

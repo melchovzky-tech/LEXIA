@@ -269,11 +269,13 @@ const casos = {
 let casoActual = null;
 let tipoCasoActual = null;
 let ultimoAnalisis = null;
+let ultimasRespuestas = null;
 
 function cargarCaso(tipo) {
   casoActual = casos[tipo];
   tipoCasoActual = tipo;
   ultimoAnalisis = null;
+  ultimasRespuestas = null;
 
   const entrevista = document.getElementById("entrevista");
   const titulo = document.getElementById("titulo-caso");
@@ -389,6 +391,7 @@ function generarDiagnostico() {
   }
 
   ultimoAnalisis = analisis;
+  ultimasRespuestas = respuestas;
 
   mostrarDiagnostico(analisis);
 }
@@ -508,8 +511,14 @@ function analizarDivorcio(r) {
       "No se advierte inicialmente un divorcio, porque el usuario indica que no existe matrimonio civil.",
       "Bajo",
       "Revisar si el asunto corresponde a separación de hecho, concubinato, custodia, alimentos o liquidación de bienes.",
-      ["Para que exista divorcio debe revisarse primero la existencia de matrimonio civil.", `Jurisdicción preliminar indicada por el usuario: ${r.estado}.`],
-      ["Podría tratarse de un asunto familiar distinto al divorcio.", "Debe revisarse la legislación familiar aplicable en el estado indicado."],
+      [
+        "Para que exista divorcio debe revisarse primero la existencia de matrimonio civil.",
+        `Jurisdicción preliminar indicada por el usuario: ${r.estado}.`
+      ],
+      [
+        "Podría tratarse de un asunto familiar distinto al divorcio.",
+        "Debe revisarse la legislación familiar aplicable en el estado indicado."
+      ],
       ["Identificación oficial", "Documentos que acrediten la relación familiar o patrimonial"]
     );
   }
@@ -859,8 +868,122 @@ function crearExpediente() {
       <span>Revisión profesional pendiente</span>
       <span>Expediente inicial creado</span>
     </div>
+
+    <button class="btn primary" onclick="descargarExpediente()">
+      Descargar expediente inicial
+    </button>
   `;
 
   expediente.style.display = "block";
   expediente.scrollIntoView({ behavior: "smooth" });
+}
+
+function descargarExpediente() {
+  if (!ultimoAnalisis || !ultimasRespuestas || !casoActual) return;
+
+  const fecha = new Date().toLocaleString("es-MX");
+
+  const preguntasYRespuestas = casoActual.preguntas
+    .map((pregunta) => {
+      const respuesta = ultimasRespuestas[pregunta.id] || "Sin respuesta";
+      return `${pregunta.texto}\nRespuesta: ${respuesta}`;
+    })
+    .join("\n\n");
+
+  const documentos = ultimoAnalisis.documentos
+    .map((doc) => `- ${doc}`)
+    .join("\n");
+
+  const hallazgos = ultimoAnalisis.hallazgos
+    .map((item) => `- ${item}`)
+    .join("\n");
+
+  const advertencias = ultimoAnalisis.advertencias.length > 0
+    ? ultimoAnalisis.advertencias.map((item) => `- ${item}`).join("\n")
+    : "- Sin advertencias adicionales registradas.";
+
+  const contenido = `
+EXPEDIENTE INICIAL LEX-IA
+Asistente Jurídico Inteligente
+
+Fecha de generación:
+${fecha}
+
+----------------------------------------
+DATOS GENERALES DEL ASUNTO
+----------------------------------------
+
+Tipo de expediente:
+${ultimoAnalisis.expediente}
+
+Jurisdicción preliminar:
+${ultimoAnalisis.estado}
+
+Materia:
+${ultimoAnalisis.materia}
+
+Normativa a revisar:
+${ultimoAnalisis.normativa}
+
+Problema identificado:
+${ultimoAnalisis.problema}
+
+Nivel de atención:
+${ultimoAnalisis.nivel}
+
+----------------------------------------
+RESPUESTAS DEL USUARIO
+----------------------------------------
+
+${preguntasYRespuestas}
+
+----------------------------------------
+LECTURA PRELIMINAR
+----------------------------------------
+
+${hallazgos}
+
+----------------------------------------
+ADVERTENCIAS RELEVANTES
+----------------------------------------
+
+${advertencias}
+
+----------------------------------------
+DOCUMENTOS SUGERIDOS
+----------------------------------------
+
+${documentos}
+
+----------------------------------------
+RECOMENDACIÓN INICIAL
+----------------------------------------
+
+${ultimoAnalisis.recomendacion}
+
+----------------------------------------
+AVISO IMPORTANTE
+----------------------------------------
+
+Este expediente es preliminar y fue generado con base únicamente en las respuestas proporcionadas por el usuario.
+
+No sustituye la revisión profesional de un abogado.
+
+Para una opinión jurídica formal será necesario revisar documentos, jurisdicción aplicable, legislación vigente y circunstancias específicas del caso.
+
+LEX-IA
+Orientación, representación y seguimiento jurídico en un solo lugar.
+`;
+
+  const blob = new Blob([contenido], { type: "text/plain;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+
+  const enlace = document.createElement("a");
+  enlace.href = url;
+  enlace.download = `expediente_lexia_${tipoCasoActual}.txt`;
+  document.body.appendChild(enlace);
+  enlace.click();
+
+  document.body.removeChild(enlace);
+  URL.revokeObjectURL(url);
 }
