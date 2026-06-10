@@ -271,6 +271,7 @@ let tipoCasoActual = null;
 let ultimoAnalisis = null;
 let ultimasRespuestas = null;
 let documentosCargados = [];
+let ultimoAnalisisDocumental = null;
 
 function cargarCaso(tipo) {
   casoActual = casos[tipo];
@@ -278,6 +279,7 @@ function cargarCaso(tipo) {
   ultimoAnalisis = null;
   ultimasRespuestas = null;
   documentosCargados = [];
+  ultimoAnalisisDocumental = null;
 
   const entrevista = document.getElementById("entrevista");
   const titulo = document.getElementById("titulo-caso");
@@ -876,6 +878,10 @@ function crearExpediente() {
         <span>!</span> Documentos pendientes
       </button>
 
+      <button id="chip-analisis-documental" class="status-chip pending" type="button" onclick="enfocarAnalisisDocumental()">
+        <span>!</span> Análisis documental pendiente
+      </button>
+
       <button class="status-chip active" type="button">
         <span>✓</span> Expediente inicial creado
       </button>
@@ -906,7 +912,15 @@ function crearExpediente() {
       <div id="lista-documentos" class="document-list">
         <p class="empty-docs">Aún no se han cargado documentos.</p>
       </div>
+
+      <div class="analysis-actions">
+        <button id="btn-analizar-documentos" class="btn primary" onclick="analizarDocumentosCargados()" disabled>
+          Analizar documentos cargados
+        </button>
+      </div>
     </div>
+
+    <div id="analisis-documental" class="document-analysis"></div>
 
     <div class="expediente-actions">
       <button class="btn primary" onclick="descargarExpediente()">
@@ -914,6 +928,9 @@ function crearExpediente() {
       </button>
     </div>
   `;
+
+  renderizarDocumentos();
+  actualizarEstadoDocumentos();
 
   expediente.style.display = "block";
   expediente.scrollIntoView({ behavior: "smooth" });
@@ -924,6 +941,17 @@ function enfocarCargaDocumentos() {
   if (panel) {
     panel.scrollIntoView({ behavior: "smooth" });
   }
+}
+
+function enfocarAnalisisDocumental() {
+  const panel = document.getElementById("analisis-documental");
+
+  if (panel && panel.style.display === "block") {
+    panel.scrollIntoView({ behavior: "smooth" });
+    return;
+  }
+
+  enfocarCargaDocumentos();
 }
 
 function manejarDocumentos(event) {
@@ -944,6 +972,8 @@ function manejarDocumentos(event) {
     }
   });
 
+  ultimoAnalisisDocumental = null;
+  limpiarAnalisisDocumental();
   renderizarDocumentos();
   actualizarEstadoDocumentos();
 }
@@ -979,22 +1009,237 @@ function renderizarDocumentos() {
 
 function eliminarDocumento(index) {
   documentosCargados.splice(index, 1);
+  ultimoAnalisisDocumental = null;
+  limpiarAnalisisDocumental();
   renderizarDocumentos();
   actualizarEstadoDocumentos();
 }
 
 function actualizarEstadoDocumentos() {
-  const chip = document.getElementById("chip-documentos");
+  const chipDocumentos = document.getElementById("chip-documentos");
+  const chipAnalisis = document.getElementById("chip-analisis-documental");
+  const botonAnalisis = document.getElementById("btn-analizar-documentos");
 
-  if (!chip) return;
-
-  if (documentosCargados.length > 0) {
-    chip.className = "status-chip active";
-    chip.innerHTML = `<span>✓</span> Documentos integrados`;
-  } else {
-    chip.className = "status-chip pending";
-    chip.innerHTML = `<span>!</span> Documentos pendientes`;
+  if (chipDocumentos) {
+    if (documentosCargados.length > 0) {
+      chipDocumentos.className = "status-chip active";
+      chipDocumentos.innerHTML = `<span>✓</span> Documentos integrados`;
+    } else {
+      chipDocumentos.className = "status-chip pending";
+      chipDocumentos.innerHTML = `<span>!</span> Documentos pendientes`;
+    }
   }
+
+  if (chipAnalisis) {
+    if (ultimoAnalisisDocumental) {
+      chipAnalisis.className = "status-chip active";
+      chipAnalisis.innerHTML = `<span>✓</span> Documentos analizados`;
+    } else {
+      chipAnalisis.className = "status-chip pending";
+      chipAnalisis.innerHTML = `<span>!</span> Análisis documental pendiente`;
+    }
+  }
+
+  if (botonAnalisis) {
+    botonAnalisis.disabled = documentosCargados.length === 0;
+  }
+}
+
+function limpiarAnalisisDocumental() {
+  const panel = document.getElementById("analisis-documental");
+
+  if (panel) {
+    panel.innerHTML = "";
+    panel.style.display = "none";
+  }
+}
+
+function analizarDocumentosCargados() {
+  if (documentosCargados.length === 0) {
+    alert("Primero sube al menos un documento para analizar.");
+    return;
+  }
+
+  const documentosDetectados = documentosCargados.map((doc) => inferirDocumento(doc));
+  const fortalezas = [];
+  const advertencias = [];
+  const recomendaciones = [];
+
+  documentosDetectados.forEach((resultado) => {
+    fortalezas.push(resultado.lectura);
+    resultado.advertencias.forEach((item) => advertencias.push(item));
+    resultado.recomendaciones.forEach((item) => recomendaciones.push(item));
+  });
+
+  if (tipoCasoActual === "despido") {
+    recomendaciones.push("Revisar si los documentos permiten acreditar relación laboral, salario, antigüedad y forma de terminación.");
+  }
+
+  if (tipoCasoActual === "divorcio") {
+    recomendaciones.push("Revisar acta de matrimonio, actas de nacimiento, bienes y posible convenio entre las partes.");
+  }
+
+  if (tipoCasoActual === "pension") {
+    recomendaciones.push("Revisar actas de nacimiento, comprobantes de gastos, ingresos, sentencia o convenio previo.");
+  }
+
+  if (tipoCasoActual === "sucesion") {
+    recomendaciones.push("Revisar acta de defunción, testamento, documentos de propiedad y parentesco de posibles herederos.");
+  }
+
+  advertencias.push("Esta lectura documental es preliminar y se basa en nombre, tipo y extensión del archivo.");
+  advertencias.push("Para lectura real del contenido se requerirá IA documental, OCR, backend seguro y revisión profesional.");
+
+  ultimoAnalisisDocumental = {
+    documentosDetectados,
+    fortalezas: limpiarDuplicados(fortalezas),
+    advertencias: limpiarDuplicados(advertencias),
+    recomendaciones: limpiarDuplicados(recomendaciones)
+  };
+
+  mostrarAnalisisDocumental();
+  actualizarEstadoDocumentos();
+}
+
+function inferirDocumento(doc) {
+  const nombre = doc.nombre.toLowerCase();
+  const advertencias = [];
+  const recomendaciones = [];
+
+  let categoria = "Documento general";
+  let lectura = "El archivo fue integrado al expediente como documento de apoyo para revisión posterior.";
+
+  if (nombre.includes("contrato")) {
+    categoria = "Contrato";
+    lectura = "El sistema detecta un posible contrato. Puede servir para identificar obligaciones, partes, fechas y condiciones relevantes.";
+    recomendaciones.push("Verificar firmas, fechas, partes involucradas y cláusulas principales.");
+  }
+
+  if (nombre.includes("nomina") || nombre.includes("nómina") || nombre.includes("recibo")) {
+    categoria = "Recibo o comprobante de pago";
+    lectura = "El sistema detecta un posible recibo o comprobante de pago. Puede ayudar a acreditar salario, pagos o relación económica.";
+    recomendaciones.push("Comparar montos, fechas de pago y datos del emisor.");
+  }
+
+  if (nombre.includes("renuncia")) {
+    categoria = "Renuncia";
+    lectura = "El sistema detecta un posible documento de renuncia. Debe revisarse con cuidado para identificar si fue voluntaria o controvertida.";
+    recomendaciones.push("Revisar fecha, firma, redacción y circunstancias en que fue firmada.");
+  }
+
+  if (nombre.includes("despido") || nombre.includes("aviso")) {
+    categoria = "Aviso laboral";
+    lectura = "El sistema detecta un posible aviso laboral. Puede ser relevante para analizar la forma de terminación.";
+    recomendaciones.push("Revisar si contiene fecha, motivo, firma y datos del patrón.");
+  }
+
+  if (nombre.includes("matrimonio")) {
+    categoria = "Acta de matrimonio";
+    lectura = "El sistema detecta un posible acta de matrimonio. Puede acreditar la existencia del vínculo civil.";
+    recomendaciones.push("Confirmar que el acta esté legible y actualizada.");
+  }
+
+  if (nombre.includes("nacimiento") || nombre.includes("hijo") || nombre.includes("hija")) {
+    categoria = "Acta de nacimiento";
+    lectura = "El sistema detecta un posible acta de nacimiento. Puede acreditar filiación, parentesco o derecho alimentario.";
+    recomendaciones.push("Verificar nombres completos, fechas y datos de registro.");
+  }
+
+  if (nombre.includes("pension") || nombre.includes("pensión") || nombre.includes("alimentos")) {
+    categoria = "Documento de alimentos";
+    lectura = "El sistema detecta un documento posiblemente relacionado con pensión alimenticia.";
+    recomendaciones.push("Revisar montos, periodicidad, obligado alimentario y beneficiarios.");
+  }
+
+  if (nombre.includes("sentencia") || nombre.includes("convenio")) {
+    categoria = "Sentencia o convenio";
+    lectura = "El sistema detecta una posible sentencia o convenio. Puede contener obligaciones vigentes.";
+    recomendaciones.push("Identificar autoridad, fecha, partes obligadas y puntos resolutivos.");
+  }
+
+  if (nombre.includes("defuncion") || nombre.includes("defunción")) {
+    categoria = "Acta de defunción";
+    lectura = "El sistema detecta un posible acta de defunción. Es documento base para asuntos sucesorios.";
+    recomendaciones.push("Verificar datos de la persona fallecida y fecha de defunción.");
+  }
+
+  if (nombre.includes("testamento")) {
+    categoria = "Testamento";
+    lectura = "El sistema detecta un posible testamento. Puede definir herederos, legatarios y voluntad sucesoria.";
+    recomendaciones.push("Verificar notaría, fecha, número de instrumento y datos del testador.");
+  }
+
+  if (
+    nombre.includes("escritura") ||
+    nombre.includes("propiedad") ||
+    nombre.includes("predial") ||
+    nombre.includes("casa") ||
+    nombre.includes("terreno")
+  ) {
+    categoria = "Documento de propiedad";
+    lectura = "El sistema detecta un posible documento de propiedad. Puede ayudar a identificar bienes objeto del asunto.";
+    recomendaciones.push("Revisar propietario, ubicación del inmueble, folio, escritura o clave catastral.");
+  }
+
+  if (doc.tipo.includes("pdf")) {
+    recomendaciones.push("El archivo está en PDF; en una fase posterior podría leerse con IA documental.");
+  }
+
+  if (doc.tipo.includes("image")) {
+    recomendaciones.push("El archivo es imagen; en una fase posterior requerirá OCR para extraer texto.");
+  }
+
+  if (!doc.tipo.includes("pdf") && !doc.tipo.includes("image")) {
+    advertencias.push(`El archivo ${doc.nombre} tiene un tipo no identificado plenamente.`);
+  }
+
+  return {
+    nombre: doc.nombre,
+    categoria,
+    lectura,
+    advertencias,
+    recomendaciones
+  };
+}
+
+function mostrarAnalisisDocumental() {
+  const panel = document.getElementById("analisis-documental");
+
+  if (!panel || !ultimoAnalisisDocumental) return;
+
+  panel.innerHTML = `
+    <h4>Análisis preliminar de documentos</h4>
+
+    <p>
+      LEX-IA realizó una lectura inicial simulada de los documentos cargados.
+      Esta versión todavía no interpreta el contenido interno del archivo, pero identifica posibles tipos documentales.
+    </p>
+
+    <h4>Documentos detectados</h4>
+    <ul>
+      ${ultimoAnalisisDocumental.documentosDetectados
+        .map((doc) => `<li><strong>${doc.nombre}</strong> — ${doc.categoria}</li>`)
+        .join("")}
+    </ul>
+
+    <h4>Lectura preliminar</h4>
+    <ul>
+      ${ultimoAnalisisDocumental.fortalezas.map((item) => `<li>${item}</li>`).join("")}
+    </ul>
+
+    <h4>Recomendaciones documentales</h4>
+    <ul>
+      ${ultimoAnalisisDocumental.recomendaciones.map((item) => `<li>${item}</li>`).join("")}
+    </ul>
+
+    <h4>Advertencias</h4>
+    <ul>
+      ${ultimoAnalisisDocumental.advertencias.map((item) => `<li>${item}</li>`).join("")}
+    </ul>
+  `;
+
+  panel.style.display = "block";
+  panel.scrollIntoView({ behavior: "smooth" });
 }
 
 function formatearTamano(bytes) {
@@ -1031,6 +1276,24 @@ function descargarExpediente() {
           .map((doc) => `- ${doc.nombre} (${formatearTamano(doc.tamano)})`)
           .join("\n")
       : "- No se integraron documentos en esta versión local.";
+
+  const analisisDocumentalTexto = ultimoAnalisisDocumental
+    ? `
+DOCUMENTOS DETECTADOS:
+${ultimoAnalisisDocumental.documentosDetectados
+  .map((doc) => `- ${doc.nombre} — ${doc.categoria}`)
+  .join("\n")}
+
+LECTURA PRELIMINAR DOCUMENTAL:
+${ultimoAnalisisDocumental.fortalezas.map((item) => `- ${item}`).join("\n")}
+
+RECOMENDACIONES DOCUMENTALES:
+${ultimoAnalisisDocumental.recomendaciones.map((item) => `- ${item}`).join("\n")}
+
+ADVERTENCIAS DOCUMENTALES:
+${ultimoAnalisisDocumental.advertencias.map((item) => `- ${item}`).join("\n")}
+`
+    : "No se realizó análisis documental preliminar.";
 
   const hallazgos = ultimoAnalisis.hallazgos
     .map((item) => `- ${item}`)
@@ -1101,6 +1364,12 @@ DOCUMENTOS INTEGRADOS POR EL USUARIO
 ${documentosIntegrados}
 
 ----------------------------------------
+ANÁLISIS PRELIMINAR DE DOCUMENTOS
+----------------------------------------
+
+${analisisDocumentalTexto}
+
+----------------------------------------
 RECOMENDACIÓN INICIAL
 ----------------------------------------
 
@@ -1114,6 +1383,7 @@ ESTADO DEL EXPEDIENTE
 - Jurisdicción registrada
 - Expediente inicial creado
 - Documentos integrados: ${documentosCargados.length}
+- Análisis documental: ${ultimoAnalisisDocumental ? "realizado" : "pendiente"}
 - Revisión profesional pendiente
 
 ----------------------------------------
@@ -1127,6 +1397,8 @@ No sustituye la revisión profesional de un abogado.
 Para una opinión jurídica formal será necesario revisar documentos, jurisdicción aplicable, legislación vigente y circunstancias específicas del caso.
 
 En esta versión local, los archivos cargados no se envían a un servidor. Únicamente se registran sus nombres dentro del expediente descargado.
+
+La lectura documental actual es una simulación basada en el nombre, tipo y extensión del archivo. Para leer el contenido real de PDFs o imágenes se requerirá backend seguro, OCR, IA documental y revisión profesional.
 
 LEX-IA
 Orientación, representación y seguimiento jurídico en un solo lugar.
