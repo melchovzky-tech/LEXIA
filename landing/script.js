@@ -270,12 +270,14 @@ let casoActual = null;
 let tipoCasoActual = null;
 let ultimoAnalisis = null;
 let ultimasRespuestas = null;
+let documentosCargados = [];
 
 function cargarCaso(tipo) {
   casoActual = casos[tipo];
   tipoCasoActual = tipo;
   ultimoAnalisis = null;
   ultimasRespuestas = null;
+  documentosCargados = [];
 
   const entrevista = document.getElementById("entrevista");
   const titulo = document.getElementById("titulo-caso");
@@ -858,24 +860,153 @@ function crearExpediente() {
     <p><strong>Normativa a revisar:</strong> ${ultimoAnalisis.normativa}</p>
     <p><strong>Problema identificado:</strong> ${ultimoAnalisis.problema}</p>
     <p><strong>Nivel de atención:</strong> ${ultimoAnalisis.nivel}.</p>
-    <p><strong>Estado:</strong> Diagnóstico preliminar generado.</p>
+    <p><strong>Estado:</strong> Expediente inicial creado.</p>
     <p><strong>Siguiente acción:</strong> Integrar documentos y solicitar revisión profesional.</p>
 
     <div class="file-status">
-      <span>Diagnóstico generado</span>
-      <span>Jurisdicción registrada</span>
-      <span>Documentos pendientes</span>
-      <span>Revisión profesional pendiente</span>
-      <span>Expediente inicial creado</span>
+      <button class="status-chip active" type="button">
+        <span>✓</span> Diagnóstico generado
+      </button>
+
+      <button class="status-chip active" type="button">
+        <span>✓</span> Jurisdicción registrada
+      </button>
+
+      <button id="chip-documentos" class="status-chip pending" type="button" onclick="enfocarCargaDocumentos()">
+        <span>!</span> Documentos pendientes
+      </button>
+
+      <button class="status-chip active" type="button">
+        <span>✓</span> Expediente inicial creado
+      </button>
+
+      <button class="status-chip pending" type="button">
+        <span>!</span> Revisión profesional pendiente
+      </button>
     </div>
 
-    <button class="btn primary" onclick="descargarExpediente()">
-      Descargar expediente inicial
-    </button>
+    <div class="upload-panel" id="panel-documentos">
+      <h4>Integrar documentos al expediente</h4>
+      <p>
+        Sube documentos en formato PDF o imagen para simular su integración al expediente inicial.
+        En esta versión local los archivos no se envían a un servidor; solo se enlistan en la página.
+      </p>
+
+      <label class="upload-box">
+        <span>Seleccionar documentos</span>
+        <input 
+          type="file" 
+          id="documentosInput" 
+          accept=".pdf,image/*" 
+          multiple 
+          onchange="manejarDocumentos(event)"
+        />
+      </label>
+
+      <div id="lista-documentos" class="document-list">
+        <p class="empty-docs">Aún no se han cargado documentos.</p>
+      </div>
+    </div>
+
+    <div class="expediente-actions">
+      <button class="btn primary" onclick="descargarExpediente()">
+        Descargar expediente inicial
+      </button>
+    </div>
   `;
 
   expediente.style.display = "block";
   expediente.scrollIntoView({ behavior: "smooth" });
+}
+
+function enfocarCargaDocumentos() {
+  const panel = document.getElementById("panel-documentos");
+  if (panel) {
+    panel.scrollIntoView({ behavior: "smooth" });
+  }
+}
+
+function manejarDocumentos(event) {
+  const archivos = Array.from(event.target.files || []);
+
+  archivos.forEach((archivo) => {
+    const yaExiste = documentosCargados.some(
+      (doc) => doc.nombre === archivo.name && doc.tamano === archivo.size
+    );
+
+    if (!yaExiste) {
+      documentosCargados.push({
+        nombre: archivo.name,
+        tipo: archivo.type || "Tipo no identificado",
+        tamano: archivo.size,
+        fecha: new Date().toLocaleString("es-MX")
+      });
+    }
+  });
+
+  renderizarDocumentos();
+  actualizarEstadoDocumentos();
+}
+
+function renderizarDocumentos() {
+  const lista = document.getElementById("lista-documentos");
+
+  if (!lista) return;
+
+  if (documentosCargados.length === 0) {
+    lista.innerHTML = `<p class="empty-docs">Aún no se han cargado documentos.</p>`;
+    return;
+  }
+
+  lista.innerHTML = documentosCargados
+    .map((doc, index) => {
+      return `
+        <div class="document-item">
+          <div>
+            <strong>${doc.nombre}</strong>
+            <p>${formatearTamano(doc.tamano)} · ${doc.tipo}</p>
+            <small>Cargado: ${doc.fecha}</small>
+          </div>
+
+          <button type="button" onclick="eliminarDocumento(${index})">
+            Eliminar
+          </button>
+        </div>
+      `;
+    })
+    .join("");
+}
+
+function eliminarDocumento(index) {
+  documentosCargados.splice(index, 1);
+  renderizarDocumentos();
+  actualizarEstadoDocumentos();
+}
+
+function actualizarEstadoDocumentos() {
+  const chip = document.getElementById("chip-documentos");
+
+  if (!chip) return;
+
+  if (documentosCargados.length > 0) {
+    chip.className = "status-chip active";
+    chip.innerHTML = `<span>✓</span> Documentos integrados`;
+  } else {
+    chip.className = "status-chip pending";
+    chip.innerHTML = `<span>!</span> Documentos pendientes`;
+  }
+}
+
+function formatearTamano(bytes) {
+  if (bytes < 1024) return `${bytes} bytes`;
+
+  const kb = bytes / 1024;
+
+  if (kb < 1024) return `${kb.toFixed(1)} KB`;
+
+  const mb = kb / 1024;
+
+  return `${mb.toFixed(1)} MB`;
 }
 
 function descargarExpediente() {
@@ -894,13 +1025,21 @@ function descargarExpediente() {
     .map((doc) => `- ${doc}`)
     .join("\n");
 
+  const documentosIntegrados =
+    documentosCargados.length > 0
+      ? documentosCargados
+          .map((doc) => `- ${doc.nombre} (${formatearTamano(doc.tamano)})`)
+          .join("\n")
+      : "- No se integraron documentos en esta versión local.";
+
   const hallazgos = ultimoAnalisis.hallazgos
     .map((item) => `- ${item}`)
     .join("\n");
 
-  const advertencias = ultimoAnalisis.advertencias.length > 0
-    ? ultimoAnalisis.advertencias.map((item) => `- ${item}`).join("\n")
-    : "- Sin advertencias adicionales registradas.";
+  const advertencias =
+    ultimoAnalisis.advertencias.length > 0
+      ? ultimoAnalisis.advertencias.map((item) => `- ${item}`).join("\n")
+      : "- Sin advertencias adicionales registradas.";
 
   const contenido = `
 EXPEDIENTE INICIAL LEX-IA
@@ -956,10 +1095,26 @@ DOCUMENTOS SUGERIDOS
 ${documentos}
 
 ----------------------------------------
+DOCUMENTOS INTEGRADOS POR EL USUARIO
+----------------------------------------
+
+${documentosIntegrados}
+
+----------------------------------------
 RECOMENDACIÓN INICIAL
 ----------------------------------------
 
 ${ultimoAnalisis.recomendacion}
+
+----------------------------------------
+ESTADO DEL EXPEDIENTE
+----------------------------------------
+
+- Diagnóstico generado
+- Jurisdicción registrada
+- Expediente inicial creado
+- Documentos integrados: ${documentosCargados.length}
+- Revisión profesional pendiente
 
 ----------------------------------------
 AVISO IMPORTANTE
@@ -970,6 +1125,8 @@ Este expediente es preliminar y fue generado con base únicamente en las respues
 No sustituye la revisión profesional de un abogado.
 
 Para una opinión jurídica formal será necesario revisar documentos, jurisdicción aplicable, legislación vigente y circunstancias específicas del caso.
+
+En esta versión local, los archivos cargados no se envían a un servidor. Únicamente se registran sus nombres dentro del expediente descargado.
 
 LEX-IA
 Orientación, representación y seguimiento jurídico en un solo lugar.
