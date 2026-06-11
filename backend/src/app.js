@@ -3,6 +3,8 @@ const cors = require("cors");
 const helmet = require("helmet");
 require("dotenv").config();
 
+const apiRoutes = require("./routes");
+
 const app = express();
 
 const PORT = process.env.PORT || 4000;
@@ -20,43 +22,14 @@ app.use(
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true }));
 
+app.use("/api", apiRoutes);
+
 app.get("/", (req, res) => {
   res.json({
     success: true,
     message: "Backend inicial de LEX-IA CASE funcionando correctamente",
     project: "LEX-IA CASE",
     version: "1.0.0"
-  });
-});
-
-app.get("/api/health", (req, res) => {
-  res.json({
-    success: true,
-    status: "ok",
-    service: "LEX-IA CASE Backend",
-    timestamp: new Date().toISOString()
-  });
-});
-
-app.get("/api/info", (req, res) => {
-  res.json({
-    success: true,
-    name: "LEX-IA CASE",
-    description: "Backend preliminar para expedientes juridicos digitales",
-    modules: [
-      "auth",
-      "users",
-      "cases",
-      "documents",
-      "logs",
-      "lawyers",
-      "ai",
-      "privacy",
-      "security",
-      "payments"
-    ],
-    warning:
-      "Este backend es una version inicial de desarrollo. No usar en produccion sin seguridad, base de datos y autenticacion completas."
   });
 });
 
