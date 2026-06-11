@@ -22,8 +22,6 @@ app.use(
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/api", apiRoutes);
-
 app.get("/", (req, res) => {
   res.json({
     success: true,
@@ -32,6 +30,8 @@ app.get("/", (req, res) => {
     version: "1.0.0"
   });
 });
+
+app.use("/api", apiRoutes);
 
 app.use((req, res) => {
   res.status(404).json({
