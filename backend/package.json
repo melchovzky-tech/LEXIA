@@ -1,0 +1,25 @@
+{
+  "name": "lexia-case-backend",
+  "version": "1.0.0",
+  "description": "Backend inicial para LEX-IA CASE",
+  "main": "src/app.js",
+  "scripts": {
+    "dev": "node src/app.js",
+    "start": "node src/app.js"
+  },
+  "keywords": [
+    "lexia",
+    "legaltech",
+    "backend",
+    "expedientes",
+    "juridico"
+  ],
+  "author": "Raymundo Marcial Melchi",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "helmet": "^8.0.0"
+  }
+}
