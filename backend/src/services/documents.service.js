@@ -1,0 +1,180 @@
+const documentsMemory = [];
+
+const createDocument = (caseId, data) => {
+  const {
+    documentType,
+    fileName,
+    fileUrl,
+    mimeType,
+    uploadedBy,
+    notes
+  } = data;
+
+  if (!caseId) {
+    return {
+      success: false,
+      statusCode: 400,
+      message: "El ID del expediente es obligatorio"
+    };
+  }
+
+  if (!documentType || !fileName) {
+    return {
+      success: false,
+      statusCode: 400,
+      message: "El tipo de documento y el nombre del archivo son obligatorios"
+    };
+  }
+
+  const newDocument = {
+    id: `document_${documentsMemory.length + 1}`,
+    caseId,
+    documentType,
+    fileName,
+    fileUrl: fileUrl || "archivo_pendiente_de_integracion",
+    mimeType: mimeType || "application/pdf",
+    uploadedBy: uploadedBy || "user_test_001",
+    uploadRole: data.uploadRole || "client",
+    notes: notes || "Sin observaciones",
+    status: "cargado",
+    analysisStatus: "pendiente",
+    preliminaryAnalysis: null,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString()
+  };
+
+  documentsMemory.push(newDocument);
+
+  return {
+    success: true,
+    statusCode: 201,
+    message: "Documento registrado correctamente en el expediente",
+    document: newDocument
+  };
+};
+
+const getDocumentsByCaseId = (caseId) => {
+  if (!caseId) {
+    return {
+      success: false,
+      statusCode: 400,
+      message: "El ID del expediente es obligatorio"
+    };
+  }
+
+  const caseDocuments = documentsMemory.filter(
+    (document) => document.caseId === caseId
+  );
+
+  return {
+    success: true,
+    statusCode: 200,
+    message: "Documentos del expediente obtenidos correctamente",
+    caseId,
+    total: caseDocuments.length,
+    documents: caseDocuments
+  };
+};
+
+const getDocumentById = (documentId) => {
+  const foundDocument = documentsMemory.find(
+    (document) => document.id === documentId
+  );
+
+  if (!foundDocument) {
+    return {
+      success: false,
+      statusCode: 404,
+      message: "Documento no encontrado"
+    };
+  }
+
+  return {
+    success: true,
+    statusCode: 200,
+    message: "Documento encontrado correctamente",
+    document: foundDocument
+  };
+};
+
+const updateDocumentStatus = (documentId, data) => {
+  const foundDocument = documentsMemory.find(
+    (document) => document.id === documentId
+  );
+
+  if (!foundDocument) {
+    return {
+      success: false,
+      statusCode: 404,
+      message: "Documento no encontrado"
+    };
+  }
+
+  if (!data.newStatus) {
+    return {
+      success: false,
+      statusCode: 400,
+      message: "El nuevo estado del documento es obligatorio"
+    };
+  }
+
+  foundDocument.status = data.newStatus;
+  foundDocument.statusReason =
+    data.reason || "Cambio de estado sin motivo especificado";
+  foundDocument.updatedAt = new Date().toISOString();
+
+  return {
+    success: true,
+    statusCode: 200,
+    message: "Estado del documento actualizado correctamente",
+    document: foundDocument
+  };
+};
+
+const analyzeDocument = (documentId) => {
+  const foundDocument = documentsMemory.find(
+    (document) => document.id === documentId
+  );
+
+  if (!foundDocument) {
+    return {
+      success: false,
+      statusCode: 404,
+      message: "Documento no encontrado"
+    };
+  }
+
+  const simulatedAnalysis = {
+    summary:
+      "El documento fue analizado de forma preliminar. Se identificaron datos relevantes para el expediente, pero requiere revisión profesional.",
+    detectedElements: [
+      "Nombre del posible promovente o interesado",
+      "Referencia al asunto jurídico",
+      "Fechas relevantes",
+      "Posibles hechos materia de análisis",
+      "Necesidad de validación por abogado"
+    ],
+    legalWarning:
+      "Este análisis es preliminar y no sustituye la revisión de un abogado autorizado.",
+    riskLevel: "medio"
+  };
+
+  foundDocument.analysisStatus = "analizado";
+  foundDocument.preliminaryAnalysis = simulatedAnalysis;
+  foundDocument.updatedAt = new Date().toISOString();
+
+  return {
+    success: true,
+    statusCode: 200,
+    message: "Análisis preliminar del documento generado correctamente",
+    document: foundDocument
+  };
+};
+
+module.exports = {
+  createDocument,
+  getDocumentsByCaseId,
+  getDocumentById,
+  updateDocumentStatus,
+  analyzeDocument
+};
