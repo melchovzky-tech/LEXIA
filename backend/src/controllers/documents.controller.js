@@ -3,7 +3,8 @@ const {
   getDocumentsByCaseId,
   getDocumentById,
   updateDocumentStatus,
-  analyzeDocument
+  analyzeDocument,
+  getAnalysisCertificate
 } = require("../services/documents.service");
 
 const create = (req, res) => {
@@ -46,10 +47,19 @@ const analyze = (req, res) => {
   return res.status(result.statusCode).json(result);
 };
 
+const getCertificate = (req, res) => {
+  const { documentId } = req.params;
+
+  const result = getAnalysisCertificate(documentId);
+
+  return res.status(result.statusCode).json(result);
+};
+
 module.exports = {
   create,
   getByCase,
   getById,
   updateStatus,
-  analyze
+  analyze,
+  getCertificate
 };

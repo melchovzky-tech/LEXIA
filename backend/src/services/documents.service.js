@@ -161,6 +161,7 @@ const analyzeDocument = (documentId) => {
 
   foundDocument.analysisStatus = "analizado";
   foundDocument.preliminaryAnalysis = simulatedAnalysis;
+  foundDocument.analysisCompletedAt = new Date().toISOString();
   foundDocument.updatedAt = new Date().toISOString();
 
   return {
@@ -171,10 +172,63 @@ const analyzeDocument = (documentId) => {
   };
 };
 
+const getAnalysisCertificate = (documentId) => {
+  const foundDocument = documentsMemory.find(
+    (document) => document.id === documentId
+  );
+
+  if (!foundDocument) {
+    return {
+      success: false,
+      statusCode: 404,
+      message: "Documento no encontrado"
+    };
+  }
+
+  if (foundDocument.analysisStatus !== "analizado") {
+    return {
+      success: false,
+      statusCode: 400,
+      message:
+        "El documento aún no cuenta con análisis preliminar. Primero debe ejecutarse el análisis documental."
+    };
+  }
+
+  const certificate = {
+    certificateId: `CERT-${foundDocument.id.toUpperCase()}-${Date.now()}`,
+    certificateType: "Certificado preliminar de análisis documental",
+    platform: "LEX-IA CASE",
+    caseId: foundDocument.caseId,
+    documentId: foundDocument.id,
+    documentType: foundDocument.documentType,
+    fileName: foundDocument.fileName,
+    analysisStatus: foundDocument.analysisStatus,
+    documentStatus: foundDocument.status,
+    resultSummary: foundDocument.preliminaryAnalysis.summary,
+    detectedElements: foundDocument.preliminaryAnalysis.detectedElements,
+    riskLevel: foundDocument.preliminaryAnalysis.riskLevel,
+    legalWarning: foundDocument.preliminaryAnalysis.legalWarning,
+    issuedAt: new Date().toISOString(),
+    analysisCompletedAt:
+      foundDocument.analysisCompletedAt || foundDocument.updatedAt,
+    validationCode: `LEXIA-${foundDocument.id}-${foundDocument.caseId}`.toUpperCase(),
+    disclaimer:
+      "Este certificado es una constancia preliminar generada por LEX-IA CASE. No constituye dictamen jurídico definitivo, resolución judicial, asesoría legal personalizada ni sustituye la revisión de un abogado autorizado."
+  };
+
+  return {
+    success: true,
+    statusCode: 200,
+    message: "Certificado preliminar de análisis documental generado correctamente",
+    certificate
+  };
+};
+
 module.exports = {
   createDocument,
   getDocumentsByCaseId,
   getDocumentById,
   updateDocumentStatus,
-  analyzeDocument
+  analyzeDocument,
+  getAnalysisCertificate
 };
