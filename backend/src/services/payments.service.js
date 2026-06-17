@@ -35,6 +35,12 @@ const createPayment = (caseId, data) => {
     };
   }
 
+  const platformCommissionPercent = 5;
+  const platformCommissionAmount = Number(
+    (amount * (platformCommissionPercent / 100)).toFixed(2)
+  );
+  const lawyerNetAmount = Number((amount - platformCommissionAmount).toFixed(2));
+
   const newPayment = {
     id: `payment_${paymentsMemory.length + 1}`,
     caseId,
@@ -47,9 +53,9 @@ const createPayment = (caseId, data) => {
     notes: notes || "Sin observaciones",
     status: "retenido_en_garantia",
     releaseStatus: "pendiente",
-    platformCommissionPercent: 5,
-    platformCommissionAmount: Number((amount * 0.05).toFixed(2)),
-    lawyerNetAmount: Number((amount * 0.95).toFixed(2)),
+    platformCommissionPercent,
+    platformCommissionAmount,
+    lawyerNetAmount,
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString()
   };
@@ -195,10 +201,57 @@ const releasePayment = (paymentId, data) => {
   };
 };
 
+const getPaymentReceipt = (paymentId) => {
+  const foundPayment = paymentsMemory.find(
+    (payment) => payment.id === paymentId
+  );
+
+  if (!foundPayment) {
+    return {
+      success: false,
+      statusCode: 404,
+      message: "Pago no encontrado"
+    };
+  }
+
+  const receipt = {
+    receiptId: `PAY-${foundPayment.id.toUpperCase()}-${Date.now()}`,
+    receiptType: "Recibo preliminar LEX-IA PAY",
+    platform: "LEX-IA PAY",
+    paymentId: foundPayment.id,
+    caseId: foundPayment.caseId,
+    payerId: foundPayment.payerId,
+    lawyerId: foundPayment.lawyerId,
+    concept: foundPayment.concept,
+    paymentMethod: foundPayment.paymentMethod,
+    grossAmount: foundPayment.amount,
+    currency: foundPayment.currency,
+    platformCommissionPercent: foundPayment.platformCommissionPercent,
+    platformCommissionAmount: foundPayment.platformCommissionAmount,
+    lawyerNetAmount: foundPayment.lawyerNetAmount,
+    paymentStatus: foundPayment.status,
+    releaseStatus: foundPayment.releaseStatus,
+    createdAt: foundPayment.createdAt,
+    issuedAt: new Date().toISOString(),
+    validationCode: `LEXIAPAY-${foundPayment.id}-${foundPayment.caseId}`.toUpperCase(),
+    notes: foundPayment.notes,
+    legalWarning:
+      "Este recibo es una constancia preliminar generada en modo simulado por LEX-IA PAY. No representa una transacción bancaria real, factura fiscal, comprobante fiscal digital ni documento con efectos contables definitivos."
+  };
+
+  return {
+    success: true,
+    statusCode: 200,
+    message: "Recibo preliminar de pago generado correctamente",
+    receipt
+  };
+};
+
 module.exports = {
   createPayment,
   getPaymentsByCaseId,
   getPaymentById,
   updatePaymentStatus,
-  releasePayment
+  releasePayment,
+  getPaymentReceipt
 };

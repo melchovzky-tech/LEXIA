@@ -3,7 +3,8 @@ const {
   getPaymentsByCaseId,
   getPaymentById,
   updatePaymentStatus,
-  releasePayment
+  releasePayment,
+  getPaymentReceipt
 } = require("../services/payments.service");
 
 const create = (req, res) => {
@@ -46,10 +47,19 @@ const release = (req, res) => {
   return res.status(result.statusCode).json(result);
 };
 
+const getReceipt = (req, res) => {
+  const { paymentId } = req.params;
+
+  const result = getPaymentReceipt(paymentId);
+
+  return res.status(result.statusCode).json(result);
+};
+
 module.exports = {
   create,
   getByCase,
   getById,
   updateStatus,
-  release
+  release,
+  getReceipt
 };

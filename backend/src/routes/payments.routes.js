@@ -5,7 +5,8 @@ const {
   getByCase,
   getById,
   updateStatus,
-  release
+  release,
+  getReceipt
 } = require("../controllers/payments.controller");
 
 const router = express.Router();
@@ -15,5 +16,6 @@ router.get("/cases/:caseId/payments", getByCase);
 router.get("/payments/:paymentId", getById);
 router.patch("/payments/:paymentId/status", updateStatus);
 router.post("/payments/:paymentId/release", release);
+router.get("/payments/:paymentId/receipt", getReceipt);
 
 module.exports = router;
