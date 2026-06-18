@@ -29,6 +29,14 @@ const riskBadge = document.getElementById("riskBadge");
 const documentsList = document.getElementById("documentsList");
 const nextStepText = document.getElementById("nextStepText");
 
+const openPrivacyBtn = document.getElementById("openPrivacyBtn");
+const openTermsBtn = document.getElementById("openTermsBtn");
+const privacyModal = document.getElementById("privacyModal");
+const termsModal = document.getElementById("termsModal");
+const footerLoginBtn = document.getElementById("footerLoginBtn");
+const footerCreateBtn = document.getElementById("footerCreateBtn");
+const termsCheck = document.getElementById("termsCheck");
+
 const DEMO_EMAIL = "cliente@lexia.test";
 const DEMO_PASSWORD = "123456";
 
@@ -134,8 +142,14 @@ const nextStepsByArea = {
 const openModal = (mode = "login") => {
   loginModal.classList.remove("hidden");
   loginError.classList.add("hidden");
+  loginError.textContent = "Usuario o contraseña incorrectos.";
+
   emailInput.value = mode === "login" ? DEMO_EMAIL : "";
   passwordInput.value = "";
+
+  if (termsCheck) {
+    termsCheck.checked = false;
+  }
 
   if (mode === "create") {
     modalTitle.textContent = "Crear cuenta LEX-IA";
@@ -243,6 +257,14 @@ const clearGuide = () => {
   guideResult.classList.add("hidden");
 };
 
+const openLegalModal = (modal) => {
+  modal.classList.remove("hidden");
+};
+
+const closeLegalModal = (modal) => {
+  modal.classList.add("hidden");
+};
+
 loginBtn.addEventListener("click", () => openModal("login"));
 heroLoginBtn.addEventListener("click", () => openModal("login"));
 createAccountBtn.addEventListener("click", () => openModal("create"));
@@ -253,6 +275,22 @@ closeModalBtn.addEventListener("click", closeModal);
 logoutBtn.addEventListener("click", showLanding);
 generateGuideBtn.addEventListener("click", generateGuide);
 clearGuideBtn.addEventListener("click", clearGuide);
+
+if (footerLoginBtn) {
+  footerLoginBtn.addEventListener("click", () => openModal("login"));
+}
+
+if (footerCreateBtn) {
+  footerCreateBtn.addEventListener("click", () => openModal("create"));
+}
+
+if (openPrivacyBtn) {
+  openPrivacyBtn.addEventListener("click", () => openLegalModal(privacyModal));
+}
+
+if (openTermsBtn) {
+  openTermsBtn.addEventListener("click", () => openLegalModal(termsModal));
+}
 
 loginModal.addEventListener("click", (event) => {
   if (event.target === loginModal) {
@@ -266,6 +304,13 @@ loginForm.addEventListener("submit", (event) => {
   const email = emailInput.value.trim().toLowerCase();
   const password = passwordInput.value.trim();
 
+  if (!termsCheck || !termsCheck.checked) {
+    loginError.textContent =
+      "Debes aceptar el Aviso de privacidad y los Términos y condiciones para continuar.";
+    loginError.classList.remove("hidden");
+    return;
+  }
+
   if (email === DEMO_EMAIL && password === DEMO_PASSWORD) {
     showDashboard();
     return;
@@ -276,11 +321,43 @@ loginForm.addEventListener("submit", (event) => {
     return;
   }
 
+  loginError.textContent = "Usuario o contraseña incorrectos.";
   loginError.classList.remove("hidden");
 });
 
+document.querySelectorAll("[data-close-legal]").forEach((button) => {
+  button.addEventListener("click", () => {
+    const modalId = button.getAttribute("data-close-legal");
+    const modal = document.getElementById(modalId);
+
+    if (modal) {
+      closeLegalModal(modal);
+    }
+  });
+});
+
+[privacyModal, termsModal].forEach((modal) => {
+  if (modal) {
+    modal.addEventListener("click", (event) => {
+      if (event.target === modal) {
+        closeLegalModal(modal);
+      }
+    });
+  }
+});
+
 document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape" && !loginModal.classList.contains("hidden")) {
-    closeModal();
+  if (event.key === "Escape") {
+    if (!loginModal.classList.contains("hidden")) {
+      closeModal();
+    }
+
+    if (privacyModal && !privacyModal.classList.contains("hidden")) {
+      closeLegalModal(privacyModal);
+    }
+
+    if (termsModal && !termsModal.classList.contains("hidden")) {
+      closeLegalModal(termsModal);
+    }
   }
 });
