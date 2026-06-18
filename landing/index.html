@@ -9,245 +9,331 @@
 <body>
   <header class="main-header">
     <div class="brand">
-      <div class="brand-mark">⚖</div>
+      <div class="brand-icon">⚖</div>
       <div>
         <h1>LEX-IA</h1>
         <p>Asistente Jurídico Inteligente</p>
       </div>
     </div>
 
-    <nav class="header-nav">
-      <a href="#servicios">Servicios</a>
-      <a href="#expediente">Expediente</a>
-      <a href="#lexia-pay">LEX-IA PAY</a>
-      <button id="openLoginBtn" class="btn btn-primary">Iniciar sesión</button>
+    <nav class="nav-actions">
+      <a href="#consulta">Cuéntame tu caso</a>
+      <a href="#modulos">Módulos</a>
+      <button id="createAccountBtn" class="btn btn-outline">Crear cuenta</button>
+      <button id="loginBtn" class="btn btn-primary">Ya tengo cuenta</button>
     </nav>
   </header>
 
-  <main id="publicLanding">
+  <main id="landingView">
     <section class="hero">
-      <div class="hero-content">
-        <span class="tag">Plataforma jurídica digital en desarrollo</span>
+      <div class="hero-text">
+        <span class="badge">Plataforma jurídica digital mexicana</span>
         <h2>Orientación, representación y seguimiento jurídico en un solo lugar.</h2>
         <p>
-          LEX-IA integra diagnóstico preliminar, expediente digital, carga documental,
-          comunicación con abogados, pagos seguros y seguimiento del caso.
+          LEX-IA permite recibir una orientación inicial sin crear cuenta. Si el usuario desea continuar,
+          puede abrir su expediente, cargar documentos, comunicarse con un abogado y dar seguimiento
+          mediante LEX-IA CASE.
         </p>
 
-        <div class="hero-actions">
-          <button id="heroLoginBtn" class="btn btn-primary">Entrar al demo</button>
-          <a href="#servicios" class="btn btn-secondary">Ver módulos</a>
+        <div class="hero-buttons">
+          <a href="#consulta" class="btn btn-primary">Cuéntame tu caso</a>
+          <button id="heroCreateAccountBtn" class="btn btn-outline">Crear cuenta</button>
+          <button id="heroLoginBtn" class="btn btn-light">Ya tengo cuenta</button>
         </div>
 
-        <div class="demo-access">
-          <strong>Acceso demo:</strong>
+        <div class="access-demo">
+          <strong>Demo inversionistas:</strong>
           <span>cliente@lexia.test</span>
           <span>123456</span>
         </div>
       </div>
 
-      <div class="hero-card">
-        <img src="../assets/branding/justicia_robotica_lexia.png" alt="LEX-IA Justicia Robótica" />
-        <div class="hero-card-info">
-          <h3>LEX-IA CASE</h3>
-          <p>Expediente jurídico digital con IA preliminar.</p>
+      <div class="hero-visual">
+        <img src="../assets/branding/justicia_robotica_lexia.png" alt="LEX-IA justicia robótica" />
+        <div class="floating-card">
+          <strong>LEX-IA CASE</strong>
+          <span>Expediente digital con IA preliminar</span>
         </div>
       </div>
     </section>
 
-    <section id="servicios" class="section">
-      <div class="section-title">
-        <span>Módulos activos</span>
-        <h2>Una plataforma jurídica integral</h2>
+    <section id="consulta" class="consult-section">
+      <div class="section-heading">
+        <span class="badge">Orientación inicial sin cuenta</span>
+        <h2>Cuéntame tu caso</h2>
+        <p>
+          Selecciona la rama del derecho, el Estado de la República y describe brevemente tu situación.
+          LEX-IA generará una guía preliminar para que decidas si deseas continuar con expediente.
+        </p>
+      </div>
+
+      <div class="consult-card">
+        <div class="form-grid">
+          <label>
+            Rama del derecho
+            <select id="legalArea">
+              <option value="">Selecciona una opción</option>
+              <option value="laboral">Laboral - Despido, liquidación, salarios</option>
+              <option value="familiar">Familiar - Divorcio, custodia, pensión</option>
+              <option value="sucesiones">Sucesiones - Herencia, testamento, intestado</option>
+              <option value="civil">Civil - Contratos, arrendamiento, adeudos</option>
+              <option value="militar">Militar informativo - Disciplina, derechos, trámites</option>
+              <option value="general">Otro / No estoy seguro</option>
+            </select>
+          </label>
+
+          <label>
+            Estado de la República
+            <select id="stateSelect">
+              <option value="">Selecciona tu Estado</option>
+              <option value="AGU">Aguascalientes</option>
+              <option value="BCN">Baja California</option>
+              <option value="BCS">Baja California Sur</option>
+              <option value="CAM">Campeche</option>
+              <option value="CHP">Chiapas</option>
+              <option value="CHH">Chihuahua</option>
+              <option value="CDMX">Ciudad de México</option>
+              <option value="COA">Coahuila</option>
+              <option value="COL">Colima</option>
+              <option value="DUR">Durango</option>
+              <option value="GTO">Guanajuato</option>
+              <option value="GRO">Guerrero</option>
+              <option value="HGO">Hidalgo</option>
+              <option value="JAL">Jalisco</option>
+              <option value="MEX">Estado de México</option>
+              <option value="MIC">Michoacán</option>
+              <option value="MOR">Morelos</option>
+              <option value="NAY">Nayarit</option>
+              <option value="NLE">Nuevo León</option>
+              <option value="OAX">Oaxaca</option>
+              <option value="PUE">Puebla</option>
+              <option value="QRO">Querétaro</option>
+              <option value="ROO">Quintana Roo</option>
+              <option value="SLP">San Luis Potosí</option>
+              <option value="SIN">Sinaloa</option>
+              <option value="SON">Sonora</option>
+              <option value="TAB">Tabasco</option>
+              <option value="TAM">Tamaulipas</option>
+              <option value="TLA">Tlaxcala</option>
+              <option value="VER">Veracruz</option>
+              <option value="YUC">Yucatán</option>
+              <option value="ZAC">Zacatecas</option>
+            </select>
+          </label>
+        </div>
+
+        <label>
+          Describe brevemente tu caso
+          <textarea id="caseDescription" rows="6" placeholder="Ejemplo: fui despedido verbalmente, no me pagaron liquidación y necesito saber qué documentos debo reunir..."></textarea>
+        </label>
+
+        <div class="consult-actions">
+          <button id="generateGuideBtn" class="btn btn-primary">Generar orientación preliminar</button>
+          <button id="clearGuideBtn" class="btn btn-outline">Limpiar</button>
+        </div>
+
+        <div id="guideResult" class="guide-result hidden">
+          <div class="guide-header">
+            <div>
+              <span class="badge">Resultado preliminar</span>
+              <h3>Guía inicial LEX-IA</h3>
+            </div>
+            <span id="riskBadge" class="risk-badge">Riesgo medio</span>
+          </div>
+
+          <div class="guide-grid">
+            <div>
+              <span>Área detectada</span>
+              <strong id="resultArea">Laboral</strong>
+            </div>
+            <div>
+              <span>Jurisdicción inicial</span>
+              <strong id="resultState">Guerrero</strong>
+            </div>
+            <div>
+              <span>Folio preliminar</span>
+              <strong id="resultFolio">LEX-IA-DEMO-0001</strong>
+            </div>
+          </div>
+
+          <div class="recommendations">
+            <h4>Documentos sugeridos</h4>
+            <ul id="documentsList"></ul>
+          </div>
+
+          <div class="next-step">
+            <h4>Siguiente paso sugerido</h4>
+            <p id="nextStepText"></p>
+          </div>
+
+          <div class="legal-warning">
+            Este resultado es una orientación preliminar automatizada. No sustituye la asesoría personalizada
+            de un abogado autorizado ni constituye dictamen jurídico definitivo.
+          </div>
+
+          <div class="guide-actions">
+            <button id="continueCreateAccountBtn" class="btn btn-primary">Crear cuenta para continuar</button>
+            <button id="continueLoginBtn" class="btn btn-light">Ya tengo cuenta</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="modulos" class="modules-section">
+      <div class="section-heading">
+        <span class="badge">Módulos del MVP</span>
+        <h2>LEX-IA ya toma forma como plataforma funcional</h2>
+        <p>
+          Estos módulos ya están modelados en el backend y representados visualmente en la interfaz demo.
+        </p>
       </div>
 
       <div class="modules-grid">
         <article class="module-card">
-          <div class="icon">📁</div>
-          <h3>Expedientes</h3>
-          <p>Creación de casos, folios, estados y seguimiento jurídico.</p>
+          <span>📁</span>
+          <h3>Expediente digital</h3>
+          <p>Folio, estado del caso, bitácora y seguimiento.</p>
         </article>
 
         <article class="module-card">
-          <div class="icon">📄</div>
-          <h3>Documentos</h3>
-          <p>Carga documental, análisis preliminar y certificado interno.</p>
-        </article>
-
-        <article class="module-card">
-          <div class="icon">🧠</div>
+          <span>🧠</span>
           <h3>Diagnóstico IA</h3>
-          <p>Detección de área jurídica, riesgo y documentos recomendados.</p>
+          <p>Área jurídica, riesgo, documentos y siguiente paso.</p>
         </article>
 
         <article class="module-card">
-          <div class="icon">👨‍⚖️</div>
+          <span>📄</span>
+          <h3>Documentos</h3>
+          <p>Carga, análisis preliminar y certificado documental.</p>
+        </article>
+
+        <article class="module-card">
+          <span>👨‍⚖️</span>
           <h3>Abogados</h3>
-          <p>Asignación preliminar de abogados por especialidad y disponibilidad.</p>
+          <p>Asignación preliminar por especialidad y disponibilidad.</p>
         </article>
 
         <article class="module-card">
-          <div class="icon">💳</div>
+          <span>💳</span>
           <h3>LEX-IA PAY</h3>
-          <p>Pago retenido en garantía, comisión y liberación simulada.</p>
+          <p>Pago retenido, comisión y liberación por avance validado.</p>
         </article>
 
         <article class="module-card">
-          <div class="icon">🔔</div>
-          <h3>Notificaciones</h3>
-          <p>Avisos internos sobre documentos, pagos, mensajes y expediente.</p>
+          <span>🔐</span>
+          <h3>Privacidad y seguridad</h3>
+          <p>Solicitudes de datos personales e incidentes internos.</p>
         </article>
-      </div>
-    </section>
-
-    <section id="expediente" class="section split-section">
-      <div>
-        <span class="tag">Expediente digital</span>
-        <h2>Del problema jurídico al seguimiento del caso.</h2>
-        <p>
-          El usuario puede iniciar una consulta, seleccionar el tipo de problema,
-          registrar su Estado, subir documentos y recibir una orientación preliminar.
-        </p>
-      </div>
-
-      <div class="case-preview">
-        <div class="case-row">
-          <span>Folio</span>
-          <strong>LEX-IA-LAB-GRO-2026-000001</strong>
-        </div>
-        <div class="case-row">
-          <span>Área</span>
-          <strong>Laboral</strong>
-        </div>
-        <div class="case-row">
-          <span>Riesgo</span>
-          <strong class="risk-high">Alto</strong>
-        </div>
-        <div class="case-row">
-          <span>Estado</span>
-          <strong>Revisión preliminar</strong>
-        </div>
-      </div>
-    </section>
-
-    <section id="lexia-pay" class="section pay-section">
-      <div class="section-title">
-        <span>LEX-IA PAY</span>
-        <h2>Pagos con control y seguimiento</h2>
-        <p>
-          Simulación de pago retenido en garantía, comisión de plataforma y liberación
-          al abogado por avance validado.
-        </p>
-      </div>
-
-      <div class="pay-box">
-        <div>
-          <span>Monto bruto</span>
-          <strong>$2,500 MXN</strong>
-        </div>
-        <div>
-          <span>Comisión plataforma</span>
-          <strong>$125 MXN</strong>
-        </div>
-        <div>
-          <span>Neto abogado</span>
-          <strong>$2,375 MXN</strong>
-        </div>
-        <div>
-          <span>Estado</span>
-          <strong>Liberado</strong>
-        </div>
       </div>
     </section>
   </main>
 
-  <main id="dashboard" class="dashboard hidden">
+  <main id="dashboardView" class="dashboard hidden">
     <aside class="sidebar">
       <div class="sidebar-brand">
-        <div class="brand-mark">⚖</div>
+        <div class="brand-icon">⚖</div>
         <div>
           <h2>LEX-IA</h2>
-          <p>Panel cliente</p>
+          <p>Panel del cliente</p>
         </div>
       </div>
 
-      <button class="sidebar-link active">🏠 Inicio</button>
-      <button class="sidebar-link">📁 Expedientes</button>
-      <button class="sidebar-link">📄 Documentos</button>
-      <button class="sidebar-link">🧠 Diagnóstico IA</button>
-      <button class="sidebar-link">👨‍⚖️ Abogado</button>
-      <button class="sidebar-link">💳 LEX-IA PAY</button>
-      <button class="sidebar-link">💬 Mensajes</button>
-      <button class="sidebar-link">🔔 Notificaciones</button>
-      <button class="sidebar-link">🔐 Seguridad</button>
+      <button class="sidebar-item active">🏠 Inicio</button>
+      <button class="sidebar-item">📁 Expediente</button>
+      <button class="sidebar-item">📄 Documentos</button>
+      <button class="sidebar-item">🧠 Diagnóstico IA</button>
+      <button class="sidebar-item">👨‍⚖️ Abogado</button>
+      <button class="sidebar-item">💳 LEX-IA PAY</button>
+      <button class="sidebar-item">💬 Mensajes</button>
+      <button class="sidebar-item">🔔 Notificaciones</button>
+      <button class="sidebar-item">🔐 Privacidad</button>
 
-      <button id="logoutBtn" class="btn btn-logout">Cerrar sesión</button>
+      <button id="logoutBtn" class="btn btn-danger">Cerrar sesión</button>
     </aside>
 
     <section class="dashboard-main">
-      <div class="dashboard-header">
+      <div class="dashboard-top">
         <div>
-          <span class="tag">Sesión demo activa</span>
-          <h2>Bienvenido, Cliente LEX-IA</h2>
-          <p>Resumen general de tu expediente jurídico digital.</p>
+          <span class="badge">Demo funcional</span>
+          <h2>Panel del cliente</h2>
+          <p>Resumen visual del expediente jurídico digital.</p>
         </div>
 
-        <div class="user-chip">
+        <div class="client-chip">
           <span>👤</span>
           <div>
-            <strong>cliente@lexia.test</strong>
-            <p>Usuario demo</p>
+            <strong>Cliente LEX-IA</strong>
+            <small>cliente@lexia.test</small>
           </div>
         </div>
       </div>
 
       <div class="stats-grid">
-        <article class="stat-card">
+        <div class="stat-card">
           <span>📁</span>
-          <h3>1</h3>
+          <strong>1</strong>
           <p>Expediente activo</p>
-        </article>
+        </div>
 
-        <article class="stat-card">
+        <div class="stat-card">
           <span>📄</span>
-          <h3>1</h3>
-          <p>Documento cargado</p>
-        </article>
+          <strong>1</strong>
+          <p>Documento analizado</p>
+        </div>
 
-        <article class="stat-card">
+        <div class="stat-card">
           <span>💬</span>
-          <h3>1</h3>
+          <strong>1</strong>
           <p>Mensaje pendiente</p>
-        </article>
+        </div>
 
-        <article class="stat-card">
+        <div class="stat-card">
           <span>💳</span>
-          <h3>$2,500</h3>
+          <strong>$2,500</strong>
           <p>Pago registrado</p>
-        </article>
+        </div>
       </div>
 
       <div class="dashboard-grid">
         <section class="panel-card large">
           <div class="panel-title">
-            <h3>Expediente principal</h3>
-            <span class="status-pill">Activo</span>
+            <h3>Expediente activo</h3>
+            <span class="status-pill">En revisión</span>
+          </div>
+
+          <div class="case-summary">
+            <div>
+              <span>Folio</span>
+              <strong>LEX-IA-LAB-GRO-2026-000001</strong>
+            </div>
+            <div>
+              <span>Área</span>
+              <strong>Laboral</strong>
+            </div>
+            <div>
+              <span>Estado</span>
+              <strong>Guerrero</strong>
+            </div>
+            <div>
+              <span>Riesgo</span>
+              <strong class="danger-text">Alto</strong>
+            </div>
           </div>
 
           <div class="timeline">
             <div class="timeline-item done">
               <span></span>
               <div>
-                <strong>Expediente creado</strong>
-                <p>Folio LEX-IA-LAB-GRO-2026-000001</p>
+                <strong>Consulta inicial generada</strong>
+                <p>El usuario recibió orientación preliminar sin crear cuenta.</p>
               </div>
             </div>
 
             <div class="timeline-item done">
               <span></span>
               <div>
-                <strong>Diagnóstico preliminar generado</strong>
-                <p>Área detectada: laboral · Riesgo: alto</p>
+                <strong>Expediente creado</strong>
+                <p>El caso fue registrado dentro de LEX-IA CASE.</p>
               </div>
             </div>
 
@@ -255,7 +341,7 @@
               <span></span>
               <div>
                 <strong>Documento analizado</strong>
-                <p>Contrato laboral de prueba revisado en modo preliminar.</p>
+                <p>Se generó certificado preliminar de análisis documental.</p>
               </div>
             </div>
 
@@ -263,7 +349,7 @@
               <span></span>
               <div>
                 <strong>Abogado asignado</strong>
-                <p>Abogado de Prueba LEX-IA · Especialidad laboral.</p>
+                <p>Abogado de prueba LEX-IA asignado al expediente.</p>
               </div>
             </div>
           </div>
@@ -272,18 +358,13 @@
         <section class="panel-card">
           <div class="panel-title">
             <h3>Diagnóstico IA</h3>
-            <span class="risk-high">Alto</span>
+            <span class="risk-pill">Alto</span>
           </div>
           <p>
-            Posible despido injustificado. Se recomienda revisión prioritaria
-            por abogado antes de dejar vencer plazos.
+            Posible despido injustificado. Se recomienda revisión prioritaria por abogado
+            para evitar vencimiento de plazos.
           </p>
-          <ul>
-            <li>Contrato laboral</li>
-            <li>Recibos de nómina</li>
-            <li>Comprobantes de pago</li>
-            <li>Datos del patrón</li>
-          </ul>
+          <button class="mini-btn">Ver diagnóstico</button>
         </section>
 
         <section class="panel-card">
@@ -291,18 +372,29 @@
             <h3>LEX-IA PAY</h3>
             <span class="status-pill">Liberado</span>
           </div>
-          <div class="money-row">
-            <span>Monto</span>
+          <div class="payment-line">
+            <span>Monto bruto</span>
             <strong>$2,500 MXN</strong>
           </div>
-          <div class="money-row">
-            <span>Comisión</span>
+          <div class="payment-line">
+            <span>Comisión 5%</span>
             <strong>$125 MXN</strong>
           </div>
-          <div class="money-row">
+          <div class="payment-line">
             <span>Neto abogado</span>
             <strong>$2,375 MXN</strong>
           </div>
+          <button class="mini-btn">Ver recibo</button>
+        </section>
+
+        <section class="panel-card">
+          <div class="panel-title">
+            <h3>Documentos</h3>
+            <span class="status-pill">Analizado</span>
+          </div>
+          <p>Contrato laboral de prueba.pdf</p>
+          <small>Certificado preliminar generado correctamente.</small>
+          <button class="mini-btn">Subir documento</button>
         </section>
 
         <section class="panel-card">
@@ -310,41 +402,34 @@
             <h3>Mensajes</h3>
             <span class="status-pill">Nuevo</span>
           </div>
-          <p>
-            “Solicito conocer el estado actual de mi expediente y los documentos pendientes.”
-          </p>
-          <small>Cliente → Abogado</small>
+          <p>“Solicito conocer el estado actual de mi expediente.”</p>
+          <button class="mini-btn">Enviar mensaje</button>
         </section>
 
         <section class="panel-card">
           <div class="panel-title">
-            <h3>Seguridad y privacidad</h3>
+            <h3>Privacidad y seguridad</h3>
             <span class="status-pill">Controlado</span>
           </div>
-          <p>
-            Incidentes y solicitudes de privacidad registrados en modo prueba.
-          </p>
-          <ul>
-            <li>Incidente resuelto</li>
-            <li>Solicitud de privacidad atendida</li>
-          </ul>
+          <p>Solicitud de privacidad atendida e incidente de seguridad resuelto en modo prueba.</p>
+          <button class="mini-btn">Ver controles</button>
         </section>
       </div>
     </section>
   </main>
 
   <div id="loginModal" class="modal hidden">
-    <div class="modal-content">
-      <button id="closeLoginBtn" class="modal-close">×</button>
-      <div class="modal-header">
-        <div class="brand-mark">⚖</div>
-        <h2>Acceso LEX-IA</h2>
-        <p>Ingresa con las credenciales demo para abrir el panel.</p>
+    <div class="modal-card">
+      <button id="closeModalBtn" class="modal-close">×</button>
+      <div class="modal-title">
+        <div class="brand-icon">⚖</div>
+        <h2 id="modalTitle">Acceso LEX-IA</h2>
+        <p id="modalSubtitle">Ingresa con tus datos para continuar.</p>
       </div>
 
       <form id="loginForm">
         <label>
-          Usuario
+          Nombre de usuario o correo
           <input id="emailInput" type="email" placeholder="cliente@lexia.test" required />
         </label>
 
@@ -353,15 +438,16 @@
           <input id="passwordInput" type="password" placeholder="123456" required />
         </label>
 
-        <p id="loginError" class="login-error hidden">
+        <p id="loginError" class="error-message hidden">
           Usuario o contraseña incorrectos.
         </p>
 
         <button type="submit" class="btn btn-primary full">Entrar al panel</button>
       </form>
 
-      <div class="demo-note">
-        <strong>Demo:</strong> cliente@lexia.test / 123456
+      <div class="demo-box">
+        <strong>Acceso demo:</strong>
+        <span>cliente@lexia.test / 123456</span>
       </div>
     </div>
   </div>
