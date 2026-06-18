@@ -9,6 +9,7 @@ const lawyersRoutes = require("./lawyers.routes");
 const paymentsRoutes = require("./payments.routes");
 const notificationsRoutes = require("./notifications.routes");
 const messagesRoutes = require("./messages.routes");
+const securityRoutes = require("./security.routes");
 
 const router = express.Router();
 
@@ -22,5 +23,6 @@ router.use("/", lawyersRoutes);
 router.use("/", paymentsRoutes);
 router.use("/", notificationsRoutes);
 router.use("/", messagesRoutes);
+router.use("/", securityRoutes);
 
 module.exports = router;
