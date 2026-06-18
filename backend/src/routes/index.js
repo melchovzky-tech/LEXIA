@@ -10,6 +10,7 @@ const paymentsRoutes = require("./payments.routes");
 const notificationsRoutes = require("./notifications.routes");
 const messagesRoutes = require("./messages.routes");
 const securityRoutes = require("./security.routes");
+const privacyRoutes = require("./privacy.routes");
 
 const router = express.Router();
 
@@ -24,5 +25,6 @@ router.use("/", paymentsRoutes);
 router.use("/", notificationsRoutes);
 router.use("/", messagesRoutes);
 router.use("/", securityRoutes);
+router.use("/", privacyRoutes);
 
 module.exports = router;
