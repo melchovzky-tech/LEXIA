@@ -258,11 +258,15 @@ const clearGuide = () => {
 };
 
 const openLegalModal = (modal) => {
-  modal.classList.remove("hidden");
+  if (modal) {
+    modal.classList.remove("hidden");
+  }
 };
 
 const closeLegalModal = (modal) => {
-  modal.classList.add("hidden");
+  if (modal) {
+    modal.classList.add("hidden");
+  }
 };
 
 loginBtn.addEventListener("click", () => openModal("login"));
@@ -329,10 +333,7 @@ document.querySelectorAll("[data-close-legal]").forEach((button) => {
   button.addEventListener("click", () => {
     const modalId = button.getAttribute("data-close-legal");
     const modal = document.getElementById(modalId);
-
-    if (modal) {
-      closeLegalModal(modal);
-    }
+    closeLegalModal(modal);
   });
 });
 
