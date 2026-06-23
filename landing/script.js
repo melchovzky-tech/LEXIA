@@ -1,250 +1,364 @@
-const IAJUR_API_URL = "http://127.0.0.1:8001/consultar";
+const loginBtn = document.getElementById("loginBtn");
+const heroLoginBtn = document.getElementById("heroLoginBtn");
+const createAccountBtn = document.getElementById("createAccountBtn");
+const heroCreateAccountBtn = document.getElementById("heroCreateAccountBtn");
+const continueCreateAccountBtn = document.getElementById("continueCreateAccountBtn");
+const continueLoginBtn = document.getElementById("continueLoginBtn");
+const closeModalBtn = document.getElementById("closeModalBtn");
+const loginModal = document.getElementById("loginModal");
+const loginForm = document.getElementById("loginForm");
+const emailInput = document.getElementById("emailInput");
+const passwordInput = document.getElementById("passwordInput");
+const loginError = document.getElementById("loginError");
+const modalTitle = document.getElementById("modalTitle");
+const modalSubtitle = document.getElementById("modalSubtitle");
+const landingView = document.getElementById("landingView");
+const dashboardView = document.getElementById("dashboardView");
+const logoutBtn = document.getElementById("logoutBtn");
 
-document.addEventListener("DOMContentLoaded", () => {
-  const analyzeCaseButton = document.getElementById("analyzeCaseButton");
-  const clearCaseButton = document.getElementById("clearCaseButton");
-  const caseText = document.getElementById("caseText");
-  const caseState = document.getElementById("caseState");
-  const iajurStatus = document.getElementById("iajurStatus");
-  const iajurResult = document.getElementById("iajurResult");
-  const resultSection = document.getElementById("iajur-result-section");
+const generateGuideBtn = document.getElementById("generateGuideBtn");
+const clearGuideBtn = document.getElementById("clearGuideBtn");
+const legalArea = document.getElementById("legalArea");
+const stateSelect = document.getElementById("stateSelect");
+const caseDescription = document.getElementById("caseDescription");
+const guideResult = document.getElementById("guideResult");
+const resultArea = document.getElementById("resultArea");
+const resultState = document.getElementById("resultState");
+const resultFolio = document.getElementById("resultFolio");
+const riskBadge = document.getElementById("riskBadge");
+const documentsList = document.getElementById("documentsList");
+const nextStepText = document.getElementById("nextStepText");
 
-  const loginModal = document.getElementById("loginModal");
-  const privacyModal = document.getElementById("privacyModal");
-  const termsModal = document.getElementById("termsModal");
+const openPrivacyBtn = document.getElementById("openPrivacyBtn");
+const openTermsBtn = document.getElementById("openTermsBtn");
+const privacyModal = document.getElementById("privacyModal");
+const termsModal = document.getElementById("termsModal");
+const footerLoginBtn = document.getElementById("footerLoginBtn");
+const footerCreateBtn = document.getElementById("footerCreateBtn");
+const termsCheck = document.getElementById("termsCheck");
 
-  const openLoginButtons = document.querySelectorAll("[data-open-login]");
-  const openPrivacyButtons = document.querySelectorAll("[data-open-privacy]");
-  const openTermsButtons = document.querySelectorAll("[data-open-terms]");
-  const closeModalButtons = document.querySelectorAll("[data-close-modal]");
-  const scrollCaseButtons = document.querySelectorAll("[data-scroll-case]");
+const DEMO_EMAIL = "cliente@lexia.test";
+const DEMO_PASSWORD = "123456";
 
-  scrollCaseButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      const target = document.getElementById("cuentame");
-      if (target) {
-        target.scrollIntoView({ behavior: "smooth", block: "center" });
-      }
-    });
-  });
+const areaLabels = {
+  laboral: "Derecho laboral",
+  familiar: "Derecho familiar",
+  sucesiones: "Sucesiones",
+  civil: "Derecho civil",
+  militar: "Derecho militar informativo",
+  general: "Orientación general"
+};
 
-  openLoginButtons.forEach((button) => {
-    button.addEventListener("click", () => openModal(loginModal));
-  });
+const stateLabels = {
+  AGU: "Aguascalientes",
+  BCN: "Baja California",
+  BCS: "Baja California Sur",
+  CAM: "Campeche",
+  CHP: "Chiapas",
+  CHH: "Chihuahua",
+  CDMX: "Ciudad de México",
+  COA: "Coahuila",
+  COL: "Colima",
+  DUR: "Durango",
+  GTO: "Guanajuato",
+  GRO: "Guerrero",
+  HGO: "Hidalgo",
+  JAL: "Jalisco",
+  MEX: "Estado de México",
+  MIC: "Michoacán",
+  MOR: "Morelos",
+  NAY: "Nayarit",
+  NLE: "Nuevo León",
+  OAX: "Oaxaca",
+  PUE: "Puebla",
+  QRO: "Querétaro",
+  ROO: "Quintana Roo",
+  SLP: "San Luis Potosí",
+  SIN: "Sinaloa",
+  SON: "Sonora",
+  TAB: "Tabasco",
+  TAM: "Tamaulipas",
+  TLA: "Tlaxcala",
+  VER: "Veracruz",
+  YUC: "Yucatán",
+  ZAC: "Zacatecas"
+};
 
-  openPrivacyButtons.forEach((button) => {
-    button.addEventListener("click", () => openModal(privacyModal));
-  });
+const documentsByArea = {
+  laboral: [
+    "Identificación oficial",
+    "Contrato laboral, si existe",
+    "Recibos de nómina",
+    "Comprobantes de pago",
+    "Mensajes o documentos relacionados con el despido"
+  ],
+  familiar: [
+    "Acta de matrimonio, si aplica",
+    "Actas de nacimiento de hijas o hijos",
+    "Comprobantes de ingresos",
+    "Documentos relacionados con gastos familiares"
+  ],
+  sucesiones: [
+    "Acta de defunción",
+    "Actas de nacimiento de posibles herederos",
+    "Testamento, si existe",
+    "Documentos de bienes"
+  ],
+  civil: [
+    "Contrato relacionado",
+    "Identificación oficial",
+    "Comprobantes de pago",
+    "Mensajes, recibos o fotografías"
+  ],
+  militar: [
+    "Identificación oficial",
+    "Documento o acto administrativo relacionado",
+    "Fechas relevantes",
+    "Datos de la autoridad o mando que intervino"
+  ],
+  general: [
+    "Identificación oficial",
+    "Documentos relacionados con el caso",
+    "Fechas relevantes",
+    "Datos de las personas involucradas"
+  ]
+};
 
-  openTermsButtons.forEach((button) => {
-    button.addEventListener("click", () => openModal(termsModal));
-  });
+const nextStepsByArea = {
+  laboral:
+    "Reúne documentos laborales y verifica fechas de despido, pagos pendientes y posibles plazos de reclamación.",
+  familiar:
+    "Organiza documentos familiares, ingresos, gastos y datos de las partes para una revisión inicial.",
+  sucesiones:
+    "Identifica herederos, bienes, existencia de testamento y documentos civiles indispensables.",
+  civil:
+    "Revisa el contrato, comprobantes de pago y comunicaciones relacionadas con el asunto.",
+  militar:
+    "Ordena cronológicamente los hechos y conserva documentos oficiales relacionados con el acto o trámite.",
+  general:
+    "Organiza los hechos en orden cronológico y reúne documentos que permitan una revisión inicial."
+};
 
-  closeModalButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      const modal = button.closest(".modal");
-      closeModal(modal);
-    });
-  });
+const openModal = (mode = "login") => {
+  loginModal.classList.remove("hidden");
+  loginError.classList.add("hidden");
+  loginError.textContent = "Usuario o contraseña incorrectos.";
 
-  document.querySelectorAll(".modal").forEach((modal) => {
-    modal.addEventListener("click", (event) => {
-      if (event.target === modal) {
-        closeModal(modal);
-      }
-    });
-  });
+  emailInput.value = mode === "login" ? DEMO_EMAIL : "";
+  passwordInput.value = "";
 
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") {
-      document.querySelectorAll(".modal").forEach((modal) => closeModal(modal));
-    }
-  });
-
-  if (clearCaseButton) {
-    clearCaseButton.addEventListener("click", () => {
-      if (caseText) caseText.value = "";
-      if (caseState) caseState.value = "";
-      if (iajurStatus) iajurStatus.textContent = "";
-      if (iajurResult) iajurResult.textContent = "";
-      if (resultSection) resultSection.classList.add("hidden");
-    });
+  if (termsCheck) {
+    termsCheck.checked = false;
   }
 
-  if (analyzeCaseButton) {
-    analyzeCaseButton.addEventListener("click", async () => {
-      const text = caseText.value.trim();
-      const state = caseState.value.trim();
+  if (mode === "create") {
+    modalTitle.textContent = "Crear cuenta LEX-IA";
+    modalSubtitle.textContent =
+      "Registra tus datos para guardar tu expediente y continuar el seguimiento.";
+  } else {
+    modalTitle.textContent = "Acceso LEX-IA";
+    modalSubtitle.textContent = "Ingresa con tus datos para abrir el panel.";
+  }
 
-      if (!state) {
-        iajurStatus.textContent = "Selecciona el Estado de la República.";
-        return;
-      }
+  setTimeout(() => emailInput.focus(), 100);
+};
 
-      if (!text) {
-        iajurStatus.textContent = "Describe brevemente tu caso antes de analizarlo.";
-        return;
-      }
+const closeModal = () => {
+  loginModal.classList.add("hidden");
+};
 
-      const ramaDetectada = detectLegalBranch(text);
-      const pregunta = buildQuestionForIAJUR(text, state, ramaDetectada);
+const showDashboard = () => {
+  landingView.classList.add("hidden");
+  dashboardView.classList.remove("hidden");
+  closeModal();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+};
 
-      iajurStatus.textContent = "LEX-IA está consultando IAJUR Engine...";
-      resultSection.classList.add("hidden");
-      iajurResult.textContent = "";
+const showLanding = () => {
+  dashboardView.classList.add("hidden");
+  landingView.classList.remove("hidden");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+};
 
-      try {
-        const response = await fetch(IAJUR_API_URL, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            pregunta: pregunta,
-            rama: ramaDetectada,
-            top_k: 5,
-            incluir_doctrina: false
-          })
-        });
+const getRiskLevel = (area, description) => {
+  const text = description.toLowerCase();
 
-        if (!response.ok) {
-          const errorText = await response.text();
-          throw new Error(`Error ${response.status}: ${errorText}`);
-        }
+  if (
+    text.includes("urgente") ||
+    text.includes("plazo") ||
+    text.includes("demanda") ||
+    text.includes("audiencia") ||
+    text.includes("despido") ||
+    text.includes("amenaza")
+  ) {
+    return "alto";
+  }
 
-        const data = await response.json();
+  if (area === "laboral" || area === "familiar" || area === "militar") {
+    return "medio";
+  }
 
-        iajurStatus.textContent = "Consulta completada.";
-        iajurResult.textContent = formatClientResponse(data, text, state, ramaDetectada);
-        resultSection.classList.remove("hidden");
+  return "bajo";
+};
 
-        resultSection.scrollIntoView({
-          behavior: "smooth",
-          block: "start"
-        });
-      } catch (error) {
-        iajurStatus.textContent = "No se pudo conectar con IAJUR Engine.";
+const renderDocuments = (area) => {
+  documentsList.innerHTML = "";
 
-        iajurResult.textContent =
-          "LEX-IA no pudo consultar el motor documental en este momento.\n\n" +
-          "Verifica lo siguiente:\n" +
-          "1. Que IAJUR esté encendido en http://127.0.0.1:8001\n" +
-          "2. Que el archivo api.py tenga CORS habilitado.\n" +
-          "3. Que el navegador haya sido recargado con Ctrl + F5.\n\n" +
-          "Detalle técnico:\n" +
-          error.message;
+  const docs = documentsByArea[area] || documentsByArea.general;
 
-        resultSection.classList.remove("hidden");
+  docs.forEach((documentName) => {
+    const item = document.createElement("li");
+    item.textContent = documentName;
+    documentsList.appendChild(item);
+  });
+};
 
-        resultSection.scrollIntoView({
-          behavior: "smooth",
-          block: "start"
-        });
+const generateGuide = () => {
+  const selectedArea = legalArea.value;
+  const selectedState = stateSelect.value;
+  const description = caseDescription.value.trim();
+
+  if (!selectedArea || !selectedState || !description) {
+    alert("Completa la rama del derecho, el Estado y la descripción del caso.");
+    return;
+  }
+
+  const risk = getRiskLevel(selectedArea, description);
+
+  resultArea.textContent = areaLabels[selectedArea] || "Orientación general";
+  resultState.textContent = stateLabels[selectedState] || "No especificado";
+  resultFolio.textContent = `LEX-IA-${selectedArea.toUpperCase()}-${selectedState}-DEMO-0001`;
+
+  riskBadge.textContent = `Riesgo ${risk}`;
+  riskBadge.className = "risk-badge";
+
+  if (risk === "alto") {
+    riskBadge.style.color = "#ff5b68";
+    riskBadge.style.background = "rgba(255, 91, 104, 0.12)";
+  } else if (risk === "medio") {
+    riskBadge.style.color = "#b7791f";
+    riskBadge.style.background = "#fff7dc";
+  } else {
+    riskBadge.style.color = "#07885f";
+    riskBadge.style.background = "rgba(32, 201, 151, 0.13)";
+  }
+
+  renderDocuments(selectedArea);
+  nextStepText.textContent = nextStepsByArea[selectedArea] || nextStepsByArea.general;
+
+  guideResult.classList.remove("hidden");
+  guideResult.scrollIntoView({ behavior: "smooth", block: "start" });
+};
+
+const clearGuide = () => {
+  legalArea.value = "";
+  stateSelect.value = "";
+  caseDescription.value = "";
+  guideResult.classList.add("hidden");
+};
+
+const openLegalModal = (modal) => {
+  if (modal) {
+    modal.classList.remove("hidden");
+  }
+};
+
+const closeLegalModal = (modal) => {
+  if (modal) {
+    modal.classList.add("hidden");
+  }
+};
+
+loginBtn.addEventListener("click", () => openModal("login"));
+heroLoginBtn.addEventListener("click", () => openModal("login"));
+createAccountBtn.addEventListener("click", () => openModal("create"));
+heroCreateAccountBtn.addEventListener("click", () => openModal("create"));
+continueCreateAccountBtn.addEventListener("click", () => openModal("create"));
+continueLoginBtn.addEventListener("click", () => openModal("login"));
+closeModalBtn.addEventListener("click", closeModal);
+logoutBtn.addEventListener("click", showLanding);
+generateGuideBtn.addEventListener("click", generateGuide);
+clearGuideBtn.addEventListener("click", clearGuide);
+
+if (footerLoginBtn) {
+  footerLoginBtn.addEventListener("click", () => openModal("login"));
+}
+
+if (footerCreateBtn) {
+  footerCreateBtn.addEventListener("click", () => openModal("create"));
+}
+
+if (openPrivacyBtn) {
+  openPrivacyBtn.addEventListener("click", () => openLegalModal(privacyModal));
+}
+
+if (openTermsBtn) {
+  openTermsBtn.addEventListener("click", () => openLegalModal(termsModal));
+}
+
+loginModal.addEventListener("click", (event) => {
+  if (event.target === loginModal) {
+    closeModal();
+  }
+});
+
+loginForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  const email = emailInput.value.trim().toLowerCase();
+  const password = passwordInput.value.trim();
+
+  if (!termsCheck || !termsCheck.checked) {
+    loginError.textContent =
+      "Debes aceptar el Aviso de privacidad y los Términos y condiciones para continuar.";
+    loginError.classList.remove("hidden");
+    return;
+  }
+
+  if (email === DEMO_EMAIL && password === DEMO_PASSWORD) {
+    showDashboard();
+    return;
+  }
+
+  if (email && password && modalTitle.textContent.includes("Crear cuenta")) {
+    showDashboard();
+    return;
+  }
+
+  loginError.textContent = "Usuario o contraseña incorrectos.";
+  loginError.classList.remove("hidden");
+});
+
+document.querySelectorAll("[data-close-legal]").forEach((button) => {
+  button.addEventListener("click", () => {
+    const modalId = button.getAttribute("data-close-legal");
+    const modal = document.getElementById(modalId);
+    closeLegalModal(modal);
+  });
+});
+
+[privacyModal, termsModal].forEach((modal) => {
+  if (modal) {
+    modal.addEventListener("click", (event) => {
+      if (event.target === modal) {
+        closeLegalModal(modal);
       }
     });
   }
 });
 
-function detectLegalBranch(text) {
-  const value = normalizeText(text);
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    if (!loginModal.classList.contains("hidden")) {
+      closeModal();
+    }
 
-  const laboralKeywords = [
-    "despido",
-    "despidieron",
-    "trabajo",
-    "trabajador",
-    "patron",
-    "patrón",
-    "salario",
-    "liquidacion",
-    "liquidación",
-    "finiquito",
-    "renuncia",
-    "imss",
-    "incapacidad",
-    "aguinaldo",
-    "vacaciones",
-    "jornada",
-    "contrato laboral",
-    "nómina",
-    "nomina",
-    "prestaciones"
-  ];
+    if (privacyModal && !privacyModal.classList.contains("hidden")) {
+      closeLegalModal(privacyModal);
+    }
 
-  const federalKeywords = [
-    "amparo",
-    "constitucion",
-    "constitución",
-    "autoridad",
-    "acto de autoridad",
-    "procedimiento administrativo",
-    "multa",
-    "derechos humanos",
-    "datos personales",
-    "responsabilidad administrativa",
-    "federal",
-    "penal federal"
-  ];
-
-  if (laboralKeywords.some((word) => value.includes(normalizeText(word)))) {
-    return "laboral";
+    if (termsModal && !termsModal.classList.contains("hidden")) {
+      closeLegalModal(termsModal);
+    }
   }
-
-  if (federalKeywords.some((word) => value.includes(normalizeText(word)))) {
-    return "federal";
-  }
-
-  return "federal";
-}
-
-function buildQuestionForIAJUR(text, state, branch) {
-  return `Caso planteado por usuario en ${state}. Materia probable: ${branch}. Hechos: ${text}`;
-}
-
-function formatClientResponse(data, originalText, state, branch) {
-  const respuestaIAJUR = data && data.respuesta
-    ? data.respuesta
-    : JSON.stringify(data, null, 2);
-
-  return `Orientación preliminar LEX-IA
-
-Estado seleccionado:
-${state}
-
-Materia probable detectada:
-${capitalize(branch)}
-
-Caso descrito:
-${originalText}
-
-Resultado documental localizado por IAJUR:
-${respuestaIAJUR}
-
-Siguiente paso sugerido:
-Reúne documentos relacionados con tu caso, fechas, mensajes, comprobantes, contratos, recibos, identificaciones, pruebas de pago o cualquier evidencia disponible. Un abogado deberá revisar la información para confirmar la estrategia jurídica adecuada.
-
-Nota:
-Esta orientación es preliminar, informativa y no sustituye la asesoría personalizada de un abogado autorizado.`;
-}
-
-function normalizeText(text) {
-  return String(text)
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "");
-}
-
-function capitalize(text) {
-  if (!text) return "";
-  return text.charAt(0).toUpperCase() + text.slice(1);
-}
-
-function openModal(modal) {
-  if (!modal) return;
-  modal.classList.remove("hidden");
-}
-
-function closeModal(modal) {
-  if (!modal) return;
-  modal.classList.add("hidden");
-}
+});

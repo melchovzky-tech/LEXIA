@@ -3,458 +3,672 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <title>LEX-IA | Asistente Jurídico Inteligente</title>
-
   <link rel="stylesheet" href="styles.css" />
 </head>
-
 <body>
-  <header class="site-header">
-    <div class="header-inner">
-      <a href="#inicio" class="brand">
-        <div class="brand-icon">⚖</div>
-        <div>
-          <div class="brand-name">LEX-<span>IA</span></div>
-          <div class="brand-subtitle">Asistente Jurídico Inteligente</div>
-        </div>
-      </a>
-
-      <nav class="main-nav">
-        <a href="#inicio" class="active">Inicio</a>
-        <a href="#soluciones">Soluciones</a>
-        <a href="#como-funciona">Cómo funciona</a>
-        <a href="#beneficios">Beneficios</a>
-        <a href="#recursos">Recursos</a>
-        <a href="#nosotros">Nosotros</a>
-      </nav>
-
-      <div class="header-actions">
-        <button class="btn btn-outline" type="button" data-open-login>
-          Iniciar sesión
-        </button>
-        <button class="btn btn-primary" type="button" data-scroll-case>
-          Cuéntame tu caso
-        </button>
+  <header class="main-header">
+    <div class="brand">
+      <div class="brand-icon">⚖</div>
+      <div>
+        <h1>LEX-IA</h1>
+        <p>Asistente Jurídico Inteligente</p>
       </div>
     </div>
+
+    <nav class="nav-actions">
+      <a href="#consulta">Cuéntame tu caso</a>
+      <a href="#modulos">Módulos</a>
+      <button id="createAccountBtn" class="btn btn-outline">Crear cuenta</button>
+      <button id="loginBtn" class="btn btn-primary">Ya tengo cuenta</button>
+    </nav>
   </header>
 
-  <main>
-    <section id="inicio" class="hero-section">
-      <div class="tech-lines tech-lines-left"></div>
-      <div class="tech-lines tech-lines-right"></div>
+  <main id="landingView">
+    <section class="hero">
+      <div class="hero-text">
+        <span class="badge">Plataforma jurídica digital mexicana</span>
+        <h2>Orientación, representación y seguimiento jurídico en un solo lugar.</h2>
+        <p>
+          LEX-IA permite recibir una orientación inicial sin crear cuenta. Si el usuario desea continuar,
+          puede abrir su expediente, cargar documentos, comunicarse con un abogado y dar seguimiento
+          mediante LEX-IA CASE.
+        </p>
 
-      <div class="hero-grid">
-        <div class="hero-content">
-          <p class="eyebrow">Inteligencia artificial. Experiencia legal.</p>
+        <div class="hero-buttons">
+          <a href="#consulta" class="btn btn-primary">Cuéntame tu caso</a>
+          <button id="heroCreateAccountBtn" class="btn btn-outline">Crear cuenta</button>
+          <button id="heroLoginBtn" class="btn btn-light">Ya tengo cuenta</button>
+        </div>
 
-          <h1>
-            Orientación,<br />
-            <span>representación</span> y<br />
-            seguimiento jurídico
-          </h1>
+        <div class="access-demo">
+          <strong>Demo inversionistas:</strong>
+          <span>cliente@lexia.test</span>
+          <span>123456</span>
+        </div>
+      </div>
 
-          <div class="hero-brand">LEX-<span>IA</span></div>
+      <div class="hero-visual">
+        <img src="../assets/branding/justicia_robotica_lexia.png" alt="LEX-IA justicia robótica" />
+        <div class="floating-card">
+          <strong>LEX-IA CASE</strong>
+          <span>Expediente digital con IA preliminar</span>
+        </div>
+      </div>
+    </section>
 
-          <p class="hero-subtitle">
-            Asistente Jurídico Inteligente
-          </p>
+    <section id="consulta" class="consult-section">
+      <div class="section-heading">
+        <span class="badge">Orientación inicial sin cuenta</span>
+        <h2>Cuéntame tu caso</h2>
+        <p>
+          Selecciona la rama del derecho, el Estado de la República y describe brevemente tu situación.
+          LEX-IA generará una guía preliminar para que decidas si deseas continuar con expediente.
+        </p>
+      </div>
 
-          <p class="hero-description">
-            Potenciamos tu acceso a la justicia con inteligencia artificial confiable,
-            segura y respaldada por documentos jurídicos reales.
-          </p>
-
-          <div class="iajur-quick-card" id="cuentame">
-            <div class="iajur-card-header">
-              <div>
-                <p class="iajur-label">IAJUR Engine</p>
-                <h2>Consulta jurídica documental</h2>
-              </div>
-              <span class="iajur-live">Motor activo</span>
-            </div>
-
-            <p class="iajur-copy">
-              Describe tu situación. LEX-IA detectará la materia probable y buscará
-              fundamento en la biblioteca jurídica cargada.
-            </p>
-
-            <label for="caseState">Estado de la República</label>
-            <select id="caseState">
-              <option value="">Selecciona tu Estado</option>
-              <option value="Aguascalientes">Aguascalientes</option>
-              <option value="Baja California">Baja California</option>
-              <option value="Baja California Sur">Baja California Sur</option>
-              <option value="Campeche">Campeche</option>
-              <option value="Chiapas">Chiapas</option>
-              <option value="Chihuahua">Chihuahua</option>
-              <option value="Ciudad de México">Ciudad de México</option>
-              <option value="Coahuila">Coahuila</option>
-              <option value="Colima">Colima</option>
-              <option value="Durango">Durango</option>
-              <option value="Estado de México">Estado de México</option>
-              <option value="Guanajuato">Guanajuato</option>
-              <option value="Guerrero">Guerrero</option>
-              <option value="Hidalgo">Hidalgo</option>
-              <option value="Jalisco">Jalisco</option>
-              <option value="Michoacán">Michoacán</option>
-              <option value="Morelos">Morelos</option>
-              <option value="Nayarit">Nayarit</option>
-              <option value="Nuevo León">Nuevo León</option>
-              <option value="Oaxaca">Oaxaca</option>
-              <option value="Puebla">Puebla</option>
-              <option value="Querétaro">Querétaro</option>
-              <option value="Quintana Roo">Quintana Roo</option>
-              <option value="San Luis Potosí">San Luis Potosí</option>
-              <option value="Sinaloa">Sinaloa</option>
-              <option value="Sonora">Sonora</option>
-              <option value="Tabasco">Tabasco</option>
-              <option value="Tamaulipas">Tamaulipas</option>
-              <option value="Tlaxcala">Tlaxcala</option>
-              <option value="Veracruz">Veracruz</option>
-              <option value="Yucatán">Yucatán</option>
-              <option value="Zacatecas">Zacatecas</option>
+      <div class="consult-card">
+        <div class="form-grid">
+          <label>
+            Rama del derecho
+            <select id="legalArea">
+              <option value="">Selecciona una opción</option>
+              <option value="laboral">Laboral - Despido, liquidación, salarios</option>
+              <option value="familiar">Familiar - Divorcio, custodia, pensión</option>
+              <option value="sucesiones">Sucesiones - Herencia, testamento, intestado</option>
+              <option value="civil">Civil - Contratos, arrendamiento, adeudos</option>
+              <option value="militar">Militar informativo - Disciplina, derechos, trámites</option>
+              <option value="general">Otro / No estoy seguro</option>
             </select>
+          </label>
 
-            <label for="caseText">Cuéntame tu caso</label>
-            <textarea
-              id="caseText"
-              rows="4"
-              placeholder="Ejemplo: me despidieron repentinamente de mi trabajo y no me pagaron liquidación..."
-            ></textarea>
-
-            <div class="iajur-actions">
-              <button id="analyzeCaseButton" type="button" class="btn btn-primary">
-                Analizar con LEX-IA
-              </button>
-
-              <button id="clearCaseButton" type="button" class="btn btn-outline">
-                Limpiar
-              </button>
-            </div>
-
-            <div id="iajurStatus" class="iajur-status"></div>
-          </div>
-
-          <div class="trust-row">
-            <div class="trust-item">
-              <div class="trust-icon">🛡</div>
-              <div>
-                <strong>Seguro</strong>
-                <span>Tus datos protegidos en cada paso.</span>
-              </div>
-            </div>
-
-            <div class="trust-item">
-              <div class="trust-icon">⚡</div>
-              <div>
-                <strong>Rápido</strong>
-                <span>Respuestas ágiles y orientación inicial.</span>
-              </div>
-            </div>
-
-            <div class="trust-item">
-              <div class="trust-icon">⚖</div>
-              <div>
-                <strong>Confiable</strong>
-                <span>Respaldo documental jurídico real.</span>
-              </div>
-            </div>
-          </div>
+          <label>
+            Estado de la República
+            <select id="stateSelect">
+              <option value="">Selecciona tu Estado</option>
+              <option value="AGU">Aguascalientes</option>
+              <option value="BCN">Baja California</option>
+              <option value="BCS">Baja California Sur</option>
+              <option value="CAM">Campeche</option>
+              <option value="CHP">Chiapas</option>
+              <option value="CHH">Chihuahua</option>
+              <option value="CDMX">Ciudad de México</option>
+              <option value="COA">Coahuila</option>
+              <option value="COL">Colima</option>
+              <option value="DUR">Durango</option>
+              <option value="GTO">Guanajuato</option>
+              <option value="GRO">Guerrero</option>
+              <option value="HGO">Hidalgo</option>
+              <option value="JAL">Jalisco</option>
+              <option value="MEX">Estado de México</option>
+              <option value="MIC">Michoacán</option>
+              <option value="MOR">Morelos</option>
+              <option value="NAY">Nayarit</option>
+              <option value="NLE">Nuevo León</option>
+              <option value="OAX">Oaxaca</option>
+              <option value="PUE">Puebla</option>
+              <option value="QRO">Querétaro</option>
+              <option value="ROO">Quintana Roo</option>
+              <option value="SLP">San Luis Potosí</option>
+              <option value="SIN">Sinaloa</option>
+              <option value="SON">Sonora</option>
+              <option value="TAB">Tabasco</option>
+              <option value="TAM">Tamaulipas</option>
+              <option value="TLA">Tlaxcala</option>
+              <option value="VER">Veracruz</option>
+              <option value="YUC">Yucatán</option>
+              <option value="ZAC">Zacatecas</option>
+            </select>
+          </label>
         </div>
 
-        <div class="hero-visual">
-          <div class="digital-connector connector-one"></div>
-          <div class="digital-connector connector-two"></div>
-          <div class="digital-connector connector-three"></div>
+        <label>
+          Describe brevemente tu caso
+          <textarea id="caseDescription" rows="6" placeholder="Ejemplo: fui despedido verbalmente, no me pagaron liquidación y necesito saber qué documentos debo reunir..."></textarea>
+        </label>
 
-          <img
-  class="lexia-justice"
-  src="../assets/branding/justicia_robotica_lexia.png"
-  alt="Justicia robótica LEX-IA"
-/>
-
-          <div class="hud-card hud-card-one">
-            <div class="hud-icon">⚖</div>
-            <div>
-              <strong>Análisis legal</strong>
-              <span>Inteligencia artificial especializada.</span>
-            </div>
-          </div>
-
-          <div class="hud-card hud-card-two">
-            <div class="hud-icon">📄</div>
-            <div>
-              <strong>Seguimiento</strong>
-              <span>Monitorea tu caso en tiempo real.</span>
-            </div>
-          </div>
-
-          <div class="hud-card hud-card-three">
-            <div class="hud-icon">👥</div>
-            <div>
-              <strong>Representación</strong>
-              <span>Estrategias legales personalizadas.</span>
-            </div>
-          </div>
-
-          <div class="hud-card hud-card-four">
-            <div class="hud-icon">💬</div>
-            <div>
-              <strong>Orientación</strong>
-              <span>Guía clara para tomar mejores decisiones.</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="iajur-result-section" class="result-section hidden">
-      <div class="result-card">
-        <div class="result-header">
-          <p class="eyebrow">Resultado preliminar LEX-IA</p>
-          <h2>Orientación con respaldo documental</h2>
+        <div class="consult-actions">
+          <button id="generateGuideBtn" class="btn btn-primary">Generar orientación preliminar</button>
+          <button id="clearGuideBtn" class="btn btn-outline">Limpiar</button>
         </div>
 
-        <div id="iajurResult" class="iajur-result"></div>
+        <div id="guideResult" class="guide-result hidden">
+          <div class="guide-header">
+            <div>
+              <span class="badge">Resultado preliminar</span>
+              <h3>Guía inicial LEX-IA</h3>
+            </div>
+            <span id="riskBadge" class="risk-badge">Riesgo medio</span>
+          </div>
 
-        <div class="result-warning">
-          La orientación generada por LEX-IA es preliminar, informativa y no sustituye
-          la asesoría personalizada de un abogado autorizado.
+          <div class="guide-grid">
+            <div>
+              <span>Área detectada</span>
+              <strong id="resultArea">Laboral</strong>
+            </div>
+            <div>
+              <span>Jurisdicción inicial</span>
+              <strong id="resultState">Guerrero</strong>
+            </div>
+            <div>
+              <span>Folio preliminar</span>
+              <strong id="resultFolio">LEX-IA-DEMO-0001</strong>
+            </div>
+          </div>
+
+          <div class="recommendations">
+            <h4>Documentos sugeridos</h4>
+            <ul id="documentsList"></ul>
+          </div>
+
+          <div class="next-step">
+            <h4>Siguiente paso sugerido</h4>
+            <p id="nextStepText"></p>
+          </div>
+
+          <div class="legal-warning">
+            Este resultado es una orientación preliminar automatizada. No sustituye la asesoría personalizada
+            de un abogado autorizado ni constituye dictamen jurídico definitivo.
+          </div>
+
+          <div class="guide-actions">
+            <button id="continueCreateAccountBtn" class="btn btn-primary">Crear cuenta para continuar</button>
+            <button id="continueLoginBtn" class="btn btn-light">Ya tengo cuenta</button>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="soluciones" class="info-section">
+    <section id="modulos" class="modules-section">
       <div class="section-heading">
-        <p class="eyebrow">Soluciones</p>
-        <h2>Una plataforma jurídica digital mexicana</h2>
+        <span class="badge">Módulos del MVP</span>
+        <h2>LEX-IA ya toma forma como plataforma funcional</h2>
         <p>
-          LEX-IA acompaña al usuario desde la orientación inicial hasta la integración
-          de expediente y conexión con abogados.
+          Estos módulos ya están modelados en el backend y representados visualmente en la interfaz demo.
         </p>
       </div>
 
-      <div class="cards-grid">
-        <article class="feature-card">
-          <h3>Orientación inicial</h3>
-          <p>
-            El usuario explica su situación y LEX-IA genera una guía preliminar
-            comprensible.
-          </p>
-        </article>
-
-        <article class="feature-card">
-          <h3>Motor documental IAJUR</h3>
-          <p>
-            El sistema busca fundamento en leyes y documentos jurídicos cargados,
-            evitando inventar artículos.
-          </p>
-        </article>
-
-        <article class="feature-card">
+      <div class="modules-grid">
+        <article class="module-card">
+          <span>📁</span>
           <h3>Expediente digital</h3>
-          <p>
-            Permite organizar documentos, datos relevantes y avances del caso.
-          </p>
+          <p>Folio, estado del caso, bitácora y seguimiento.</p>
+        </article>
+
+        <article class="module-card">
+          <span>🧠</span>
+          <h3>Diagnóstico IA</h3>
+          <p>Área jurídica, riesgo, documentos y siguiente paso.</p>
+        </article>
+
+        <article class="module-card">
+          <span>📄</span>
+          <h3>Documentos</h3>
+          <p>Carga, análisis preliminar y certificado documental.</p>
+        </article>
+
+        <article class="module-card">
+          <span>👨‍⚖️</span>
+          <h3>Abogados</h3>
+          <p>Asignación preliminar por especialidad y disponibilidad.</p>
+        </article>
+
+        <article class="module-card">
+          <span>💳</span>
+          <h3>LEX-IA PAY</h3>
+          <p>Pago retenido, comisión y liberación por avance validado.</p>
+        </article>
+
+        <article class="module-card">
+          <span>🔐</span>
+          <h3>Privacidad y seguridad</h3>
+          <p>Solicitudes de datos personales e incidentes internos.</p>
         </article>
       </div>
     </section>
 
-    <section id="como-funciona" class="info-section">
-      <div class="section-heading">
-        <p class="eyebrow">Cómo funciona</p>
-        <h2>De la consulta inicial al análisis documental</h2>
-      </div>
-
-      <div class="steps-grid">
-        <div class="step-card">
-          <span>01</span>
-          <h3>El usuario cuenta su caso</h3>
-          <p>Describe su problema en lenguaje natural, sin conocer tecnicismos legales.</p>
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="brand-icon">⚖</div>
+          <div>
+            <h3>LEX-IA</h3>
+            <p>Asistente Jurídico Inteligente</p>
+          </div>
         </div>
 
-        <div class="step-card">
-          <span>02</span>
-          <h3>LEX-IA detecta la materia</h3>
-          <p>Identifica si el asunto parece laboral, federal u otra materia disponible.</p>
+        <div class="footer-column">
+          <h4>Plataforma</h4>
+          <a href="#consulta">Cuéntame tu caso</a>
+          <a href="#modulos">Módulos</a>
+          <button id="footerLoginBtn" class="footer-link-button">Ya tengo cuenta</button>
+          <button id="footerCreateBtn" class="footer-link-button">Crear cuenta</button>
         </div>
 
-        <div class="step-card">
-          <span>03</span>
-          <h3>IAJUR busca fundamento</h3>
-          <p>Consulta la biblioteca jurídica y devuelve documento, página y fragmento.</p>
+        <div class="footer-column">
+          <h4>Legal</h4>
+          <button id="openPrivacyBtn" class="footer-link-button">Aviso de privacidad</button>
+          <button id="openTermsBtn" class="footer-link-button">Términos y condiciones</button>
+          <span>Uso responsable de IA</span>
+          <span>Protección de datos personales</span>
         </div>
 
-        <div class="step-card">
-          <span>04</span>
-          <h3>Se genera orientación</h3>
-          <p>El usuario recibe una explicación preliminar y próximos pasos sugeridos.</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="beneficios" class="info-section">
-      <div class="section-heading">
-        <p class="eyebrow">Beneficios</p>
-        <h2>Diseñada para usuarios y abogados</h2>
-      </div>
-
-      <div class="cards-grid">
-        <article class="feature-card">
-          <h3>Para ciudadanos</h3>
-          <p>
-            Orientación clara, rápida y comprensible para decidir si continuar con
-            un expediente.
+        <div class="footer-column">
+          <h4>Redes sociales</h4>
+          <div class="social-links">
+            <a href="https://x.com/LexIAbogados" target="_blank" rel="noopener noreferrer" aria-label="X / Twitter">𝕏</a>
+            <a href="https://www.facebook.com/LEX-ia" target="_blank" rel="noopener noreferrer" aria-label="Facebook">f</a>
+            <a href="https://www.instagram.com/lexiabogados/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">◎</a>
+          </div>
+          <p class="footer-note">
+            Sitio oficial: <a href="https://www.lex-ia.app" target="_blank" rel="noopener noreferrer">www.lex-ia.app</a><br />
+            Contacto oficial: <a href="mailto:contacto@lex-ia.app">contacto@lex-ia.app</a><br />
+            Redes sociales: <a href="mailto:redes@lex-ia.app">redes@lex-ia.app</a>
           </p>
-        </article>
-
-        <article class="feature-card">
-          <h3>Para abogados</h3>
-          <p>
-            Ficha documental con fundamento localizado, fragmentos y referencia de página.
-          </p>
-        </article>
-
-        <article class="feature-card">
-          <h3>Para inversionistas</h3>
-          <p>
-            MVP funcional con motor documental, interfaz pública y ruta clara de escalamiento.
-          </p>
-        </article>
+        </div>
       </div>
-    </section>
 
-    <section id="recursos" class="info-section">
-      <div class="section-heading">
-        <p class="eyebrow">Recursos</p>
-        <h2>Biblioteca jurídica en expansión</h2>
+      <div class="footer-bottom">
+        <p>© 2026 LEX-IA. Plataforma jurídica digital en desarrollo. Sitio oficial: www.lex-ia.app</p>
         <p>
-          Actualmente el motor trabaja con documentos federales y laborales cargados
-          localmente. La biblioteca crecerá por ramas, Estados, doctrina y jurisprudencia.
+          La orientación generada por LEX-IA es preliminar, informativa y no sustituye la asesoría
+          personalizada de un abogado autorizado.
         </p>
       </div>
-    </section>
+    </footer>
+  </main>
 
-    <section id="nosotros" class="info-section">
-      <div class="section-heading">
-        <p class="eyebrow">Nosotros</p>
-        <h2>LEX-IA nace para acercar la justicia</h2>
-        <p>
-          Una plataforma jurídica digital mexicana orientada a simplificar el primer
-          contacto legal, ordenar expedientes y apoyar la toma de decisiones con tecnología.
-        </p>
+  <main id="dashboardView" class="dashboard hidden">
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-icon">⚖</div>
+        <div>
+          <h2>LEX-IA</h2>
+          <p>Panel del cliente</p>
+        </div>
+      </div>
+
+      <button class="sidebar-item active">🏠 Inicio</button>
+      <button class="sidebar-item">📁 Expediente</button>
+      <button class="sidebar-item">📄 Documentos</button>
+      <button class="sidebar-item">🧠 Diagnóstico IA</button>
+      <button class="sidebar-item">👨‍⚖️ Abogado</button>
+      <button class="sidebar-item">💳 LEX-IA PAY</button>
+      <button class="sidebar-item">💬 Mensajes</button>
+      <button class="sidebar-item">🔔 Notificaciones</button>
+      <button class="sidebar-item">🔐 Privacidad</button>
+
+      <button id="logoutBtn" class="btn btn-danger">Cerrar sesión</button>
+    </aside>
+
+    <section class="dashboard-main">
+      <div class="dashboard-top">
+        <div>
+          <span class="badge">Demo funcional</span>
+          <h2>Panel del cliente</h2>
+          <p>Resumen visual del expediente jurídico digital.</p>
+        </div>
+
+        <div class="client-chip">
+          <span>👤</span>
+          <div>
+            <strong>Cliente LEX-IA</strong>
+            <small>cliente@lexia.test</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <span>📁</span>
+          <strong>1</strong>
+          <p>Expediente activo</p>
+        </div>
+
+        <div class="stat-card">
+          <span>📄</span>
+          <strong>1</strong>
+          <p>Documento analizado</p>
+        </div>
+
+        <div class="stat-card">
+          <span>💬</span>
+          <strong>1</strong>
+          <p>Mensaje pendiente</p>
+        </div>
+
+        <div class="stat-card">
+          <span>💳</span>
+          <strong>$2,500</strong>
+          <p>Pago registrado</p>
+        </div>
+      </div>
+
+      <div class="dashboard-grid">
+        <section class="panel-card large">
+          <div class="panel-title">
+            <h3>Expediente activo</h3>
+            <span class="status-pill">En revisión</span>
+          </div>
+
+          <div class="case-summary">
+            <div>
+              <span>Folio</span>
+              <strong>LEX-IA-LAB-GRO-2026-000001</strong>
+            </div>
+            <div>
+              <span>Área</span>
+              <strong>Laboral</strong>
+            </div>
+            <div>
+              <span>Estado</span>
+              <strong>Guerrero</strong>
+            </div>
+            <div>
+              <span>Riesgo</span>
+              <strong class="danger-text">Alto</strong>
+            </div>
+          </div>
+
+          <div class="timeline">
+            <div class="timeline-item done">
+              <span></span>
+              <div>
+                <strong>Consulta inicial generada</strong>
+                <p>El usuario recibió orientación preliminar sin crear cuenta.</p>
+              </div>
+            </div>
+
+            <div class="timeline-item done">
+              <span></span>
+              <div>
+                <strong>Expediente creado</strong>
+                <p>El caso fue registrado dentro de LEX-IA CASE.</p>
+              </div>
+            </div>
+
+            <div class="timeline-item done">
+              <span></span>
+              <div>
+                <strong>Documento analizado</strong>
+                <p>Se generó certificado preliminar de análisis documental.</p>
+              </div>
+            </div>
+
+            <div class="timeline-item active">
+              <span></span>
+              <div>
+                <strong>Abogado asignado</strong>
+                <p>Abogado de prueba LEX-IA asignado al expediente.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel-card">
+          <div class="panel-title">
+            <h3>Diagnóstico IA</h3>
+            <span class="risk-pill">Alto</span>
+          </div>
+          <p>
+            Posible despido injustificado. Se recomienda revisión prioritaria por abogado
+            para evitar vencimiento de plazos.
+          </p>
+          <button class="mini-btn">Ver diagnóstico</button>
+        </section>
+
+        <section class="panel-card">
+          <div class="panel-title">
+            <h3>LEX-IA PAY</h3>
+            <span class="status-pill">Liberado</span>
+          </div>
+          <div class="payment-line">
+            <span>Monto bruto</span>
+            <strong>$2,500 MXN</strong>
+          </div>
+          <div class="payment-line">
+            <span>Comisión 5%</span>
+            <strong>$125 MXN</strong>
+          </div>
+          <div class="payment-line">
+            <span>Neto abogado</span>
+            <strong>$2,375 MXN</strong>
+          </div>
+          <button class="mini-btn">Ver recibo</button>
+        </section>
+
+        <section class="panel-card">
+          <div class="panel-title">
+            <h3>Documentos</h3>
+            <span class="status-pill">Analizado</span>
+          </div>
+          <p>Contrato laboral de prueba.pdf</p>
+          <small>Certificado preliminar generado correctamente.</small>
+          <button class="mini-btn">Subir documento</button>
+        </section>
+
+        <section class="panel-card">
+          <div class="panel-title">
+            <h3>Mensajes</h3>
+            <span class="status-pill">Nuevo</span>
+          </div>
+          <p>“Solicito conocer el estado actual de mi expediente.”</p>
+          <button class="mini-btn">Enviar mensaje</button>
+        </section>
+
+        <section class="panel-card">
+          <div class="panel-title">
+            <h3>Privacidad y seguridad</h3>
+            <span class="status-pill">Controlado</span>
+          </div>
+          <p>Solicitud de privacidad atendida e incidente de seguridad resuelto en modo prueba.</p>
+          <button class="mini-btn">Ver controles</button>
+        </section>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="footer-grid">
-      <div>
-        <div class="footer-brand">LEX-<span>IA</span></div>
-        <p>
-          Plataforma jurídica digital mexicana en desarrollo.
-        </p>
-        <p>
-          Sitio oficial:
-          <a href="https://www.lex-ia.app" target="_blank" rel="noopener">
-            www.lex-ia.app
-          </a>
-        </p>
-      </div>
+  <div id="privacyModal" class="legal-modal hidden">
+    <div class="legal-card">
+      <button class="modal-close" data-close-legal="privacyModal">×</button>
+      <h2>Aviso de privacidad integral LEX-IA</h2>
+      <p class="legal-updated">Versión demo: junio 2026</p>
 
-      <div>
-        <h4>Contacto</h4>
-        <a href="mailto:contacto@lex-ia.app">contacto@lex-ia.app</a>
-        <a href="mailto:redes@lex-ia.app">redes@lex-ia.app</a>
-      </div>
+      <h3>1. Responsable del tratamiento de datos personales</h3>
+      <p>
+        LEX-IA, plataforma jurídica digital en desarrollo, será responsable del tratamiento
+        de los datos personales que sean proporcionados por usuarios, clientes, abogados,
+        colaboradores o visitantes de la plataforma. El canal de contacto oficial será:
+        contacto@lex-ia.app.
+      </p>
 
-      <div>
-        <h4>Redes oficiales</h4>
-        <a href="https://www.instagram.com/lexiabogados/" target="_blank" rel="noopener">
-          Instagram: @lexiabogados
-        </a>
-        <a href="https://www.facebook.com/LEX-ia" target="_blank" rel="noopener">
-          Facebook: LEX-ia
-        </a>
-        <a href="https://x.com/LexIAbogados" target="_blank" rel="noopener">
-          X: @LexIAbogados
-        </a>
-      </div>
+      <h3>2. Datos personales que podrán recabarse</h3>
+      <p>
+        LEX-IA podrá recabar datos de identificación, contacto, ubicación general por entidad
+        federativa, datos relacionados con el asunto jurídico, documentos cargados por el usuario,
+        mensajes, historial de actividad dentro de la plataforma, información de pagos y datos
+        necesarios para la creación y seguimiento de expedientes.
+      </p>
 
-      <div>
-        <h4>Legal</h4>
-        <button type="button" class="footer-link" data-open-privacy>
-          Aviso de privacidad
-        </button>
-        <button type="button" class="footer-link" data-open-terms>
-          Términos y condiciones
-        </button>
-        <p class="footer-note">
-          La orientación generada es preliminar y no sustituye asesoría legal profesional.
-        </p>
-      </div>
+      <h3>3. Datos personales sensibles</h3>
+      <p>
+        Debido a la naturaleza jurídica de los asuntos, el usuario podría proporcionar datos
+        sensibles relacionados con situación familiar, laboral, patrimonial, procedimientos legales,
+        salud, menores de edad u otra información delicada. LEX-IA únicamente deberá tratar estos
+        datos cuando sean indispensables para la orientación o seguimiento del expediente y con
+        consentimiento del titular.
+      </p>
+
+      <h3>4. Finalidades principales</h3>
+      <ul>
+        <li>Crear consultas preliminares y expedientes digitales.</li>
+        <li>Generar orientación jurídica inicial mediante herramientas tecnológicas.</li>
+        <li>Permitir la carga y análisis preliminar de documentos.</li>
+        <li>Facilitar comunicación entre usuario, plataforma y abogados registrados.</li>
+        <li>Gestionar pagos, recibos, liberaciones y seguimiento mediante LEX-IA PAY.</li>
+        <li>Registrar bitácoras, notificaciones, incidentes de seguridad y solicitudes de privacidad.</li>
+      </ul>
+
+      <h3>5. Finalidades secundarias</h3>
+      <p>
+        De manera secundaria, LEX-IA podrá utilizar información estadística, disociada o anonimizada
+        para mejorar la plataforma, detectar fallas, medir uso de módulos y desarrollar nuevas
+        funcionalidades. Cuando sea posible, dicha información será tratada sin identificar
+        directamente al usuario.
+      </p>
+
+      <h3>6. Transferencias</h3>
+      <p>
+        LEX-IA no venderá datos personales. Los datos podrán compartirse únicamente con abogados,
+        proveedores tecnológicos, autoridades competentes cuando exista obligación legal, o terceros
+        indispensables para prestar el servicio, siempre bajo medidas razonables de confidencialidad
+        y seguridad.
+      </p>
+
+      <h3>7. Derechos ARCO y revocación del consentimiento</h3>
+      <p>
+        El titular podrá solicitar acceso, rectificación, cancelación u oposición respecto de sus
+        datos personales, así como revocar su consentimiento, mediante solicitud enviada a
+        contacto@lex-ia.app. La solicitud deberá incluir nombre, medio de contacto, derecho que
+        desea ejercer y datos que permitan localizar la información.
+      </p>
+
+      <h3>8. Seguridad de la información</h3>
+      <p>
+        LEX-IA deberá implementar medidas administrativas, técnicas y físicas para proteger los
+        datos contra pérdida, alteración, acceso no autorizado, uso indebido o divulgación. En esta
+        versión demo, los datos son de prueba y no deben utilizarse para asuntos reales.
+      </p>
+
+      <h3>9. Uso de inteligencia artificial</h3>
+      <p>
+        Las respuestas generadas por LEX-IA son preliminares, informativas y automatizadas. No
+        constituyen dictamen jurídico definitivo, sentencia, garantía de resultado, representación
+        legal ni sustituyen la revisión de un abogado autorizado.
+      </p>
+
+      <h3>10. Cambios al aviso de privacidad</h3>
+      <p>
+        LEX-IA podrá modificar este aviso para atender cambios legales, técnicos, operativos o de
+        modelo de negocio. Los cambios serán publicados en la plataforma oficial www.lex-ia.app.
+      </p>
     </div>
+  </div>
 
-    <div class="footer-bottom">
-      © 2026 LEX-IA. Todos los derechos reservados.
+  <div id="termsModal" class="legal-modal hidden">
+    <div class="legal-card">
+      <button class="modal-close" data-close-legal="termsModal">×</button>
+      <h2>Términos y condiciones de uso LEX-IA</h2>
+      <p class="legal-updated">Versión demo: junio 2026</p>
+
+      <h3>1. Naturaleza de la plataforma</h3>
+      <p>
+        LEX-IA es una plataforma jurídica digital en desarrollo que proporciona orientación inicial,
+        organización de información, generación preliminar de diagnósticos, gestión documental,
+        comunicación y seguimiento de expedientes. La plataforma no sustituye a un abogado ni
+        garantiza resultados legales.
+      </p>
+
+      <h3>2. Orientación preliminar</h3>
+      <p>
+        Toda información generada por LEX-IA tiene carácter informativo y preliminar. El usuario
+        reconoce que cada caso debe ser revisado por un abogado autorizado antes de presentar
+        demandas, celebrar convenios, responder requerimientos o tomar decisiones legales.
+      </p>
+
+      <h3>3. Responsabilidad del usuario</h3>
+      <ul>
+        <li>Proporcionar información verdadera, completa y actualizada.</li>
+        <li>No cargar documentos falsos, alterados, ilícitos o de terceros sin autorización.</li>
+        <li>No usar la plataforma para cometer fraude, amenazas, extorsión, simulación o actos ilegales.</li>
+        <li>Verificar cualquier orientación con un abogado antes de actuar jurídicamente.</li>
+      </ul>
+
+      <h3>4. Relación con abogados</h3>
+      <p>
+        Cuando un asunto sea canalizado a un abogado, la relación profesional se formalizará conforme
+        a los acuerdos, honorarios, autorizaciones y documentos que correspondan. LEX-IA podrá actuar
+        como plataforma tecnológica de contacto, gestión y seguimiento, sin sustituir la responsabilidad
+        profesional del abogado.
+      </p>
+
+      <h3>5. LEX-IA PAY</h3>
+      <p>
+        LEX-IA PAY se presenta en esta versión como simulación de pagos, retención, comisión y liberación
+        por avance validado. En una versión productiva, cualquier operación real deberá sujetarse a
+        proveedores financieros autorizados, términos específicos de pago, comprobantes, impuestos y
+        legislación aplicable.
+      </p>
+
+      <h3>6. Prohibiciones</h3>
+      <ul>
+        <li>Usar LEX-IA para evadir la ley, fabricar pruebas o engañar autoridades.</li>
+        <li>Solicitar instrucciones para actos ilícitos.</li>
+        <li>Subir información de terceros sin derecho o autorización.</li>
+        <li>Intentar vulnerar la seguridad, extraer datos o manipular expedientes.</li>
+      </ul>
+
+      <h3>7. Limitación de responsabilidad</h3>
+      <p>
+        LEX-IA no será responsable por decisiones tomadas únicamente con base en orientación automatizada,
+        por información falsa proporcionada por el usuario, por pérdida de plazos no informados, por
+        documentos incompletos o por actos realizados fuera de la plataforma.
+      </p>
+
+      <h3>8. Suspensión de cuenta</h3>
+      <p>
+        LEX-IA podrá suspender o limitar el acceso cuando detecte uso indebido, información falsa,
+        riesgo de seguridad, incumplimiento de estos términos o requerimiento de autoridad competente.
+      </p>
+
+      <h3>9. Aceptación</h3>
+      <p>
+        Al usar LEX-IA, crear cuenta, cargar documentos o continuar con un expediente, el usuario acepta
+        estos términos, el aviso de privacidad y el uso responsable de herramientas tecnológicas de
+        apoyo jurídico.
+      </p>
     </div>
-  </footer>
+  </div>
 
   <div id="loginModal" class="modal hidden">
     <div class="modal-card">
-      <button class="modal-close" type="button" data-close-modal>×</button>
-      <h2>Acceso LEX-IA</h2>
-      <p>
-        Módulo de acceso demo. En la siguiente fase se conectará con el backend
-        de usuarios y expedientes.
-      </p>
-      <input type="email" placeholder="Correo electrónico" />
-      <input type="password" placeholder="Contraseña" />
-      <button class="btn btn-primary" type="button">Entrar</button>
-    </div>
-  </div>
+      <button id="closeModalBtn" class="modal-close">×</button>
+      <div class="modal-title">
+        <div class="brand-icon">⚖</div>
+        <h2 id="modalTitle">Acceso LEX-IA</h2>
+        <p id="modalSubtitle">Ingresa con tus datos para continuar.</p>
+      </div>
 
-  <div id="privacyModal" class="modal hidden">
-    <div class="modal-card legal-modal">
-      <button class="modal-close" type="button" data-close-modal>×</button>
-      <h2>Aviso de privacidad</h2>
-      <p>
-        LEX-IA es una plataforma jurídica digital mexicana en desarrollo. Los datos
-        proporcionados por los usuarios serán utilizados para generar una orientación
-        preliminar, integrar expedientes digitales y, en su caso, facilitar la conexión
-        con profesionales del derecho.
-      </p>
-      <p>
-        La información podrá incluir datos de contacto, descripción del caso,
-        documentos cargados y entidad federativa relacionada. LEX-IA deberá proteger
-        dicha información mediante medidas administrativas, técnicas y organizativas.
-      </p>
-      <p>
-        Este aviso es una versión preliminar para demo y deberá ser revisado por un
-        abogado especializado antes de su publicación definitiva.
-      </p>
-    </div>
-  </div>
+      <form id="loginForm">
+        <label>
+          Nombre de usuario o correo
+          <input id="emailInput" type="email" placeholder="cliente@lexia.test" required />
+        </label>
 
-  <div id="termsModal" class="modal hidden">
-    <div class="modal-card legal-modal">
-      <button class="modal-close" type="button" data-close-modal>×</button>
-      <h2>Términos y condiciones</h2>
-      <p>
-        LEX-IA proporciona orientación jurídica preliminar con apoyo de herramientas
-        tecnológicas y documentos jurídicos cargados en su biblioteca.
-      </p>
-      <p>
-        Las respuestas generadas no constituyen asesoría legal definitiva, no crean
-        relación abogado-cliente y deben ser revisadas por un profesional autorizado.
-      </p>
-      <p>
-        El usuario reconoce que los resultados pueden requerir validación conforme
-        a jurisdicción, vigencia normativa, pruebas disponibles y circunstancias
-        particulares del caso.
-      </p>
+        <label>
+          Contraseña
+          <input id="passwordInput" type="password" placeholder="123456" required />
+        </label>
+
+        <label class="legal-check">
+          <input id="termsCheck" type="checkbox" />
+          <span>
+            Acepto el Aviso de privacidad, los Términos y condiciones y entiendo que LEX-IA
+            genera orientación preliminar que no sustituye a un abogado.
+          </span>
+        </label>
+
+        <p id="loginError" class="error-message hidden">
+          Usuario o contraseña incorrectos.
+        </p>
+
+        <button type="submit" class="btn btn-primary full">Entrar al panel</button>
+      </form>
+
+      <div class="demo-box">
+        <strong>Acceso demo:</strong>
+        <span>cliente@lexia.test / 123456</span>
+      </div>
     </div>
   </div>
 
