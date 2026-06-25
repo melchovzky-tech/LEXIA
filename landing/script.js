@@ -252,7 +252,7 @@ const renderPartnerChat = (folio = activeCaseFolio) => {
         <div class="chat-bubble client"><span>Cliente</span><p id="activeCaseClientMessage">${chat.clientMessage}</p></div>
         <div class="chat-bubble lawyer"><span>Abogado</span><p id="activeCaseLawyerMessage">${chat.lawyerMessage}</p></div>
       </div>
-      <button class="mini-btn">Responder en este expediente</button>
+      <button class="mini-btn" type="button" data-demo-action="reply-case-chat">Responder en este expediente</button>
     </section>
   `;
 };
@@ -452,7 +452,7 @@ const renderPartnerSection = (section, folio = activeCaseFolio) => {
       <section class="panel-card large">
         <div class="panel-title"><h3>Documentos del expediente</h3><span class="status-pill">${record.documents.length} archivos</span></div>
         <div class="document-list">${record.documents.map((doc) => `<div><span class="line-icon icon-doc"></span><div><strong>${doc}</strong><small>${record.folio}</small></div></div>`).join("")}</div>
-        <button class="mini-btn">Solicitar documento al cliente</button>
+        <button class="mini-btn" type="button" data-demo-action="request-client-document">Solicitar documento al cliente</button>
       </section>
       ${renderPartnerChat(folio)}
     `;
@@ -483,7 +483,7 @@ const renderPartnerSection = (section, folio = activeCaseFolio) => {
           <div><span>Estado base</span><strong>Guerrero</strong></div>
           <div><span>Estatus</span><strong>Activo</strong></div>
         </div>
-        <button class="mini-btn">Actualizar documentacion</button>
+        <button class="mini-btn" type="button" data-demo-action="update-lawyer-validation">Actualizar documentación</button>
       </section>
     `;
   }
@@ -498,17 +498,17 @@ const renderClientSection = (section) => {
 
   const templates = {
     inicio: `
-      <section class="panel-card large"><div class="panel-title"><h3>Expediente activo</h3><span class="status-pill">En revision</span></div><p>${record.folio}</p><p>${record.matter} - ${record.state}</p><button class="mini-btn" data-client-section-jump="expediente">Ver expediente</button></section>
-      <section class="panel-card"><div class="panel-title"><h3>Chat del expediente</h3><span class="status-pill">Nuevo</span></div><p>Tu chat esta ligado al folio ${record.folio}.</p><button class="mini-btn" data-client-section-jump="mensajes">Abrir chat</button></section>
+      <section class="panel-card large"><div class="panel-title"><h3>Expediente activo</h3><span class="status-pill">En revisión</span></div><p>${record.folio}</p><p>${record.matter} - ${record.state}</p><button class="mini-btn" type="button" data-client-section-jump="expediente">Ver expediente</button></section>
+      <section class="panel-card"><div class="panel-title"><h3>Chat del expediente</h3><span class="status-pill">Nuevo</span></div><p>Tu chat está ligado al folio ${record.folio}.</p><button class="mini-btn" type="button" data-client-section-jump="mensajes">Abrir chat</button></section>
     `,
     expediente: renderPartnerExpediente(record.folio).replace("<h3>Expediente</h3>", "<h3>Mi expediente</h3>"),
-    documentos: `<section class="panel-card large"><div class="panel-title"><h3>Mis documentos</h3><span class="status-pill">3 archivos</span></div><ul class="workspace-list">${record.documents.map((doc) => `<li>${doc}</li>`).join("")}</ul><button class="mini-btn">Subir documento</button></section>`,
-    diagnostico: `<section class="panel-card large"><div class="panel-title"><h3>Diagnostico IA</h3><span class="risk-pill">Alto</span></div><p>Posible despido injustificado. Se recomienda revision prioritaria por abogado.</p></section>`,
-    abogado: `<section class="panel-card large"><div class="panel-title"><h3>Abogado asignado</h3><span class="status-pill">Disponible</span></div><div class="lawyer-card"><div class="avatar">AM</div><div><strong>Abogada Marcela Rios</strong><p>Especialista laboral - Guerrero</p><small>Chat vinculado a ${record.folio}</small></div></div></section>`,
+    documentos: `<section class="panel-card large"><div class="panel-title"><h3>Mis documentos</h3><span class="status-pill">3 archivos</span></div><ul class="workspace-list">${record.documents.map((doc) => `<li>${doc}</li>`).join("")}</ul><button class="mini-btn" type="button" data-demo-action="upload-document">Subir documento</button></section>`,
+    diagnostico: `<section class="panel-card large"><div class="panel-title"><h3>Diagnóstico IA</h3><span class="risk-pill">Alto</span></div><p>Posible despido injustificado. Se recomienda revisión prioritaria por abogado.</p><button class="mini-btn" type="button" data-client-section-jump="abogado">Ver abogado asignado</button></section>`,
+    abogado: `<section class="panel-card large"><div class="panel-title"><h3>Abogado asignado</h3><span class="status-pill">Disponible</span></div><div class="lawyer-card"><div class="avatar">AM</div><div><strong>Abogada Marcela Ríos</strong><p>Especialista laboral - Guerrero</p><small>Chat vinculado a ${record.folio}</small></div></div><button class="mini-btn" type="button" data-client-section-jump="mensajes">Abrir chat con abogado</button></section>`,
     pay: renderLexiaPayClient(),
     mensajes: renderPartnerChat(record.folio),
     notificaciones: `<section class="panel-card large"><div class="panel-title"><h3>Notificaciones</h3><span class="status-pill">2 nuevas</span></div><ul class="workspace-list"><li>Tu abogado solicito confirmar fecha de despido.</li><li>Documento analizado correctamente.</li></ul></section>`,
-    privacidad: `<section class="panel-card large"><div class="panel-title"><h3>Privacidad</h3><span class="status-pill">Controlado</span></div><p>Gestiona permisos, datos personales y solicitudes ARCO desde aqui.</p></section>`
+    privacidad: `<section class="panel-card large"><div class="panel-title"><h3>Privacidad</h3><span class="status-pill">Controlado</span></div><p>Gestiona permisos, datos personales y solicitudes ARCO desde aquí.</p><button class="mini-btn" type="button" data-demo-action="privacy-request">Solicitar acceso/corrección ARCO</button></section>`
   };
 
   clientWorkspace.innerHTML = templates[section] || templates.inicio;
@@ -737,6 +737,24 @@ const closeModal = () => {
   loginModal.classList.add("hidden");
 };
 
+const showToast = (message) => {
+  let toast = document.getElementById("appToast");
+
+  if (!toast) {
+    toast = document.createElement("div");
+    toast.id = "appToast";
+    toast.className = "app-toast";
+    document.body.appendChild(toast);
+  }
+
+  toast.textContent = message;
+  toast.classList.add("show");
+  window.clearTimeout(showToast.timeoutId);
+  showToast.timeoutId = window.setTimeout(() => {
+    toast.classList.remove("show");
+  }, 2600);
+};
+
 const showDashboard = (user = {}) => {
   const dashboardName = document.getElementById("dashboardClientName");
   const dashboardEmail = document.getElementById("dashboardClientEmail");
@@ -757,6 +775,7 @@ const showDashboard = (user = {}) => {
   if (partnerDashboardView) {
     partnerDashboardView.classList.add("hidden");
   }
+  renderClientSection("inicio");
   closeModal();
   window.scrollTo({ top: 0, behavior: "smooth" });
 };
@@ -789,6 +808,7 @@ const showPartnerDashboard = (user = {}) => {
   if (partnerDashboardView) {
     partnerDashboardView.classList.remove("hidden");
   }
+  renderPartnerSection("cases");
   closeModal();
   window.scrollTo({ top: 0, behavior: "smooth" });
 };
@@ -1112,6 +1132,20 @@ document.addEventListener("click", async (event) => {
     return;
   }
 
+  const demoActionButton = event.target.closest("[data-demo-action]");
+  if (demoActionButton) {
+    const messages = {
+      "upload-document": "Carga de documentos lista para conectar: PDF, JPG o PNG al expediente.",
+      "reply-case-chat": "Respuesta preparada: este chat queda vinculado al folio activo.",
+      "request-client-document": "Solicitud enviada al cliente dentro del expediente.",
+      "update-lawyer-validation": "Validación profesional lista para conectar con cédula, INE y constancia fiscal.",
+      "privacy-request": "Solicitud ARCO registrada en modo demo.",
+      "view-receipt": "Recibo LEX-IA PAY listo para generarse desde el pago del expediente."
+    };
+    showToast(messages[demoActionButton.dataset.demoAction] || "Acción registrada en modo demo.");
+    return;
+  }
+
   const partnerSectionButton = event.target.closest("[data-partner-section]");
   if (partnerSectionButton) {
     renderPartnerSection(partnerSectionButton.dataset.partnerSection);
@@ -1141,6 +1175,10 @@ document.addEventListener("click", async (event) => {
   if (chatButton) {
     activeCaseFolio = chatButton.dataset.caseChat;
     setActiveCaseChat(activeCaseFolio);
+    if (dashboardView && !dashboardView.classList.contains("hidden")) {
+      renderClientSection("mensajes");
+      return;
+    }
     if (partnerWorkspace && partnerDashboardView && !partnerDashboardView.classList.contains("hidden")) {
       const activeSection = document.querySelector("[data-partner-section].active")?.dataset.partnerSection;
       if (activeSection === "mensajes") {
