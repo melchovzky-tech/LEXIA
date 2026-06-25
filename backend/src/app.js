@@ -9,12 +9,24 @@ const app = express();
 
 const PORT = process.env.PORT || 4000;
 const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:3000";
+const ALLOWED_ORIGINS = [
+  FRONTEND_URL,
+  "http://localhost:3000",
+  "http://127.0.0.1:3000"
+];
 
 app.use(helmet());
 
 app.use(
   cors({
-    origin: FRONTEND_URL,
+    origin: (origin, callback) => {
+      if (!origin || ALLOWED_ORIGINS.includes(origin)) {
+        callback(null, true);
+        return;
+      }
+
+      callback(new Error("Origen no permitido por CORS"));
+    },
     credentials: true
   })
 );

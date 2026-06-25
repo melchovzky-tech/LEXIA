@@ -16,15 +16,36 @@ class LegalSearchEngine:
         self.load_corpus()
 
     def load_corpus(self):
+        self.documents = []
+        self.vectorizer = None
+        self.matrix = None
+
         if not CORPUS_FILE.exists():
-            raise FileNotFoundError(
-                "No existe corpus.json. Primero ejecuta: python src\\ingest.py"
+            return False
+
+        try:
+            with open(CORPUS_FILE, "r", encoding="utf-8") as file:
+                documents = json.load(file)
+        except (OSError, json.JSONDecodeError):
+            return False
+
+        if not isinstance(documents, list):
+            return False
+
+        documents = [
+            document
+            for document in documents
+            if (
+                isinstance(document, dict)
+                and isinstance(document.get("text"), str)
+                and document["text"].strip()
             )
+        ]
 
-        with open(CORPUS_FILE, "r", encoding="utf-8") as file:
-            self.documents = json.load(file)
+        if not documents:
+            return False
 
-        texts = [doc["text"] for doc in self.documents]
+        texts = [document["text"] for document in documents]
 
         self.vectorizer = TfidfVectorizer(
             lowercase=True,
@@ -32,10 +53,17 @@ class LegalSearchEngine:
             ngram_range=(1, 2)
         )
 
-        self.matrix = self.vectorizer.fit_transform(texts)
+        try:
+            self.matrix = self.vectorizer.fit_transform(texts)
+        except ValueError:
+            self.vectorizer = None
+            return False
+
+        self.documents = documents
+        return True
 
     def search(self, query: str, top_k: int = 5, rama: str | None = None, incluir_doctrina: bool = True):
-        if not query.strip():
+        if not query.strip() or self.vectorizer is None or self.matrix is None:
             return []
 
         query_vector = self.vectorizer.transform([query])

@@ -3,14 +3,15 @@ const {
   getPaymentsByCaseId,
   getPaymentById,
   updatePaymentStatus,
+  registerPaymentWebhook,
   releasePayment,
   getPaymentReceipt
 } = require("../services/payments.service");
 
-const create = (req, res) => {
+const create = async (req, res) => {
   const { caseId } = req.params;
 
-  const result = createPayment(caseId, req.body);
+  const result = await createPayment(caseId, req.body);
 
   return res.status(result.statusCode).json(result);
 };
@@ -39,6 +40,17 @@ const updateStatus = (req, res) => {
   return res.status(result.statusCode).json(result);
 };
 
+const webhook = (req, res) => {
+  const { provider } = req.params;
+
+  const result = registerPaymentWebhook(provider, {
+    ...req.query,
+    ...req.body
+  });
+
+  return res.status(result.statusCode).json(result);
+};
+
 const release = (req, res) => {
   const { paymentId } = req.params;
 
@@ -60,6 +72,7 @@ module.exports = {
   getByCase,
   getById,
   updateStatus,
+  webhook,
   release,
   getReceipt
 };
