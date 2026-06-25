@@ -12,3 +12,4 @@ iajur_engine/data/pdfs/**
 iajur_engine/data/index/**
 !iajur_engine/data/index/
 !iajur_engine/data/index/legal_seed.json
+!iajur_engine/data/index/jurisprudence_seed.json

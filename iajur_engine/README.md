@@ -23,6 +23,12 @@ El manifest `data/sources/official_sources.json` contiene fuentes públicas inic
 - Código Civil Federal.
 - Código Nacional de Procedimientos Civiles y Familiares.
 - Ley de Amparo.
+- Constitución.
+- Código Penal Federal.
+- Código Nacional de Procedimientos Penales.
+- Ley del Seguro Social.
+- Leyes familiares y de protección de niñez.
+- Portales de jurisprudencia SCJN/SJF.
 
 Para descargar PDFs oficiales:
 
@@ -48,6 +54,24 @@ python src/ingest.py
 - siguiente paso.
 
 Cada entrada debe tener referencias y advertir si la legislación depende del Estado o de vigencia.
+
+## Jurisprudencia
+
+`data/index/jurisprudence_seed.json` agrega reglas para usar criterios judiciales sin inventarlos:
+
+- distinguir jurisprudencia, tesis aislada y precedentes,
+- pedir registro digital, rubro, órgano, época y materia,
+- marcar como "criterio por localizar" cuando no exista cita verificable,
+- explicar cuándo la jurisprudencia ayuda a interpretar una norma.
+
+Las fuentes base son:
+
+- Semanario Judicial de la Federación.
+- Buscador Jurídico SCJN.
+- Juris Lex.
+- Biblioteca Digital SCJN.
+
+Ver `data/sources/professionalization_plan.md`.
 
 ## Regla de seguridad
 

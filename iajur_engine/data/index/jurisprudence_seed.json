@@ -1,0 +1,68 @@
+[
+  {
+    "source_file": "jurisprudence_method_binding_force",
+    "source_name": "Semanario Judicial de la Federación - metodología de consulta",
+    "category": "jurisprudencia",
+    "source_type": "jurisprudencia_metodologia",
+    "jurisdiction": "federal_mx",
+    "page": 0,
+    "chunk_id": "jurisprudencia_fuerza_obligatoria_001",
+    "legal_references": ["SJF/SCJN: consultar registro digital, rubro, época, materia y órgano"],
+    "text": "Jurisprudencia: para usar criterios judiciales, LEX-IA debe distinguir jurisprudencia obligatoria, tesis aislada, contradicción de criterios, precedentes y sentencias. No debe afirmar que un criterio existe si no cuenta con registro digital, rubro, órgano, época y fuente verificable. La jurisprudencia puede orientar la interpretación de leyes, pero debe aplicarse solo si los hechos del caso son comparables."
+  },
+  {
+    "source_file": "jurisprudence_method_search",
+    "source_name": "Semanario Judicial de la Federación - búsqueda por problema jurídico",
+    "category": "jurisprudencia",
+    "source_type": "jurisprudencia_metodologia",
+    "jurisdiction": "federal_mx",
+    "page": 0,
+    "chunk_id": "jurisprudencia_busqueda_001",
+    "legal_references": ["SJF: búsqueda por palabra, materia, órgano, registro digital"],
+    "text": "Búsqueda jurisprudencial: antes de sugerir criterio judicial, LEX-IA debe formar consultas con palabras jurídicas y hechos relevantes: despido, carga probatoria, salario integrado, alimentos, interés superior, custodia, arrendamiento, incumplimiento, amparo, suspensión, acto reclamado. Debe reportar si la búsqueda requiere confirmación manual en SJF."
+  },
+  {
+    "source_file": "jurisprudence_laboral_prueba",
+    "source_name": "Criterios laborales - guía de localización SJF",
+    "category": "laboral",
+    "source_type": "jurisprudencia_guia",
+    "jurisdiction": "federal_mx",
+    "page": 0,
+    "chunk_id": "jurisprudencia_laboral_prueba_001",
+    "legal_references": ["Consultar SJF: despido, carga de la prueba, condiciones de trabajo"],
+    "text": "En asuntos laborales, la jurisprudencia suele ser relevante para carga probatoria, ofrecimiento de trabajo, despido, renuncia, salario, antigüedad, subordinación y condiciones de trabajo. LEX-IA debe explicar que el criterio judicial no sustituye la ley: ayuda a interpretar cómo tribunales han aplicado la norma frente a hechos y pruebas."
+  },
+  {
+    "source_file": "jurisprudence_familiar_interes_superior",
+    "source_name": "Criterios familiares - guía de localización SJF",
+    "category": "familiar",
+    "source_type": "jurisprudencia_guia",
+    "jurisdiction": "federal_mx",
+    "page": 0,
+    "chunk_id": "jurisprudencia_familiar_interes_superior_001",
+    "legal_references": ["Consultar SJF: interés superior de la niñez, alimentos, custodia, convivencia"],
+    "text": "En derecho familiar, los criterios judiciales sobre interés superior de niñas, niños y adolescentes son centrales. LEX-IA debe buscar jurisprudencia sobre alimentos, guarda y custodia, convivencia, violencia familiar y perspectiva de género. Debe advertir que la decisión depende de pruebas, contexto familiar y legislación local."
+  },
+  {
+    "source_file": "jurisprudence_amparo_suspension",
+    "source_name": "Criterios de amparo - guía de localización SJF",
+    "category": "amparo",
+    "source_type": "jurisprudencia_guia",
+    "jurisdiction": "federal_mx",
+    "page": 0,
+    "chunk_id": "jurisprudencia_amparo_suspension_001",
+    "legal_references": ["Consultar SJF: suspensión, interés jurídico, interés legítimo, acto reclamado"],
+    "text": "En amparo, la jurisprudencia es especialmente importante para interés jurídico, interés legítimo, suspensión, definitividad, acto reclamado, autoridad responsable y plazos. LEX-IA debe pedir fecha de conocimiento del acto y documento de notificación antes de orientar sobre oportunidad o suspensión."
+  },
+  {
+    "source_file": "jurisprudence_citation_rule",
+    "source_name": "Regla LEX-IA de citación jurisprudencial",
+    "category": "metodologia",
+    "source_type": "jurisprudencia_metodologia",
+    "jurisdiction": "mx",
+    "page": 0,
+    "chunk_id": "jurisprudencia_cita_001",
+    "legal_references": ["Registro digital, rubro, órgano, época, materia, fuente"],
+    "text": "Regla de citación: cuando LEX-IA use jurisprudencia debe mostrar registro digital, rubro, órgano emisor, época, materia y liga o fuente. Si solo tiene una guía de búsqueda, debe decir 'criterio por localizar' o 'requiere validación en SJF', no presentarlo como jurisprudencia existente."
+  }
+]

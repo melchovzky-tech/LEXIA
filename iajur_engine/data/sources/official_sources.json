@@ -1,27 +1,111 @@
 [
   {
+    "id": "cpeum",
+    "name": "Constituci?n Pol?tica de los Estados Unidos Mexicanos",
+    "category": "constitucional",
+    "jurisdiction": "federal_mx",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPEUM.pdf",
+    "source_type": "official_pdf",
+    "authority": "C?mara de Diputados"
+  },
+  {
     "id": "lft",
     "name": "Ley Federal del Trabajo",
     "category": "laboral",
     "jurisdiction": "federal_mx",
     "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LFT.pdf",
-    "source_type": "official_pdf"
+    "source_type": "official_pdf",
+    "authority": "C?mara de Diputados"
+  },
+  {
+    "id": "lss",
+    "name": "Ley del Seguro Social",
+    "category": "seguridad_social",
+    "jurisdiction": "federal_mx",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LSS.pdf",
+    "source_type": "official_pdf",
+    "authority": "C?mara de Diputados"
+  },
+  {
+    "id": "lisr",
+    "name": "Ley del Impuesto sobre la Renta",
+    "category": "fiscal",
+    "jurisdiction": "federal_mx",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LISR.pdf",
+    "source_type": "official_pdf",
+    "authority": "C?mara de Diputados"
+  },
+  {
+    "id": "cff",
+    "name": "C?digo Fiscal de la Federaci?n",
+    "category": "fiscal",
+    "jurisdiction": "federal_mx",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CFF.pdf",
+    "source_type": "official_pdf",
+    "authority": "C?mara de Diputados"
   },
   {
     "id": "ccf",
-    "name": "Código Civil Federal",
+    "name": "C?digo Civil Federal",
     "category": "civil",
     "jurisdiction": "federal_mx",
     "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CCF.pdf",
-    "source_type": "official_pdf"
+    "source_type": "official_pdf",
+    "authority": "C?mara de Diputados"
+  },
+  {
+    "id": "cfpc",
+    "name": "C?digo Federal de Procedimientos Civiles",
+    "category": "procesal",
+    "jurisdiction": "federal_mx",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CFPC.pdf",
+    "source_type": "official_pdf",
+    "authority": "C?mara de Diputados"
   },
   {
     "id": "cnpcf",
-    "name": "Código Nacional de Procedimientos Civiles y Familiares",
+    "name": "C?digo Nacional de Procedimientos Civiles y Familiares",
     "category": "procesal",
     "jurisdiction": "federal_mx",
     "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CNPCF.pdf",
-    "source_type": "official_pdf"
+    "source_type": "official_pdf",
+    "authority": "C?mara de Diputados"
+  },
+  {
+    "id": "lgdnna",
+    "name": "Ley General de los Derechos de Ni?as, Ni?os y Adolescentes",
+    "category": "familiar",
+    "jurisdiction": "federal_mx",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGDNNA.pdf",
+    "source_type": "official_pdf",
+    "authority": "C?mara de Diputados"
+  },
+  {
+    "id": "lgamvlv",
+    "name": "Ley General de Acceso de las Mujeres a una Vida Libre de Violencia",
+    "category": "familiar",
+    "jurisdiction": "federal_mx",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGAMVLV.pdf",
+    "source_type": "official_pdf",
+    "authority": "C?mara de Diputados"
+  },
+  {
+    "id": "cpf",
+    "name": "C?digo Penal Federal",
+    "category": "penal",
+    "jurisdiction": "federal_mx",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CPF.pdf",
+    "source_type": "official_pdf",
+    "authority": "C?mara de Diputados"
+  },
+  {
+    "id": "cnpp",
+    "name": "C?digo Nacional de Procedimientos Penales",
+    "category": "penal",
+    "jurisdiction": "federal_mx",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/CNPP.pdf",
+    "source_type": "official_pdf",
+    "authority": "C?mara de Diputados"
   },
   {
     "id": "lamp",
@@ -29,6 +113,79 @@
     "category": "amparo",
     "jurisdiction": "federal_mx",
     "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LAmp.pdf",
-    "source_type": "official_pdf"
+    "source_type": "official_pdf",
+    "authority": "C?mara de Diputados"
+  },
+  {
+    "id": "lgnm",
+    "name": "Ley de la Guardia Nacional",
+    "category": "seguridad_publica",
+    "jurisdiction": "federal_mx",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/pdf/LGN.pdf",
+    "source_type": "official_pdf",
+    "authority": "C?mara de Diputados"
+  },
+  {
+    "id": "legislacion_federal_portal",
+    "name": "Portal de Leyes Federales Vigentes",
+    "category": "portal_normativo",
+    "jurisdiction": "federal_mx",
+    "url": "https://www.diputados.gob.mx/LeyesBiblio/index.htm",
+    "source_type": "official_portal",
+    "authority": "C?mara de Diputados"
+  },
+  {
+    "id": "dof",
+    "name": "Diario Oficial de la Federaci?n",
+    "category": "actualizacion_normativa",
+    "jurisdiction": "federal_mx",
+    "url": "https://www.dof.gob.mx/",
+    "source_type": "official_portal",
+    "authority": "Secretar?a de Gobernaci?n"
+  },
+  {
+    "id": "sjf",
+    "name": "Semanario Judicial de la Federaci?n",
+    "category": "jurisprudencia",
+    "jurisdiction": "federal_mx",
+    "url": "https://sjf2.scjn.gob.mx/busqueda-principal-tesis",
+    "source_type": "jurisprudence_portal",
+    "authority": "Suprema Corte de Justicia de la Naci?n"
+  },
+  {
+    "id": "scjn_buscador_juridico",
+    "name": "Buscador Jur?dico SCJN",
+    "category": "jurisprudencia",
+    "jurisdiction": "federal_mx",
+    "url": "https://bj.scjn.gob.mx/",
+    "source_type": "jurisprudence_portal",
+    "authority": "Suprema Corte de Justicia de la Naci?n"
+  },
+  {
+    "id": "jurislex",
+    "name": "Juris Lex: consulta de tesis por ordenamiento",
+    "category": "jurisprudencia",
+    "jurisdiction": "federal_mx",
+    "url": "https://jurislex.scjn.gob.mx/",
+    "source_type": "jurisprudence_portal",
+    "authority": "Suprema Corte de Justicia de la Naci?n"
+  },
+  {
+    "id": "scjn_sentencias",
+    "name": "Sentencias, votos y datos de expedientes SCJN",
+    "category": "sentencias",
+    "jurisdiction": "federal_mx",
+    "url": "https://www2.scjn.gob.mx/",
+    "source_type": "case_law_portal",
+    "authority": "Suprema Corte de Justicia de la Naci?n"
+  },
+  {
+    "id": "scjn_biblioteca_digital",
+    "name": "Biblioteca Digital SCJN",
+    "category": "doctrina",
+    "jurisdiction": "federal_mx",
+    "url": "https://bibliotecadigital.scjn.gob.mx/",
+    "source_type": "doctrine_portal",
+    "authority": "Suprema Corte de Justicia de la Naci?n"
   }
 ]

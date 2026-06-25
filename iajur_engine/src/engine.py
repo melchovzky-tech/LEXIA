@@ -56,7 +56,7 @@ class IAJUREngine:
                 "score": item["score"]
             }
 
-            if source_type in ["doctrina", "doctrina_operativa"]:
+            if source_type in ["doctrina", "doctrina_operativa"] or source_type.startswith("jurisprudencia"):
                 apoyos_doctrinales.append(registro)
             else:
                 fundamentos_normativos.append(registro)
@@ -284,7 +284,7 @@ class IAJUREngine:
             texto += "\n"
 
         if apoyos_doctrinales:
-            texto += "Apoyo doctrinal o metodológico localizado:\n\n"
+            texto += "Apoyo doctrinal, metodológico o jurisprudencial localizado:\n\n"
 
             for i, apoyo in enumerate(apoyos_doctrinales[:2], start=1):
                 texto += f"{i}. Documento: {apoyo['documento']}\n"

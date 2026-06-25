@@ -23,6 +23,10 @@ def fetch_sources():
     downloaded = []
 
     for source in sources:
+        if source.get("source_type") != "official_pdf":
+            print(f"Referencia no descargable automáticamente: {source['name']} -> {source['url']}")
+            continue
+
         category = source.get("category", "general")
         target_dir = PDF_DIR / category
         target_dir.mkdir(parents=True, exist_ok=True)

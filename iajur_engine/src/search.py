@@ -7,6 +7,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 BASE_DIR = Path(__file__).resolve().parent.parent
 CORPUS_FILE = BASE_DIR / "data" / "index" / "corpus.json"
 LEGAL_SEED_FILE = BASE_DIR / "data" / "index" / "legal_seed.json"
+JURISPRUDENCE_SEED_FILE = BASE_DIR / "data" / "index" / "jurisprudence_seed.json"
 
 
 class LegalSearchEngine:
@@ -59,6 +60,7 @@ class LegalSearchEngine:
 
         documents = self.load_json_documents(CORPUS_FILE)
         documents.extend(self.load_json_documents(LEGAL_SEED_FILE))
+        documents.extend(self.load_json_documents(JURISPRUDENCE_SEED_FILE))
 
         if not documents:
             return False

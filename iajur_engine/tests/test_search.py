@@ -13,8 +13,9 @@ class LegalSearchEngineTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary_directory:
             corpus_file = Path(temporary_directory) / "corpus.json"
             seed_file = Path(temporary_directory) / "legal_seed.json"
+            jurisprudence_file = Path(temporary_directory) / "jurisprudence_seed.json"
 
-            with patch("src.search.CORPUS_FILE", corpus_file), patch("src.search.LEGAL_SEED_FILE", seed_file):
+            with patch("src.search.CORPUS_FILE", corpus_file), patch("src.search.LEGAL_SEED_FILE", seed_file), patch("src.search.JURISPRUDENCE_SEED_FILE", jurisprudence_file):
                 search_engine = LegalSearchEngine()
 
             self.assertEqual(search_engine.search("despido"), [])
@@ -23,9 +24,10 @@ class LegalSearchEngineTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary_directory:
             corpus_file = Path(temporary_directory) / "corpus.json"
             seed_file = Path(temporary_directory) / "legal_seed.json"
+            jurisprudence_file = Path(temporary_directory) / "jurisprudence_seed.json"
             corpus_file.write_text("[]", encoding="utf-8")
 
-            with patch("src.search.CORPUS_FILE", corpus_file), patch("src.search.LEGAL_SEED_FILE", seed_file):
+            with patch("src.search.CORPUS_FILE", corpus_file), patch("src.search.LEGAL_SEED_FILE", seed_file), patch("src.search.JURISPRUDENCE_SEED_FILE", jurisprudence_file):
                 search_engine = LegalSearchEngine()
 
             self.assertEqual(search_engine.search("despido"), [])
@@ -34,9 +36,10 @@ class LegalSearchEngineTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary_directory:
             corpus_file = Path(temporary_directory) / "corpus.json"
             seed_file = Path(temporary_directory) / "legal_seed.json"
+            jurisprudence_file = Path(temporary_directory) / "jurisprudence_seed.json"
             corpus_file.write_text("not-json", encoding="utf-8")
 
-            with patch("src.search.CORPUS_FILE", corpus_file), patch("src.search.LEGAL_SEED_FILE", seed_file):
+            with patch("src.search.CORPUS_FILE", corpus_file), patch("src.search.LEGAL_SEED_FILE", seed_file), patch("src.search.JURISPRUDENCE_SEED_FILE", jurisprudence_file):
                 search_engine = LegalSearchEngine()
 
             self.assertEqual(search_engine.search("despido"), [])
@@ -45,6 +48,7 @@ class LegalSearchEngineTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary_directory:
             corpus_file = Path(temporary_directory) / "corpus.json"
             seed_file = Path(temporary_directory) / "legal_seed.json"
+            jurisprudence_file = Path(temporary_directory) / "jurisprudence_seed.json"
             corpus_file.write_text(
                 json.dumps([
                     {
@@ -59,7 +63,7 @@ class LegalSearchEngineTests(unittest.TestCase):
                 encoding="utf-8"
             )
 
-            with patch("src.search.CORPUS_FILE", corpus_file), patch("src.search.LEGAL_SEED_FILE", seed_file):
+            with patch("src.search.CORPUS_FILE", corpus_file), patch("src.search.LEGAL_SEED_FILE", seed_file), patch("src.search.JURISPRUDENCE_SEED_FILE", jurisprudence_file):
                 search_engine = LegalSearchEngine()
 
             results = search_engine.search("salario")
@@ -83,6 +87,14 @@ class LegalSearchEngineTests(unittest.TestCase):
         self.assertIn("Hechos que deben precisarse", result["respuesta"])
         self.assertIn("Pruebas o documentos sugeridos", result["respuesta"])
         self.assertIn("fundamentos", result)
+
+    def test_jurisprudence_seed_is_searchable_as_support(self):
+        search_engine = LegalSearchEngine()
+
+        results = search_engine.search("jurisprudencia interes superior custodia alimentos", incluir_doctrina=True)
+        source_types = {result["source_type"] for result in results}
+
+        self.assertTrue(any("jurisprudencia" in source_type for source_type in source_types))
 
 
 if __name__ == "__main__":
