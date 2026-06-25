@@ -1,0 +1,145 @@
+[
+  {
+    "source_file": "legal_seed_laboral_relacion_trabajo",
+    "source_name": "Ley Federal del Trabajo",
+    "category": "laboral",
+    "source_type": "normativa_sintesis",
+    "jurisdiction": "federal_mx",
+    "page": 0,
+    "chunk_id": "laboral_relacion_trabajo_001",
+    "legal_references": ["LFT arts. 20, 21"],
+    "text": "Relación laboral: para orientar un caso laboral, primero se debe identificar si existió prestación de trabajo personal subordinado mediante pago de salario. La existencia del contrato escrito no es indispensable si los hechos muestran subordinación, horario, órdenes, salario o integración a la organización del patrón. Lógica jurídica: hechos de subordinación + remuneración + prestación personal pueden activar derechos laborales."
+  },
+  {
+    "source_file": "legal_seed_laboral_despido",
+    "source_name": "Ley Federal del Trabajo",
+    "category": "laboral",
+    "source_type": "normativa_sintesis",
+    "jurisdiction": "federal_mx",
+    "page": 0,
+    "chunk_id": "laboral_despido_001",
+    "legal_references": ["LFT arts. 47, 48, 784"],
+    "text": "Despido: si la persona trabajadora afirma despido injustificado, se deben ubicar fecha de separación, forma del despido, puesto, salario, antigüedad, patrón, testigos, recibos, contrato, IMSS y comunicaciones. La orientación debe distinguir entre rescisión justificada, despido injustificado, renuncia y terminación negociada. En litigio laboral suelen importar pruebas documentales y la carga probatoria sobre condiciones de trabajo."
+  },
+  {
+    "source_file": "legal_seed_laboral_salario_prestaciones",
+    "source_name": "Ley Federal del Trabajo",
+    "category": "laboral",
+    "source_type": "normativa_sintesis",
+    "jurisdiction": "federal_mx",
+    "page": 0,
+    "chunk_id": "laboral_salario_prestaciones_001",
+    "legal_references": ["LFT arts. 82, 87, 89"],
+    "text": "Salario y prestaciones: para calcular o explicar derechos laborales se requiere salario diario, salario integrado cuando aplique, aguinaldo, vacaciones, prima vacacional, horas extra, descansos, fecha de ingreso y fecha de salida. Lógica jurídica: identificar base salarial + periodo trabajado + prestaciones devengadas + pagos ya recibidos."
+  },
+  {
+    "source_file": "legal_seed_laboral_conciliacion",
+    "source_name": "Ley Federal del Trabajo",
+    "category": "laboral",
+    "source_type": "normativa_sintesis",
+    "jurisdiction": "federal_mx",
+    "page": 0,
+    "chunk_id": "laboral_conciliacion_001",
+    "legal_references": ["LFT arts. 684-A a 684-E"],
+    "text": "Conciliación prejudicial laboral: antes de demandar, muchos conflictos laborales deben pasar por conciliación prejudicial, salvo excepciones. La orientación debe advertir que el plazo y el centro competente dependen del asunto, entidad y tipo de reclamación. Siguiente paso típico: reunir documentos, calcular monto preliminar y solicitar conciliación."
+  },
+  {
+    "source_file": "legal_seed_familiar_alimentos",
+    "source_name": "Código Civil Federal y legislación familiar local",
+    "category": "familiar",
+    "source_type": "normativa_sintesis",
+    "jurisdiction": "federal_y_local_mx",
+    "page": 0,
+    "chunk_id": "familiar_alimentos_001",
+    "legal_references": ["CCF, reglas de alimentos; verificar código familiar local"],
+    "text": "Alimentos: la orientación debe identificar parentesco, necesidad de quien pide, capacidad económica de quien debe proporcionar alimentos, gastos escolares, médicos, vivienda, alimentación y pruebas de ingresos. La regla práctica es proporcionalidad entre necesidad y posibilidad. La norma aplicable puede ser local, por lo que siempre debe confirmarse entidad federativa."
+  },
+  {
+    "source_file": "legal_seed_familiar_custodia",
+    "source_name": "Código Civil Federal y legislación familiar local",
+    "category": "familiar",
+    "source_type": "normativa_sintesis",
+    "jurisdiction": "federal_y_local_mx",
+    "page": 0,
+    "chunk_id": "familiar_custodia_001",
+    "legal_references": ["Interés superior de niñas, niños y adolescentes; verificar código local"],
+    "text": "Guarda, custodia y convivencia: el eje de análisis es el interés superior de niñas, niños y adolescentes. Se deben valorar cuidados reales, estabilidad, escuela, salud, red familiar, riesgos, violencia, disponibilidad de cada progenitor y opinión de menores cuando proceda. La orientación no debe prometer resultados; debe ordenar hechos y pruebas."
+  },
+  {
+    "source_file": "legal_seed_civil_contratos",
+    "source_name": "Código Civil Federal",
+    "category": "civil",
+    "source_type": "normativa_sintesis",
+    "jurisdiction": "federal_y_local_mx",
+    "page": 0,
+    "chunk_id": "civil_contratos_001",
+    "legal_references": ["CCF, obligaciones y contratos; verificar código local"],
+    "text": "Contratos: para orientar incumplimientos se deben identificar partes, objeto, obligaciones, plazo, precio, forma de pago, evidencia del acuerdo, incumplimiento concreto, daños, requerimientos previos y cláusulas penales. Lógica jurídica: contrato válido + obligación exigible + incumplimiento + daño o consecuencia pactada."
+  },
+  {
+    "source_file": "legal_seed_civil_arrendamiento",
+    "source_name": "Código Civil Federal y legislación local",
+    "category": "civil",
+    "source_type": "normativa_sintesis",
+    "jurisdiction": "federal_y_local_mx",
+    "page": 0,
+    "chunk_id": "civil_arrendamiento_001",
+    "legal_references": ["CCF, arrendamiento; verificar legislación local"],
+    "text": "Arrendamiento: la orientación debe ubicar contrato, inmueble, renta, depósitos, adeudos, plazo, uso, entrega, daños, requerimientos y comprobantes de pago. En muchos casos la competencia y procedimiento dependen de la entidad y del tipo de acción: pago de rentas, rescisión, desocupación, daños o devolución de depósito."
+  },
+  {
+    "source_file": "legal_seed_sucesiones",
+    "source_name": "Código Civil Federal y códigos civiles locales",
+    "category": "civil",
+    "source_type": "normativa_sintesis",
+    "jurisdiction": "federal_y_local_mx",
+    "page": 0,
+    "chunk_id": "civil_sucesiones_001",
+    "legal_references": ["CCF, sucesiones; verificar código local"],
+    "text": "Sucesiones: primero se distingue si hay testamento o intestado. Se necesitan acta de defunción, parentesco, bienes, posibles herederos, testamento, domicilio del autor de la herencia y conflictos entre familiares. La lógica es: determinar vía sucesoria + acreditar parentesco o voluntad testamentaria + inventariar bienes + nombrar albacea + adjudicar conforme a resolución."
+  },
+  {
+    "source_file": "legal_seed_procesal_pruebas",
+    "source_name": "Código Nacional de Procedimientos Civiles y Familiares",
+    "category": "procesal",
+    "source_type": "normativa_sintesis",
+    "jurisdiction": "federal_y_local_mx",
+    "page": 0,
+    "chunk_id": "procesal_pruebas_001",
+    "legal_references": ["CNPCF, principios y prueba"],
+    "text": "Prueba: una explicación jurídica útil debe separar hechos afirmados, hechos que deben probarse, documentos existentes, testigos, comunicaciones, periciales y datos cronológicos. La norma no se aplica en abstracto: se aplica a hechos probables y acreditables. Si falta prueba, LEX-IA debe pedir documentos antes de sugerir estrategia fuerte."
+  },
+  {
+    "source_file": "legal_seed_procesal_competencia",
+    "source_name": "Código Nacional de Procedimientos Civiles y Familiares",
+    "category": "procesal",
+    "source_type": "normativa_sintesis",
+    "jurisdiction": "federal_y_local_mx",
+    "page": 0,
+    "chunk_id": "procesal_competencia_001",
+    "legal_references": ["CNPCF, competencia; verificar transición local"],
+    "text": "Competencia y procedimiento: antes de sugerir demanda se debe identificar materia, cuantía, domicilio de partes, ubicación del bien, entidad federativa y vía procesal. La implementación del Código Nacional de Procedimientos Civiles y Familiares depende de calendarios de entrada en vigor, por lo que debe verificarse tribunal y legislación transitoria."
+  },
+  {
+    "source_file": "legal_seed_amparo",
+    "source_name": "Ley de Amparo",
+    "category": "amparo",
+    "source_type": "normativa_sintesis",
+    "jurisdiction": "federal_mx",
+    "page": 0,
+    "chunk_id": "amparo_general_001",
+    "legal_references": ["Ley de Amparo arts. 1, 5, 17"],
+    "text": "Amparo: se analiza cuando existe acto u omisión de autoridad que puede vulnerar derechos humanos o garantías. Se debe identificar autoridad responsable, acto reclamado, fecha de conocimiento, derecho afectado, suspensión requerida, pruebas y si existe otro medio de defensa. La oportunidad es crítica porque puede haber plazos breves."
+  },
+  {
+    "source_file": "legal_seed_metodo_subsuncion",
+    "source_name": "Método LEX-IA de razonamiento jurídico",
+    "category": "metodologia",
+    "source_type": "doctrina_operativa",
+    "jurisdiction": "mx",
+    "page": 0,
+    "chunk_id": "metodo_subsuncion_001",
+    "legal_references": ["Hechos, norma, subsunción, prueba, estrategia"],
+    "text": "Método de aplicación normativa: 1) separar hechos jurídicamente relevantes; 2) clasificar rama; 3) identificar norma aplicable y jurisdicción; 4) comparar supuesto normativo con hechos; 5) medir pruebas disponibles; 6) advertir riesgos y plazos; 7) proponer siguiente paso verificable. LEX-IA debe explicar la norma en lenguaje claro sin inventar artículos no localizados."
+  }
+]

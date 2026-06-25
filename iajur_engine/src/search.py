@@ -6,6 +6,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 CORPUS_FILE = BASE_DIR / "data" / "index" / "corpus.json"
+LEGAL_SEED_FILE = BASE_DIR / "data" / "index" / "legal_seed.json"
 
 
 class LegalSearchEngine:
@@ -15,24 +16,20 @@ class LegalSearchEngine:
         self.matrix = None
         self.load_corpus()
 
-    def load_corpus(self):
-        self.documents = []
-        self.vectorizer = None
-        self.matrix = None
-
-        if not CORPUS_FILE.exists():
-            return False
+    def load_json_documents(self, path: Path):
+        if not path.exists():
+            return []
 
         try:
-            with open(CORPUS_FILE, "r", encoding="utf-8") as file:
+            with open(path, "r", encoding="utf-8") as file:
                 documents = json.load(file)
         except (OSError, json.JSONDecodeError):
-            return False
+            return []
 
         if not isinstance(documents, list):
-            return False
+            return []
 
-        documents = [
+        return [
             document
             for document in documents
             if (
@@ -42,8 +39,34 @@ class LegalSearchEngine:
             )
         ]
 
+    def normalize_document(self, document: dict, fallback_index: int):
+        return {
+            "source_file": document.get("source_file") or f"legal_seed_{fallback_index}",
+            "source_name": document.get("source_name") or document.get("source_file") or "Biblioteca LEX-IA",
+            "category": document.get("category") or "general",
+            "source_type": document.get("source_type") or "normativa",
+            "jurisdiction": document.get("jurisdiction") or "mx",
+            "page": document.get("page", 0),
+            "chunk_id": document.get("chunk_id") or f"chunk_{fallback_index}",
+            "legal_references": document.get("legal_references", []),
+            "text": document["text"].strip()
+        }
+
+    def load_corpus(self):
+        self.documents = []
+        self.vectorizer = None
+        self.matrix = None
+
+        documents = self.load_json_documents(CORPUS_FILE)
+        documents.extend(self.load_json_documents(LEGAL_SEED_FILE))
+
         if not documents:
             return False
+
+        documents = [
+            self.normalize_document(document, index)
+            for index, document in enumerate(documents)
+        ]
 
         texts = [document["text"] for document in documents]
 
@@ -94,10 +117,13 @@ class LegalSearchEngine:
             results.append({
                 "score": round(score, 4),
                 "source_file": doc["source_file"],
+                "source_name": doc.get("source_name", doc["source_file"]),
                 "category": doc["category"],
                 "source_type": source_type,
+                "jurisdiction": doc.get("jurisdiction", "mx"),
                 "page": doc["page"],
                 "chunk_id": doc["chunk_id"],
+                "legal_references": doc.get("legal_references", []),
                 "text": doc["text"]
             })
 

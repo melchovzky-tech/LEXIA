@@ -10,3 +10,5 @@ __pycache__/
 # IAJUR Engine local legal PDFs and generated index
 iajur_engine/data/pdfs/**
 iajur_engine/data/index/**
+!iajur_engine/data/index/
+!iajur_engine/data/index/legal_seed.json
